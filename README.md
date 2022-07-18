@@ -34,7 +34,7 @@ Samurai players can run straight toward combat and stay there, sustaining their 
 Wielding the most traditional of Samurai weaponry, a katana, this class is the most balanced of the 3. While not quite as powerful in every regard as other classes, the Samurai will help your team survive multiple waves which are trying to destroy your world. His abilities are based on enchanting his weapon using magical blocks and direct attacks, with the ultimate being Lighting Rage. Life Pull drains health from surrounding enemies, while sharp blade boosts your sword damage, and occasionally adds explosive damage to your hits.
 
 ## Physics
-Enemies are created using blocks which can detach if they received enough damage. These magical blocks can be used by champions in order to defeat more challenging enemies. Specific objects within the environment can be damaged and transformed into block which can be used by our players into their advantage.
+Enemies are created using blocks which can detach if they received enough damage. These magical blocks can be used by champions in order to defeat more challenging enemies. Specific objects within the environment can be damaged and transformed into blocsk which can be used by our players into their advantage.
 
 ### Features:
 - Magical blocks can levitate and be thrown into enemies.
