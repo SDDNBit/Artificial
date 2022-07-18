@@ -3,7 +3,7 @@ using Autohand.Demo;
 using UnityEngine;
 
 namespace SoftBit.Autohand.Custom{
-    public class CubeBreakCustom : MonoBehaviour{
+    public class CubeBreak : MonoBehaviour{
 
         public float force = 10f;
         [SerializeField] private bool breakOnlyOnce = true;
@@ -38,7 +38,7 @@ namespace SoftBit.Autohand.Custom{
                 if (breakOnlyOnce)
                 {
                     Destroy(smallerCopy.GetComponent<Smash>());
-                    Destroy(smallerCopy.GetComponent<CubeBreakCustom>());
+                    Destroy(smallerCopy.GetComponent<CubeBreak>());
                 }
             }
             Destroy(gameObject);
