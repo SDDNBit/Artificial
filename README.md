@@ -1,4 +1,4 @@
-**Battle of AI** is a co-op multiplayer mode for which let the players show their skills against various enemies. It is a cooperative mode in which players are able to choose from 3 available classes: Mage, Samurai, Sniper. 
+**Battle of AI** is a co-op multiplayer mode in which the players can show their skills against various enemies. It is a cooperative mode in which players are able to choose from 3 available classes: Mage, Samurai, Sniper. 
 
 Players can currently choose between 2 modes - Story, Survival. Story and Survival modes have a difficult tier system of bronze, silver and gold, all of which have skill requirements before they can be tackled. Replaying these modes over and over at the increasing tier levels serves as the core gameplay loop and is how you will level up your skill and acquire high-level gear.
 
