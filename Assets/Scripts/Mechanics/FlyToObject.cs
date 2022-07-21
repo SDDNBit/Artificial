@@ -6,20 +6,24 @@ namespace SoftBit.Mechanics
     [RequireComponent(typeof(Rigidbody))]
     public class FlyToObject : MonoBehaviour
     {
-        [SerializeField] private Transform target;
-        private Rigidbody rigidbody;
+        public Transform Target;
+
+        private Rigidbody rb;
         private float speed;
 
         private void Awake()
         {
             speed = Constants.FlyToObjectSpeed;
-            rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()
         {
-            transform.LookAt(target.position);
-            rigidbody.velocity = transform.forward * speed;
+            if (Target)
+            {
+                transform.LookAt(Target.position);
+                rb.velocity = transform.forward * speed;
+            }
         }
     }
 }
