@@ -9,11 +9,9 @@ namespace SoftBit.Mechanics
         public Transform Target;
 
         private Rigidbody rb;
-        private float speed;
 
         private void Awake()
         {
-            speed = Constants.FlyToObjectSpeed;
             rb = GetComponent<Rigidbody>();
         }
 
@@ -22,7 +20,10 @@ namespace SoftBit.Mechanics
             if (Target)
             {
                 transform.LookAt(Target.position);
-                rb.velocity = transform.forward * speed;
+                rb.velocity = transform.forward *
+                    Mathf.Clamp(Mathf.Abs(Vector3.Distance(Target.position, transform.position) * Constants.FlyToObjectMultiplier),
+                    Constants.FlyToObjectSpeed,
+                    Constants.FlyToObjectMaxSpeed);
             }
         }
     }

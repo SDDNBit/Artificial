@@ -1,4 +1,5 @@
 using Autohand;
+using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,28 +8,32 @@ namespace SoftBit.Mechanics
     public class HandObjectsAttraction : MonoBehaviour
     {
         public const string DefaultLayer = "Default";
-        
+        [SerializeField] private Hand hand;
+
         [Header("Pointing Options")]
         [SerializeField] private Transform forwardPointer;
         [SerializeField] private LineRenderer line;
 
-        [Header("Attraction")]
-        [SerializeField] private float maxRange = 5;
-        [SerializeField] private float attractionRadius = 0.03f;
-        [Tooltip("Defaults to Default layer on start if none")]
+        [Tooltip("Avoid Default layer, it is used to remove already attracted objects from raycast")]
         [SerializeField] private LayerMask layers;
 
-        [Header("GravityZone")]
         [SerializeField] private List<Transform> orbitingPoints;
 
         private RaycastHit hit;
 
-        private bool pointing;
-        private bool pulling;
+        private bool isGrabbing;
+        private bool isTriggering;
         private List<Transform> availableOrbitingPoints = new List<Transform>();
+        private List<AttractableObject> objectsAttracted;
+
+        //private void Awake()
+        //{
+        //    hand = GetComponent<Hand>();
+        //}
 
         private void Start()
         {
+            objectsAttracted = new List<AttractableObject>();
             if (layers == 0)
             {
                 layers = LayerMask.GetMask(DefaultLayer);
@@ -43,12 +48,12 @@ namespace SoftBit.Mechanics
 
         public virtual void StartPointing()
         {
-            pointing = true;
+            isGrabbing = true;
         }
 
         public virtual void StopPointing()
         {
-            pointing = false;
+            isGrabbing = false;
             if (line != null)
             {
                 line.positionCount = 0;
@@ -58,21 +63,21 @@ namespace SoftBit.Mechanics
 
         public virtual void SelectTarget()
         {
-            pulling = true;
+            isTriggering = true;
             StopPointing();
         }
 
         public virtual void CancelSelect()
         {
-            pulling = false;
+            isTriggering = false;
         }
 
 
         private void CheckDistanceGrabbable()
         {
-            if (!pulling && pointing)
+            if (isGrabbing)
             {
-                bool didHit = Physics.SphereCast(forwardPointer.position, attractionRadius, forwardPointer.forward, out hit, maxRange, layers);
+                bool didHit = Physics.SphereCast(forwardPointer.position, Utils.Constants.AttractionRadius, forwardPointer.forward, out hit, Utils.Constants.HandMaxObjectAttractionRange, layers);
                 if (didHit)
                 {
                     if (hit.transform.TryGetComponent(out AttractableObject attractableObject))
@@ -81,7 +86,9 @@ namespace SoftBit.Mechanics
                         {
                             attractableObject.IsAlreadyOrbiting = true;
                             attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
+                            attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
                             availableOrbitingPoints.RemoveAt(0);
+                            objectsAttracted.Add(attractableObject);
                         }
                     }
                 }
@@ -95,18 +102,41 @@ namespace SoftBit.Mechanics
                     else
                     {
                         line.positionCount = 2;
-                        line.SetPositions(new Vector3[] { forwardPointer.position, forwardPointer.position + forwardPointer.forward * maxRange });
+                        line.SetPositions(new Vector3[] { forwardPointer.position, forwardPointer.position + forwardPointer.forward * Utils.Constants.HandMaxObjectAttractionRange });
                     }
                 }
             }
-            else if (pulling)
+            else
             {
-                // shoot with attracted objects
+                if (objectsAttracted.Count > 0)
+                {
+                    foreach(var objectAttracted in objectsAttracted)
+                    {
+                        objectAttracted.FlyToObjectComponent.Target = null;
+                        objectAttracted.IsAlreadyOrbiting = false;
+                        objectAttracted.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+                        ShootAttractedObject(objectAttracted);
+                    }
+                    AddAvailableOrbitPoints();
+                    objectsAttracted = new List<AttractableObject>();
+                }
             }
+        }
+
+        private void ShootAttractedObject(AttractableObject attractableObject)
+        {
+            var attractableObjectRigidbody = attractableObject.GetComponent<Rigidbody>();
+            attractableObject.transform.rotation = forwardPointer.rotation;
+            attractableObjectRigidbody.velocity = transform.forward * Utils.Constants.AttractableShootPower;
+            //attractableObjectRigidbody.velocity = hand.ThrowVelocity() * Utils.Constants.AttractableThrowingPower;
+            //var throwAngularVel = hand.ThrowAngularVelocity();
+            //if (!float.IsNaN(throwAngularVel.x) && !float.IsNaN(throwAngularVel.y) && !float.IsNaN(throwAngularVel.z))
+            //    attractableObjectRigidbody.angularVelocity = throwAngularVel;
         }
 
         private void AddAvailableOrbitPoints()
         {
+            availableOrbitingPoints = new List<Transform>();
             availableOrbitingPoints.AddRange(orbitingPoints);
         }
     }

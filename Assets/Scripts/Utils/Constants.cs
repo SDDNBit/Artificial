@@ -7,5 +7,20 @@ namespace SoftBit.Utils
         /// also, if you double one of them, make sure that you double the other one as well
         /// </summary>
         public static float FlyToObjectSpeed = .5f;
+        public static float FlyToObjectMaxSpeed = 20f;
+        public static float FlyToObjectMultiplier = 3f;
+
+
+        /// <summary>
+        /// Hand attraction constants
+        /// </summary>
+        public static float HandMaxObjectAttractionRange = 10f;
+        public static float AttractionRadius = 0.5f;
+        public static float AttractableShootPower = 20f;
+
+        /// <summary>
+        /// Layers names
+        /// </summary>
+        public static string AttractableObjectLayer = "AttractableObject";
     }
 }
