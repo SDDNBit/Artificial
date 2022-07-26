@@ -22,7 +22,7 @@ namespace SoftBit.Mechanics
                 transform.LookAt(Target.position);
                 rb.velocity = transform.forward *
                     Mathf.Clamp(Mathf.Abs(Vector3.Distance(Target.position, transform.position) * Constants.FlyToObjectMultiplier),
-                    Constants.FlyToObjectSpeed,
+                    Constants.FlyToObjectMinSpeed,
                     Constants.FlyToObjectMaxSpeed);
             }
         }

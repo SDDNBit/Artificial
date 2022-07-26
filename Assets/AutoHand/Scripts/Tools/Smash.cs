@@ -57,6 +57,7 @@ namespace Autohand.Demo{
 
 
         public void DoSmash(Smasher smash){
+            print("smasshhh");
             if(effect){
                 ParticleSystem particles;
                 if(createNewEffect)

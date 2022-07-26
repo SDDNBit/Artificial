@@ -4,42 +4,33 @@ using UnityEngine;
 
 namespace SoftBit.Autohand.Custom{
     public class CubeBreak : MonoBehaviour{
-
+        private const int DropObjectsCount = 8;
         public float force = 10f;
-        [SerializeField] private bool breakOnlyOnce = true;
+        [SerializeField] private GameObject attractableObjectPrefab;
         
-        Vector3[] offsets = { new Vector3(0.25f, 0.25f, 0.25f), new Vector3(-0.25f, 0.25f, 0.25f), new Vector3(0.25f, 0.25f, -0.25f), new Vector3(-0.25f, 0.25f, -0.25f),
+        private Vector3[] offsets = { new Vector3(0.25f, 0.25f, 0.25f), new Vector3(-0.25f, 0.25f, 0.25f), new Vector3(0.25f, 0.25f, -0.25f), new Vector3(-0.25f, 0.25f, -0.25f),
                             new Vector3(0.25f, -0.25f, 0.25f), new Vector3(-0.25f, -0.25f, 0.25f), new Vector3(0.25f, -0.25f, -0.25f), new Vector3(-0.25f, -0.25f, -0.25f),};
+        private Rigidbody rb;
+
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         [ContextMenu("Break")]
         public void Break() {
-            for(int i = 0; i < 8; i++) {
-                var smallerCopy = Instantiate(gameObject, transform.position, transform.rotation);
-                foreach(var joint in smallerCopy.GetComponents<FixedJoint>()) {
-                    Destroy(joint);
-                }
+            for(var i = 0; i < DropObjectsCount; ++i) {
+                var attractableObject = Instantiate(attractableObjectPrefab, transform.position, transform.rotation);
                 try{
-                    smallerCopy.transform.parent = transform;
+                    attractableObject.transform.parent = transform;
                 }
                 catch { }
-                smallerCopy.transform.localPosition += offsets[i];
-                smallerCopy.transform.parent = null;
-                smallerCopy.transform.localScale = transform.localScale/2f;
-                smallerCopy.layer = LayerMask.NameToLayer(Hand.grabbableLayerNameDefault);
-                var body = smallerCopy.GetComponent<Rigidbody>();
-                body.ResetCenterOfMass();
-                body.ResetInertiaTensor();
-                body.velocity = GetComponent<Rigidbody>().velocity;
+                attractableObject.transform.localPosition += offsets[i];
+                attractableObject.transform.parent = null;
+                var body = attractableObject.GetComponent<Rigidbody>();
+                body.velocity = rb.velocity;
                 body.AddRelativeForce(transform.rotation*(offsets[i]*force), ForceMode.Impulse);
                 body.AddRelativeTorque(transform.rotation*(offsets[i]*force + Vector3.one*(Random.value/3f)), ForceMode.Impulse);
-                body.mass /= 2;
-                smallerCopy.GetComponent<Grabbable>().jointBreakForce /= 2;
-                if(smallerCopy.transform.localScale.x < 0.03f)
-                    smallerCopy.GetComponent<Grabbable>().singleHandOnly = true;
-                if (breakOnlyOnce)
-                {
-                    Destroy(smallerCopy.GetComponent<Smash>());
-                    Destroy(smallerCopy.GetComponent<CubeBreak>());
-                }
             }
             Destroy(gameObject);
         }
