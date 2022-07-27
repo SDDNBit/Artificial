@@ -1,10 +1,10 @@
-using Autohand;
-using Autohand.Demo;
 using UnityEngine;
 
 namespace SoftBit.Autohand.Custom{
     public class CubeBreak : MonoBehaviour{
+
         private const int DropObjectsCount = 8;
+
         public float force = 10f;
         [SerializeField] private GameObject attractableObjectPrefab;
         

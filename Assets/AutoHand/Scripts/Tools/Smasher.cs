@@ -47,7 +47,6 @@ namespace Autohand.Demo{
             if(collision.transform.CanGetComponent(out smash)){
                 if(GetMagnitude() >= smash.smashForce){
                     smash.DoSmash();
-                    collision.gameObject.GetComponent<Collider>().enabled = false;
                     OnSmashEvent?.Invoke(this, smash);
                 }
             }
