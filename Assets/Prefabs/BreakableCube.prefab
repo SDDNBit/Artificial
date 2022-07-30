@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 328e372aefdc3fd40a1c29d939ad65f1, type: 2}
+  - {fileID: 2100000, guid: 786c7caa508d1f344a2b05806f53730c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -192,7 +192,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 10
-  attractableObjectPrefab: {fileID: 2581830057285167296, guid: 9855546c6cb07ad40b24041f1dbeee1a, type: 3}
+  commonCrystals:
+  - {fileID: 1512163682892321210, guid: b06f6e60a8299d54cbc24ee40e23359f, type: 3}
+  - {fileID: 1540446109074179235, guid: 81a2f3eb7fea5104c936f6113311ec8d, type: 3}
+  - {fileID: 2861734720801681717, guid: 6e1a781075c9c7c428fc1540e3d30a62, type: 3}
+  - {fileID: 4049491777742463976, guid: f754689fafd4df643a88b29260f04edf, type: 3}
+  - {fileID: 8402320060375536124, guid: 5bdc0fefa2a92c44ca9665cd3b42c1b5, type: 3}
+  - {fileID: 7160721357768985424, guid: a6be2201962b53a4996d6a572971e46b, type: 3}
+  - {fileID: 5638068637554316016, guid: 7b15f73c51c64394ab9f814dfd3fa51f, type: 3}
+  - {fileID: 2891228776883697040, guid: 76564ac06380e274c959a29a629eb007, type: 3}
 --- !u!82 &4780930263538946547
 AudioSource:
   m_ObjectHideFlags: 0
@@ -410,18 +418,6 @@ MonoBehaviour:
   OnSmash:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4780930263538946548}
-        m_TargetAssemblyTypeName: SoftBit.Autohand.Custom.CubeBreakCustom, Assembly-CSharp
-        m_MethodName: Break
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4780930263538946545}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
