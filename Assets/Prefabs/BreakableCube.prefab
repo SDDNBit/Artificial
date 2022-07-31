@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4780930263538946548}
   - component: {fileID: 4780930263538946547}
   - component: {fileID: 4780930263538946544}
-  - component: {fileID: 4780930263538946545}
+  - component: {fileID: 8323965438323028484}
   m_Layer: 0
   m_Name: BreakableCube
   m_TagString: Untagged
@@ -192,15 +192,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 10
+  UseSmasherVelocity: 1
   commonCrystals:
-  - {fileID: 1512163682892321210, guid: b06f6e60a8299d54cbc24ee40e23359f, type: 3}
-  - {fileID: 1540446109074179235, guid: 81a2f3eb7fea5104c936f6113311ec8d, type: 3}
-  - {fileID: 2861734720801681717, guid: 6e1a781075c9c7c428fc1540e3d30a62, type: 3}
-  - {fileID: 4049491777742463976, guid: f754689fafd4df643a88b29260f04edf, type: 3}
-  - {fileID: 8402320060375536124, guid: 5bdc0fefa2a92c44ca9665cd3b42c1b5, type: 3}
-  - {fileID: 7160721357768985424, guid: a6be2201962b53a4996d6a572971e46b, type: 3}
-  - {fileID: 5638068637554316016, guid: 7b15f73c51c64394ab9f814dfd3fa51f, type: 3}
-  - {fileID: 2891228776883697040, guid: 76564ac06380e274c959a29a629eb007, type: 3}
+  - {fileID: 1466782124647510667, guid: 75eba53eced130f409cb2fa272977677, type: 3}
+  - {fileID: 5592701045058092235, guid: 48d30830ddaef384cb555b44ae7e7c93, type: 3}
+  - {fileID: 443069037334216649, guid: 9ef5a0fca5dfed1489a116eb272c9fec, type: 3}
+  - {fileID: 7734686967431571427, guid: a181aa19f38125f4888b9ad19b088542, type: 3}
+  - {fileID: 1691976172698571632, guid: a705df821f9db7e4e8f13c1a7a5b7ffc, type: 3}
+  - {fileID: 6519956707205783648, guid: 65dd723ae79a73542a633232bb828f5e, type: 3}
 --- !u!82 &4780930263538946547
 AudioSource:
   m_ObjectHideFlags: 0
@@ -395,7 +394,7 @@ MonoBehaviour:
   volumeAmp: 1
   velocityAmp: 0.3
   soundRepeatDelay: 0.2
---- !u!114 &4780930263538946545
+--- !u!114 &8323965438323028484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,21 +403,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4780930263538946555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07d975bb4661eb244a698f2a75d13fe3, type: 3}
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smashForce: 2
+  smashForce: 1
   destroyOnSmash: 0
   releaseOnSmash: 0
   effect: {fileID: 0}
   createNewEffect: 0
   applyVelocityOnSmash: 0
-  smashSound: {fileID: 8300000, guid: 3c73ab236391cd748b00945c22254c46, type: 3}
+  smashSound: {fileID: 0}
   smashVolume: 1
   OnSmash:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4780930263538946545}
+      - m_Target: {fileID: 8323965438323028484}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6

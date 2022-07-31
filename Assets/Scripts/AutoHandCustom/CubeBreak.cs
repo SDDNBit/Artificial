@@ -1,4 +1,3 @@
-using Autohand.Demo;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,6 @@ namespace SoftBit.Autohand.Custom
 {
     public class CubeBreak : MonoBehaviour
     {
-
         private const int DropObjectsCount = 8;
 
         public float force = 10f;
@@ -26,10 +24,9 @@ namespace SoftBit.Autohand.Custom
         }
 
         [ContextMenu("Break")]
-        public void Break(Smasher smasher)
+        public void Break(Smasher smasher, Collision collision)
         {
-            print("Smasher: " + smasher.gameObject.name);
-            print(smasher.GetComponent<Rigidbody>().velocity);
+            var hitDirection = (transform.position - collision.GetContact(0).point).normalized;
             for (var i = 0; i < DropObjectsCount; ++i)
             {
                 var attractableObject = Instantiate(GetRandomFromList(commonCrystals), transform.position, transform.rotation);
@@ -44,7 +41,8 @@ namespace SoftBit.Autohand.Custom
                 body.velocity = rb.velocity;
                 if (UseSmasherVelocity)
                 {
-                    body.AddRelativeForce(transform.rotation * (offsets[i] * force), ForceMode.Impulse);
+                    // Multiply by smasher force/weapon mass
+                    body.AddRelativeForce(body.transform.InverseTransformDirection(hitDirection) * 5f, ForceMode.Impulse);
                 }
                 else
                 {
