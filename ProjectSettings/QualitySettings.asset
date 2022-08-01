@@ -122,7 +122,7 @@ QualitySettings:
     Stadia: 2
     Standalone: 0
     WebGL: 1
-    Windows Store Apps: 2
+    Windows Store Apps: 0
     XboxOne: 2
-    iPhone: 1
+    iPhone: 0
     tvOS: 1
