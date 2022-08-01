@@ -27,7 +27,7 @@ namespace Autohand.Demo{
         
 
         [Header("Event")]
-        public UnityEvent OnSmash;
+        public UnityEvent<Smasher> OnSmash;
         
         //Progammer Events <3
         public SmashEvent OnSmashEvent;
@@ -42,7 +42,7 @@ namespace Autohand.Demo{
                     grabbable = grabChild.grabParent;
             }
 
-            OnSmashEvent += (smasher, smashable) => { OnSmash?.Invoke(); };
+            OnSmashEvent += (smasher, smashable) => { OnSmash?.Invoke(smasher); };
         }
 
 
@@ -57,7 +57,6 @@ namespace Autohand.Demo{
 
 
         public void DoSmash(Smasher smash){
-            print("smasshhh");
             if(effect){
                 ParticleSystem particles;
                 if(createNewEffect)
