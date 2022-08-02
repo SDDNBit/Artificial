@@ -73286,7 +73286,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -84383,51 +84383,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46672618c7c83a74f8e18606cd94a983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGrab: {fileID: 8753339201248552833}
-  pointAction:
+  HandObjectsAttraction: {fileID: 8753339201248552833}
+  AttractingAction:
     m_UseReference: 1
     m_Action:
-      m_Name: Point
+      m_Name: Attracting
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: b75e6675-a945-4d38-835c-aafb177d14a8
+      m_Id: 9625e558-835a-4cf8-b798-531230e29f06
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
     m_Reference: {fileID: -4456888692727725139, guid: ea9500ae32862c949b420c59682d02ed, type: 3}
-  stopPointAction:
+  StopAttractingAction:
     m_UseReference: 1
     m_Action:
-      m_Name: Stop Point
+      m_Name: Stop Attracting
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 1cc1d0b2-5939-43db-afb4-536c7d58b224
+      m_Id: c9b91433-1691-47a0-8dfa-fc4686c8c9cf
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
     m_Reference: {fileID: -3694457766066378137, guid: ea9500ae32862c949b420c59682d02ed, type: 3}
-  selectAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Select
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 34040858-3094-483c-8d26-afc49279757c
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-    m_Reference: {fileID: 8650556816782149517, guid: ea9500ae32862c949b420c59682d02ed, type: 3}
-  stopSelectAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Stop Select
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 3af9e0a5-6b9d-4f82-8777-dc498379cc3f
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-    m_Reference: {fileID: -1398031799169746360, guid: ea9500ae32862c949b420c59682d02ed, type: 3}
 --- !u!136 &8776398153372268657
 CapsuleCollider:
   m_ObjectHideFlags: 0

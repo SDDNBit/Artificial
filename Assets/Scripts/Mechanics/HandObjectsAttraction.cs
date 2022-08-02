@@ -54,13 +54,13 @@ namespace SoftBit.Mechanics
             CheckForObjectAttraction();
         }
 
-        public virtual void StartPointing()
+        public virtual void StartAttracting()
         {
             isGrabbing = true;
             onGrabbedWasCalledCoroutine = StartCoroutine(CheckIfOnGrabbedWasCalled());
         }
 
-        public virtual void StopPointing()
+        public virtual void StopAttracting()
         {
             isGrabbing = false;
             handIsBusy = true;
@@ -69,15 +69,6 @@ namespace SoftBit.Mechanics
             {
                 StopCoroutine(onGrabbedWasCalledCoroutine);
             }
-        }
-
-        public virtual void SelectTarget()
-        {
-            StopPointing();
-        }
-
-        public virtual void CancelSelect()
-        {
         }
 
         private void OnGrabbedListener(Hand hand, Grabbable grabbable)
@@ -132,7 +123,7 @@ namespace SoftBit.Mechanics
             {
                 if (hitColliders[i].transform.TryGetComponent(out AttractableObject attractableObject))
                 {
-                    if (!attractableObject.IsAlreadyOrbiting && availableOrbitingPoints.Count > 0)
+                    if (!attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed && availableOrbitingPoints.Count > 0)
                     {
                         attractableObject.IsAlreadyOrbiting = true;
                         attractableObject.DestroyIfNotInUseComponent.InUse = true;
@@ -151,9 +142,8 @@ namespace SoftBit.Mechanics
             attractableObject.IsAlreadyOrbiting = false;
             attractableObject.DestroyIfNotInUseComponent.InUse = false;
             attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
-            var attractableObjectRigidbody = attractableObject.GetComponent<Rigidbody>();
             attractableObject.transform.rotation = transform.rotation;
-            attractableObjectRigidbody.velocity = transform.forward * Utils.Constants.AttractableShootPower;
+            attractableObject.RigidbodyComponent.velocity = transform.forward * Utils.Constants.AttractableShootPower;
         }
 
         private void AddAvailableOrbitPoints()
