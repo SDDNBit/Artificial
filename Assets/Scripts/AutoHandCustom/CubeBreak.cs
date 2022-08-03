@@ -7,8 +7,9 @@ namespace SoftBit.Autohand.Custom
     {
         private const int DropObjectsCount = 8;
 
-        public float force = 10f;
-        [SerializeField] private bool UseSmasherVelocity = true;
+        public float Force = 10f;
+
+        [SerializeField] private bool withRelativeForce = false;
         [SerializeField] private List<GameObject> commonCrystals;
 
         private Vector3[] offsets = { new Vector3(0.25f, 0.25f, 0.25f), new Vector3(-0.25f, 0.25f, 0.25f), new Vector3(0.25f, 0.25f, -0.25f), new Vector3(-0.25f, 0.25f, -0.25f),
@@ -26,7 +27,6 @@ namespace SoftBit.Autohand.Custom
         [ContextMenu("Break")]
         public void Break(Smasher smasher, Collision collision)
         {
-            var hitDirection = (transform.position - collision.GetContact(0).point).normalized;
             for (var i = 0; i < DropObjectsCount; ++i)
             {
                 var attractableObject = Instantiate(GetRandomFromList(commonCrystals), transform.position, transform.rotation);
@@ -39,16 +39,11 @@ namespace SoftBit.Autohand.Custom
                 attractableObject.transform.parent = null;
                 var body = attractableObject.GetComponent<Rigidbody>();
                 body.velocity = rb.velocity;
-                if (UseSmasherVelocity)
+                if (withRelativeForce)
                 {
-                    // Multiply by smasher force/weapon mass
-                    body.AddRelativeForce(body.transform.InverseTransformDirection(hitDirection) * 5f, ForceMode.Impulse);
+                    body.AddRelativeForce(transform.rotation * (offsets[i] * Force), ForceMode.Impulse);
+                    body.AddRelativeTorque(transform.rotation * (offsets[i] * Force + Vector3.one * (Random.value / 3f)), ForceMode.Impulse);
                 }
-                else
-                {
-                    body.AddRelativeForce(transform.rotation * (offsets[i] * force), ForceMode.Impulse);
-                }
-                body.AddRelativeTorque(transform.rotation * (offsets[i] * force + Vector3.one * (Random.value / 3f)), ForceMode.Impulse);
             }
             Destroy(gameObject);
         }

@@ -54,13 +54,13 @@ namespace SoftBit.Mechanics
             CheckForObjectAttraction();
         }
 
-        public virtual void StartPointing()
+        public virtual void StartAttracting()
         {
             isGrabbing = true;
             onGrabbedWasCalledCoroutine = StartCoroutine(CheckIfOnGrabbedWasCalled());
         }
 
-        public virtual void StopPointing()
+        public virtual void StopAttracting()
         {
             isGrabbing = false;
             handIsBusy = true;
@@ -71,13 +71,12 @@ namespace SoftBit.Mechanics
             }
         }
 
-        public virtual void SelectTarget()
+        public void DetachAttractedObject(AttractableObject attractableObject)
         {
-            StopPointing();
-        }
-
-        public virtual void CancelSelect()
-        {
+            attractableObject.FlyToObjectComponent.Target = null;
+            attractableObject.IsAlreadyOrbiting = false;
+            attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            objectsAttracted.Remove(attractableObject);
         }
 
         private void OnGrabbedListener(Hand hand, Grabbable grabbable)
@@ -132,12 +131,13 @@ namespace SoftBit.Mechanics
             {
                 if (hitColliders[i].transform.TryGetComponent(out AttractableObject attractableObject))
                 {
-                    if (!attractableObject.IsAlreadyOrbiting && availableOrbitingPoints.Count > 0)
+                    if (!attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed && availableOrbitingPoints.Count > 0)
                     {
                         attractableObject.IsAlreadyOrbiting = true;
                         attractableObject.DestroyIfNotInUseComponent.InUse = true;
                         attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
                         attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
+                        attractableObject.SetObjectAttractionComponent(this);
                         availableOrbitingPoints.RemoveAt(0);
                         objectsAttracted.Add(attractableObject);
                     }
@@ -151,9 +151,8 @@ namespace SoftBit.Mechanics
             attractableObject.IsAlreadyOrbiting = false;
             attractableObject.DestroyIfNotInUseComponent.InUse = false;
             attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
-            var attractableObjectRigidbody = attractableObject.GetComponent<Rigidbody>();
             attractableObject.transform.rotation = transform.rotation;
-            attractableObjectRigidbody.velocity = transform.forward * Utils.Constants.AttractableShootPower;
+            attractableObject.RigidbodyComponent.velocity = transform.forward * Utils.Constants.AttractableShootPower;
         }
 
         private void AddAvailableOrbitPoints()

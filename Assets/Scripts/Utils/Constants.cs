@@ -13,9 +13,9 @@ namespace SoftBit.Utils
         /// Be careful with this constant, if it is set to .5f, then make sure the OrbitingPointsSpeed is set to 200, otherwise jitter appear, 
         /// also, if you double one of them, make sure that you double the other one as well
         /// </summary>
-        public static float FlyToObjectMinSpeed = .5f;
+        public static float FlyToObjectMinSpeed = 10f;
         public static float FlyToObjectMaxSpeed = 20f;
-        public static float FlyToObjectMultiplier = 5f;
+        public static float FlyToObjectMultiplier = 2f;
 
         /// <summary>
         /// Layers names
