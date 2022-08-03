@@ -299,7 +299,7 @@ MonoBehaviour:
   smashableLayers:
     serializedVersion: 2
     m_Bits: 0
-  forceMulti: 1
+  forceMulti: 2
   centerOfMassPoint: {fileID: 377016496093807218}
   OnSmash:
     m_PersistentCalls:

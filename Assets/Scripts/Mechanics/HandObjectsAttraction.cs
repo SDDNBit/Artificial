@@ -71,6 +71,14 @@ namespace SoftBit.Mechanics
             }
         }
 
+        public void DetachAttractedObject(AttractableObject attractableObject)
+        {
+            attractableObject.FlyToObjectComponent.Target = null;
+            attractableObject.IsAlreadyOrbiting = false;
+            attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            objectsAttracted.Remove(attractableObject);
+        }
+
         private void OnGrabbedListener(Hand hand, Grabbable grabbable)
         {
             onGrabbedCalled = true;
@@ -129,6 +137,7 @@ namespace SoftBit.Mechanics
                         attractableObject.DestroyIfNotInUseComponent.InUse = true;
                         attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
                         attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
+                        attractableObject.SetObjectAttractionComponent(this);
                         availableOrbitingPoints.RemoveAt(0);
                         objectsAttracted.Add(attractableObject);
                     }

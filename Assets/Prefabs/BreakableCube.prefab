@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 10
-  UseSmasherVelocity: 1
+  WithRelativeForce: 0
   commonCrystals:
   - {fileID: 1466782124647510667, guid: 75eba53eced130f409cb2fa272977677, type: 3}
   - {fileID: 5592701045058092235, guid: 48d30830ddaef384cb555b44ae7e7c93, type: 3}

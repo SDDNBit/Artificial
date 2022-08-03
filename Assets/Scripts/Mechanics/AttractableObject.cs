@@ -13,6 +13,7 @@ namespace SoftBit.Mechanics
         [HideInInspector] public DestroyIfNotInUse DestroyIfNotInUseComponent;
         [HideInInspector] public Rigidbody RigidbodyComponent;
 
+        private HandObjectsAttraction handObjectsAttraction;
         private Grabbable grabbable;
 
         private void Awake()
@@ -25,8 +26,17 @@ namespace SoftBit.Mechanics
             grabbable.onRelease.AddListener(ReleaseListener);
         }
 
+        public void SetObjectAttractionComponent(HandObjectsAttraction handObjectsAttraction)
+        {
+            this.handObjectsAttraction = handObjectsAttraction;
+        }
+
         private void GrabListener(Hand hand, Grabbable grabbable)
         {
+            if (IsAlreadyOrbiting)
+            {
+                handObjectsAttraction.DetachAttractedObject(this);
+            }
             DestroyIfNotInUseComponent.InUse = true;
             IsGrabbed = true;
         }
