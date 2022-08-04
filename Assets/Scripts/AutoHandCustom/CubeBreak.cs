@@ -6,6 +6,7 @@ namespace SoftBit.Autohand.Custom
     public class CubeBreak : MonoBehaviour
     {
         private const int DropObjectsCount = 8;
+        private const float RandomFactorForTorque = 3f;
 
         public float Force = 10f;
 
@@ -42,7 +43,7 @@ namespace SoftBit.Autohand.Custom
                 if (withRelativeForce)
                 {
                     body.AddRelativeForce(transform.rotation * (offsets[i] * Force), ForceMode.Impulse);
-                    body.AddRelativeTorque(transform.rotation * (offsets[i] * Force + Vector3.one * (Random.value / 3f)), ForceMode.Impulse);
+                    body.AddRelativeTorque(transform.rotation * (offsets[i] * Force + Vector3.one * (Random.value / RandomFactorForTorque)), ForceMode.Impulse);
                 }
             }
             Destroy(gameObject);
