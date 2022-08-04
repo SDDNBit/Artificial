@@ -84233,6 +84233,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   hand: {fileID: 1575735658512069217}
+  attractByPlayersHandPointing: 1
   orbitingPoints:
   - {fileID: 2063184357}
   - {fileID: 1338906654}

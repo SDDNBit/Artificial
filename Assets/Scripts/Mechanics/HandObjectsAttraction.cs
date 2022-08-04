@@ -13,23 +13,28 @@ namespace SoftBit.Mechanics
         [Tooltip("Avoid Default layer, it is used to remove already attracted objects from raycast")]
         [SerializeField] private LayerMask layers;
         [SerializeField] private Hand hand;
+        [Tooltip("If set to true, objects are attracted by player, pointing the hand towards them; if set to false, attractables around within a range are attracted automatically")]
+        [SerializeField] private bool attractByPlayersHandPointing = true;
         [SerializeField] private List<Transform> orbitingPoints;
 
         private bool isGrabbing;
         private bool handIsBusy;
         private bool onGrabbedCalled;
-        private bool attractionPerformed;
 
         private List<Transform> availableOrbitingPoints = new List<Transform>();
         private List<AttractableObject> objectsAttracted;
         private Collider[] hitColliders;
         private Coroutine onGrabbedWasCalledCoroutine;
+        private Transform myTransform;
+        private RaycastHit hit;
+        private int attractablesArround;
 
         private void Start()
         {
+            myTransform = transform;
             onGrabbedCalled = false;
+            attractablesArround = 0;
             handIsBusy = true;
-            attractionPerformed = false;
             hitColliders = new Collider[8];
             objectsAttracted = new List<AttractableObject>();
             if (layers == 0)
@@ -101,14 +106,20 @@ namespace SoftBit.Mechanics
         {
             if (isGrabbing && !handIsBusy)
             {
-                if (!attractionPerformed)
+                if (attractByPlayersHandPointing)
                 {
-                    var collidersFound = Physics.OverlapSphereNonAlloc(transform.position, Utils.Constants.HandAttractionRange, hitColliders, layers, QueryTriggerInteraction.Ignore);
-                    if (collidersFound > 0)
+                    if (Physics.SphereCast(myTransform.position, Utils.Constants.AttractionRadius, myTransform.forward, out hit, Utils.Constants.HandAttractionRange, layers, QueryTriggerInteraction.Ignore))
                     {
-                        AttractObjects(collidersFound);
+                        AttractObjectByPlayersHand(hit);
                     }
-                    attractionPerformed = true;
+                }
+                else
+                {
+                    attractablesArround = Physics.OverlapSphereNonAlloc(transform.position, Utils.Constants.HandAttractionRange, hitColliders, layers, QueryTriggerInteraction.Ignore);
+                    if (attractablesArround > 0)
+                    {
+                        AttractObjectsArroundPlayer(attractablesArround);
+                    }
                 }
             }
             else
@@ -121,27 +132,39 @@ namespace SoftBit.Mechanics
                     }
                     CleanupOrbitPoints();
                 }
-                attractionPerformed = false;
             }
         }
 
-        private void AttractObjects(int collidersFound)
+        private void AttractObjectByPlayersHand(RaycastHit hit)
+        {
+            if (hit.transform.TryGetComponent(out AttractableObject attractableObject))
+            {
+                AttractObject(attractableObject);
+            }
+        }
+
+        private void AttractObjectsArroundPlayer(int collidersFound)
         {
             for (var i = 0; i < collidersFound; ++i)
             {
                 if (hitColliders[i].transform.TryGetComponent(out AttractableObject attractableObject))
                 {
-                    if (!attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed && availableOrbitingPoints.Count > 0)
-                    {
-                        attractableObject.IsAlreadyOrbiting = true;
-                        attractableObject.DestroyIfNotInUseComponent.InUse = true;
-                        attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
-                        attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
-                        attractableObject.SetObjectAttractionComponent(this);
-                        availableOrbitingPoints.RemoveAt(0);
-                        objectsAttracted.Add(attractableObject);
-                    }
+                    AttractObject(attractableObject);
                 }
+            }
+        }
+
+        private void AttractObject(AttractableObject attractableObject)
+        {
+            if (!attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed && availableOrbitingPoints.Count > 0)
+            {
+                attractableObject.IsAlreadyOrbiting = true;
+                attractableObject.DestroyIfNotInUseComponent.InUse = true;
+                attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
+                attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
+                attractableObject.SetObjectAttractionComponent(this);
+                availableOrbitingPoints.RemoveAt(0);
+                objectsAttracted.Add(attractableObject);
             }
         }
 

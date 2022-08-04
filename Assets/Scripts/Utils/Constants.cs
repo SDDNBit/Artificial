@@ -5,6 +5,7 @@ namespace SoftBit.Utils
         /// <summary>
         /// Hand attraction constants
         /// </summary>
+        public static float AttractionRadius = 0.5f;
         public static float HandAttractionRange = 8f;
         public static float AttractableShootPower = 20f;
         public static int MaxAvailableOrbitingPoints = 8; // Make sure to adjust also in HandObjectsAttraction script the transforms in the list if this is changed
