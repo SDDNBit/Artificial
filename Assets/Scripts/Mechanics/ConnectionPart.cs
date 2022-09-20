@@ -6,7 +6,7 @@ namespace SoftBit.Mechanics
 {
     public class ConnectionPart : MonoBehaviour
     {
-        public EnemyCollider enemyCollider;
+        public List<Collider> colliders;
         public string guid;
         public List<ConnectionPart> parentParts;
         public List<ConnectionPart> childParts;

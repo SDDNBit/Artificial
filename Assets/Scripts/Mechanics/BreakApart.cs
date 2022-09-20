@@ -62,17 +62,14 @@ namespace SoftBit.Mechanics
                 if (!found)
                 {
                     connectionPart.gameObject.SetActive(false);
-                    if (connectionPart.enemyCollider != null)
-                    {
-                        connectionPart.enemyCollider.DestroyCollider();
-                    }
+                    RemoveColliders(connectionPart);
                 }
             }
         }
 
         private void DestroyIfGarbage()
         {
-            foreach(var connectionPart in connectionParts)
+            foreach (var connectionPart in connectionParts)
             {
                 if (connectionPart.gameObject.activeSelf)
                 {
@@ -121,7 +118,22 @@ namespace SoftBit.Mechanics
         {
             partsToSpawn.Add(connectionPart);
             connectionPart.gameObject.SetActive(false);
+            RemoveColliders(connectionPart);
             DeactivateChilds(connectionPart);
+        }
+
+        private void RemoveColliders(ConnectionPart connectionPart)
+        {
+            if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+            {
+                foreach (var collider in connectionPart.colliders)
+                {
+                    if (collider != null)
+                    {
+                        Destroy(collider.transform.gameObject);
+                    }
+                }
+            }
         }
 
         private void DeactivateSibling(ConnectionPart sibling)
