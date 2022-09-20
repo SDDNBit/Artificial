@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 213768485642943707}
   - component: {fileID: 8427441659380657149}
   - component: {fileID: 5859797330262773045}
+  - component: {fileID: 3796269036294733070}
   m_Layer: 0
   m_Name: Stomach_L_Collider
   m_TagString: Untagged
@@ -59,6 +60,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 4637782228835851716}
+--- !u!114 &3796269036294733070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21892964117525016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &61524380367466414
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,6 +94,7 @@ GameObject:
   - component: {fileID: 4981226661214583188}
   - component: {fileID: 7190077335043093429}
   - component: {fileID: 1535064437648770333}
+  - component: {fileID: 6037762569949298844}
   m_Layer: 0
   m_Name: LowerArm_L_Collider
   m_TagString: Untagged
@@ -118,6 +143,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 5107222542938655260}
+--- !u!114 &6037762569949298844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61524380367466414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &182026423422853481
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +455,7 @@ GameObject:
   - component: {fileID: 1029030462273710750}
   - component: {fileID: 1029030462273710737}
   - component: {fileID: 5518020017378841630}
+  - component: {fileID: 5206141690103259186}
   m_Layer: 0
   m_Name: Head_Collider
   m_TagString: Untagged
@@ -455,6 +504,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 4502899937066260343}
+--- !u!114 &5206141690103259186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029030462273710751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1040005231596651628
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +825,7 @@ GameObject:
   - component: {fileID: 3607431609228282787}
   - component: {fileID: 6658971303087080400}
   - component: {fileID: 2448424568222586595}
+  - component: {fileID: 5054083858213448699}
   m_Layer: 0
   m_Name: UpperBody_L_Collider
   m_TagString: Untagged
@@ -801,6 +874,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 1277673143907761716}
+--- !u!114 &5054083858213448699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268282093951076865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1388792906543369244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1661,7 @@ GameObject:
   - component: {fileID: 9090469008917345073}
   - component: {fileID: 8789243933058130504}
   - component: {fileID: 7702156531046979160}
+  - component: {fileID: 3924162814672456624}
   m_Layer: 0
   m_Name: UpperBody_R_Collider
   m_TagString: Untagged
@@ -1613,6 +1710,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 7462439039509769507}
+--- !u!114 &3924162814672456624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283903817551854207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2358404951438405325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1776,7 @@ GameObject:
   - component: {fileID: 1631281935941754975}
   - component: {fileID: 6158701828867881034}
   - component: {fileID: 7947682539621548455}
+  - component: {fileID: 6861317127947617783}
   m_Layer: 0
   m_Name: LowerLeg_L_Collider
   m_TagString: Untagged
@@ -1704,6 +1825,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 6178643565370723422}
+--- !u!114 &6861317127947617783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2489059964102365642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2521043396552892674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,6 +2217,7 @@ GameObject:
   - component: {fileID: 7318851592444084153}
   - component: {fileID: 998729212776419117}
   - component: {fileID: 1866713361489904347}
+  - component: {fileID: 4477729642520787820}
   m_Layer: 0
   m_Name: UpperArm_R_Collider
   m_TagString: Untagged
@@ -2121,6 +2266,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 4393624989482457193}
+--- !u!114 &4477729642520787820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3149902192526374700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3189117200869604619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,6 +2332,7 @@ GameObject:
   - component: {fileID: 4551752441224942976}
   - component: {fileID: 6288515918604401641}
   - component: {fileID: 1374892049675864127}
+  - component: {fileID: 5563039192157375057}
   m_Layer: 0
   m_Name: UpperArm_L_Collider
   m_TagString: Untagged
@@ -2212,6 +2381,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 6786508747989550969}
+--- !u!114 &5563039192157375057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313469519730852328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3322990112785474715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,6 +2849,7 @@ GameObject:
   - component: {fileID: 2922823020456264054}
   - component: {fileID: 4087991481715709295}
   - component: {fileID: 2811505046259709846}
+  - component: {fileID: 4088016461262240169}
   m_Layer: 0
   m_Name: LowerBody_R_Collider
   m_TagString: Untagged
@@ -2705,6 +2898,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 9160660894484773703}
+--- !u!114 &4088016461262240169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275053660340587332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4368615977238508146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,6 +3726,7 @@ GameObject:
   - component: {fileID: 3653999339709537519}
   - component: {fileID: 7962975025088301954}
   - component: {fileID: 7201701052686335238}
+  - component: {fileID: 6114490457937730892}
   m_Layer: 0
   m_Name: Stomach_R_Collider
   m_TagString: Untagged
@@ -3558,6 +3775,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 7726603608432526228}
+--- !u!114 &6114490457937730892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566991197493604036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6184905071374302270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4206,6 +4446,7 @@ GameObject:
   - component: {fileID: 7876918290995773831}
   - component: {fileID: 5656003093512320686}
   - component: {fileID: 3101346834782947036}
+  - component: {fileID: 2683055616199433634}
   m_Layer: 0
   m_Name: UpperLeg_R_Collider
   m_TagString: Untagged
@@ -4254,6 +4495,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 8407236442380638686}
+--- !u!114 &2683055616199433634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995075955724438996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7079645258570849300
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,6 +4563,7 @@ GameObject:
   - component: {fileID: 3644275520808618919}
   - component: {fileID: 1149700613568033954}
   - component: {fileID: 8644201487786400798}
+  - component: {fileID: 8100781117981403718}
   m_Layer: 0
   m_Name: Palm_L_Collider
   m_TagString: Untagged
@@ -4347,6 +4612,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 8284410953273339034}
+--- !u!114 &8100781117981403718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127097275274612953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7283057880207220931
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,6 +4646,7 @@ GameObject:
   - component: {fileID: 2689270584564961410}
   - component: {fileID: 6373118896476320875}
   - component: {fileID: 792886656511071508}
+  - component: {fileID: 3126831565750777025}
   m_Layer: 0
   m_Name: LowerArm_R_Collider
   m_TagString: Untagged
@@ -4406,6 +4695,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 8144724417712708773}
+--- !u!114 &3126831565750777025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283057880207220931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7317431293449462821
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,6 +4729,7 @@ GameObject:
   - component: {fileID: 7167089429368855251}
   - component: {fileID: 8509546709371222414}
   - component: {fileID: 6657883045252562503}
+  - component: {fileID: 4461776969974264125}
   m_Layer: 0
   m_Name: LowerBody_L_Collider
   m_TagString: Untagged
@@ -4465,6 +4778,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 7283332302884520792}
+--- !u!114 &4461776969974264125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317431293449462821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7397712482564960915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,6 +4845,7 @@ GameObject:
   - component: {fileID: 8413634887559295518}
   - component: {fileID: 3436671836920400711}
   - component: {fileID: 4392730192457467796}
+  - component: {fileID: 5590843411743881320}
   m_Layer: 0
   m_Name: LowerLeg_R_Collider
   m_TagString: Untagged
@@ -4557,6 +4894,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 8591176638457523896}
+--- !u!114 &5590843411743881320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414047210091831643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7577059664991336271
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,6 +4928,7 @@ GameObject:
   - component: {fileID: 1249712414780937525}
   - component: {fileID: 4279541186707206629}
   - component: {fileID: 2619062020493569739}
+  - component: {fileID: 6331791004351854352}
   m_Layer: 0
   m_Name: UpperLeg_L_Collider
   m_TagString: Untagged
@@ -4616,6 +4977,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 6796260492893449111}
+--- !u!114 &6331791004351854352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577059664991336271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7672443861260642835
 GameObject:
   m_ObjectHideFlags: 0
@@ -5092,6 +5476,7 @@ GameObject:
   - component: {fileID: 310339768500535488}
   - component: {fileID: 8592587174555901355}
   - component: {fileID: 8081406445326500444}
+  - component: {fileID: 5215002043622633357}
   m_Layer: 0
   m_Name: Palm_R_Collider
   m_TagString: Untagged
@@ -5140,6 +5525,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPart: {fileID: 6697364990138116987}
+--- !u!114 &5215002043622633357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534745998616301742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0545997b0da04295d853a021f010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: 1
+  destroyOnSmash: 0
+  releaseOnSmash: 0
+  effect: {fileID: 0}
+  createNewEffect: 0
+  applyVelocityOnSmash: 0
+  smashSound: {fileID: 0}
+  smashVolume: 1
+  OnSmash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8583091438210679369
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using SoftBit.Autohand.Custom;
 using UnityEngine;
 
 namespace SoftBit.Mechanics
@@ -8,15 +7,23 @@ namespace SoftBit.Mechanics
     {
         [SerializeField] private ConnectionPart connectionPart;
 
-        [ContextMenu("DestroyPart")]
-        public void DestroyPart()
+        private Smash smash;
+
+        private void Awake()
+        {
+            smash = GetComponent<Smash>();
+            smash.OnSmash.AddListener(DestroyPart);
+        }
+
+        private void DestroyPart(Smasher smasher, Collision collision)
         {
             connectionPart.DestroyPart();
         }
 
-        public void DestroyCollider()
+        [ContextMenu("Test_DestroyPart")]
+        private void DestroyTest()
         {
-            Destroy(gameObject);
+            DestroyPart(null, null);
         }
     }
 }
