@@ -38,6 +38,11 @@ namespace SoftBit.Autohand.Custom
 
         internal Grabbable grabbable;
 
+        private void Awake()
+        {
+            enabled = true;
+        }
+
         public void Start()
         {
             if (!(grabbable = GetComponent<Grabbable>()))

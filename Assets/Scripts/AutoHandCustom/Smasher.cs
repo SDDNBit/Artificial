@@ -51,10 +51,12 @@ namespace SoftBit.Autohand.Custom
         private void OnCollisionEnter(Collision collision)
         {
             Smash smash;
-            if (collision.transform.CanGetComponent(out smash))
+            if (collision.collider.transform.CanGetComponent(out smash))
             {
+                print("Smash component received");
                 if (GetMagnitude() >= smash.smashForce)
                 {
+                    print("Smash it");
                     smash.DoSmash(this, collision);
                     OnSmashEvent?.Invoke(this, smash, collision);
                 }
