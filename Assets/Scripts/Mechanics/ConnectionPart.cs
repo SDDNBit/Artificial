@@ -10,6 +10,7 @@ namespace SoftBit.Mechanics
         public string guid;
         public List<ConnectionPart> parentParts;
         public List<ConnectionPart> childParts;
+        public List<GameObject> cells;
         [HideInInspector] public BreakApart breakApart;
 
         [ContextMenu("DestroyPart")]
