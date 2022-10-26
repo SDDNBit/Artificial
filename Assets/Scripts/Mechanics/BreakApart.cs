@@ -13,9 +13,11 @@ namespace SoftBit.Mechanics
         private int granpasActive;
         private GameObject scrap;
         private BreakApart scrapBreakApart;
+        private Transform selfTransform;
 
         private void Awake()
         {
+            selfTransform = transform;
             partsToSpawn = new List<ConnectionPart>();
             foreach (var connectionPart in connectionParts)
             {
@@ -26,6 +28,12 @@ namespace SoftBit.Mechanics
         public void DestroyPart(ConnectionPart connectionPart)
         {
             partsToSpawn.Clear();
+            foreach (var cell in connectionPart.cells)
+            {
+                var spawnedCell = cell.BakeMesh();
+                //spawnedCell.transform.position += selfTransform.position;
+                ////spawnedCell.transform.rotation
+            }
             DeactivatePart(connectionPart);
             print(partsToSpawn.Count);
             partsToSpawn.RemoveAt(0);
