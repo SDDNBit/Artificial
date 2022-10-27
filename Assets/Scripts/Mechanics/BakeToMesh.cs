@@ -17,6 +17,9 @@ namespace SoftBit.Mechanics
             meshFilter.mesh = mesh;
             bakedMeshGameObject.transform.position = transform.position;
             bakedMeshGameObject.transform.rotation = transform.rotation;
+            var meshCollider = bakedMeshGameObject.AddComponent<MeshCollider>();
+            meshCollider.convex = true;
+            bakedMeshGameObject.AddComponent<Rigidbody>();
             return bakedMeshGameObject;
         }
     }
