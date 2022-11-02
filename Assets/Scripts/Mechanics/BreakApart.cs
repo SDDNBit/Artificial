@@ -38,14 +38,9 @@ namespace SoftBit.Mechanics
             if (partsToSpawn.Count > 0)
             {
                 scrap = Instantiate(prefab);
-                scrap.GetComponent<Rigidbody>().isKinematic = false;
+                scrap.AddComponent<Rigidbody>();
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
                 scrapBreakApart.SetActiveParts(partsToSpawn);
-                var animator = scrap.GetComponent<Animator>();
-                if (animator != null)
-                {
-                    Destroy(animator);
-                }
                 scrap.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
             DestroyIfGarbage();
