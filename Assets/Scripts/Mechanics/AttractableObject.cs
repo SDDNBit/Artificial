@@ -7,6 +7,8 @@ namespace SoftBit.Mechanics
     [RequireComponent(typeof(FlyToObject))]
     public class AttractableObject : MonoBehaviour
     {
+        public const string AttractableLayer = "AttractableObject";
+
         [HideInInspector] public bool IsGrabbed = false;
         [HideInInspector] public bool IsAlreadyOrbiting = false;
         [HideInInspector] public FlyToObject FlyToObjectComponent;
@@ -24,6 +26,11 @@ namespace SoftBit.Mechanics
             grabbable = GetComponent<Grabbable>();
             grabbable.onGrab.AddListener(GrabListener);
             grabbable.onRelease.AddListener(ReleaseListener);
+            var layer = LayerMask.NameToLayer(AttractableLayer);
+            if (layer != -1)
+            {
+                SetLayerRecursively(gameObject, layer);
+            }
         }
 
         public void SetObjectAttractionComponent(HandObjectsAttraction handObjectsAttraction)
@@ -45,6 +52,14 @@ namespace SoftBit.Mechanics
         {
             DestroyIfNotInUseComponent.InUse = false;
             IsGrabbed = false;
+        }
+
+        private void SetLayerRecursively(GameObject gameObject, int layerNumber)
+        {
+            foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
+            {
+                transform.gameObject.layer = layerNumber;
+            }
         }
     }
 }

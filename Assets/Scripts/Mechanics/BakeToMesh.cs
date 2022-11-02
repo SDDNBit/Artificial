@@ -1,3 +1,5 @@
+using Autohand;
+using SoftBit.Utils;
 using UnityEngine;
 
 namespace SoftBit.Mechanics
@@ -19,8 +21,20 @@ namespace SoftBit.Mechanics
             bakedMeshGameObject.transform.rotation = transform.rotation;
             var meshCollider = bakedMeshGameObject.AddComponent<MeshCollider>();
             meshCollider.convex = true;
-            bakedMeshGameObject.AddComponent<Rigidbody>();
-            return bakedMeshGameObject;
+
+            var meshParent = new GameObject(gameObject.name + "Parent");
+            meshParent.transform.position = meshRenderer.bounds.center;
+            meshParent.transform.rotation = Quaternion.identity;
+            bakedMeshGameObject.transform.SetParent(meshParent.transform);
+
+            meshParent.AddComponent<Rigidbody>();
+            var grabbable = meshParent.AddComponent<Grabbable>();
+            grabbable.singleHandOnly = true;
+            grabbable.jointBreakForce = float.PositiveInfinity;
+            meshParent.AddComponent<FlyToObject>();
+            meshParent.AddComponent<DestroyIfNotInUse>();
+            meshParent.AddComponent<AttractableObject>();
+            return meshParent;
         }
     }
 }
