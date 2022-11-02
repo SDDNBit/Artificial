@@ -30,9 +30,7 @@ namespace SoftBit.Mechanics
             partsToSpawn.Clear();
             foreach (var cell in connectionPart.cells)
             {
-                var spawnedCell = cell.BakeMesh();
-                //spawnedCell.transform.position += selfTransform.position;
-                ////spawnedCell.transform.rotation
+                cell.BakeMesh();
             }
             DeactivatePart(connectionPart);
             print(partsToSpawn.Count);

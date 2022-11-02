@@ -7,8 +7,6 @@ namespace SoftBit.Mechanics
     [RequireComponent(typeof(FlyToObject))]
     public class AttractableObject : MonoBehaviour
     {
-        public const string AttractableLayer = "AttractableObject";
-
         [HideInInspector] public bool IsGrabbed = false;
         [HideInInspector] public bool IsAlreadyOrbiting = false;
         [HideInInspector] public FlyToObject FlyToObjectComponent;
@@ -26,7 +24,7 @@ namespace SoftBit.Mechanics
             grabbable = GetComponent<Grabbable>();
             grabbable.onGrab.AddListener(GrabListener);
             grabbable.onRelease.AddListener(ReleaseListener);
-            var layer = LayerMask.NameToLayer(AttractableLayer);
+            var layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
             if (layer != -1)
             {
                 SetLayerRecursively(gameObject, layer);

@@ -7,7 +7,7 @@ namespace SoftBit.Mechanics
     public class BakeToMesh : MonoBehaviour
     {
         [ContextMenu("BakeMe")]
-        public GameObject BakeMesh()
+        public void BakeMesh()
         {
             var mesh = new Mesh();
             var skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
@@ -22,11 +22,22 @@ namespace SoftBit.Mechanics
             var meshCollider = bakedMeshGameObject.AddComponent<MeshCollider>();
             meshCollider.convex = true;
 
+            var meshParent = CorrectPivotWithParent(meshRenderer, bakedMeshGameObject);
+
+            AddAttractableBehaviour(meshParent);
+        }
+
+        private GameObject CorrectPivotWithParent(MeshRenderer meshRenderer, GameObject bakedMeshGameObject)
+        {
             var meshParent = new GameObject(gameObject.name + "Parent");
             meshParent.transform.position = meshRenderer.bounds.center;
             meshParent.transform.rotation = Quaternion.identity;
             bakedMeshGameObject.transform.SetParent(meshParent.transform);
+            return meshParent;
+        }
 
+        private void AddAttractableBehaviour(GameObject meshParent)
+        {
             meshParent.AddComponent<Rigidbody>();
             var grabbable = meshParent.AddComponent<Grabbable>();
             grabbable.singleHandOnly = true;
@@ -34,7 +45,6 @@ namespace SoftBit.Mechanics
             meshParent.AddComponent<FlyToObject>();
             meshParent.AddComponent<DestroyIfNotInUse>();
             meshParent.AddComponent<AttractableObject>();
-            return meshParent;
         }
     }
 }
