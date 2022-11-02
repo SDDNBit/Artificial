@@ -24,6 +24,11 @@ namespace SoftBit.Mechanics
             grabbable = GetComponent<Grabbable>();
             grabbable.onGrab.AddListener(GrabListener);
             grabbable.onRelease.AddListener(ReleaseListener);
+            var layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            if (layer != -1)
+            {
+                SetLayerRecursively(gameObject, layer);
+            }
         }
 
         public void SetObjectAttractionComponent(HandObjectsAttraction handObjectsAttraction)
@@ -45,6 +50,14 @@ namespace SoftBit.Mechanics
         {
             DestroyIfNotInUseComponent.InUse = false;
             IsGrabbed = false;
+        }
+
+        private void SetLayerRecursively(GameObject gameObject, int layerNumber)
+        {
+            foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
+            {
+                transform.gameObject.layer = layerNumber;
+            }
         }
     }
 }

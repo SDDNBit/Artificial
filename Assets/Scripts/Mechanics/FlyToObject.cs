@@ -8,20 +8,20 @@ namespace SoftBit.Mechanics
     {
         public Transform Target;
 
-        private Rigidbody rb;
-        private Transform tr;
+        private Rigidbody selfRigidbody;
+        private Transform selfTransform;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
-            tr = transform;
+            selfRigidbody = GetComponent<Rigidbody>();
+            selfTransform = transform;
         }
 
         private void FixedUpdate()
         {
             if (Target)
             {
-                rb.velocity = (Target.position - tr.position) *
+                selfRigidbody.velocity = (Target.position - selfTransform.position) *
                     Mathf.Clamp(Mathf.Abs(Vector3.Distance(Target.position, transform.position) * Constants.FlyToObjectMultiplier),
                     Constants.FlyToObjectMinSpeed,
                     Constants.FlyToObjectMaxSpeed);
