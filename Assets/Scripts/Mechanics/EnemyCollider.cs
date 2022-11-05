@@ -18,7 +18,7 @@ namespace SoftBit.Mechanics
         private void DestroyPart(Smasher smasher, Collision collision)
         {
             print("Destroy part");
-            connectionPart.DestroyPart();
+            connectionPart.DestroyPart(collision);
         }
 
         [ContextMenu("Test_DestroyPart")]

@@ -3,10 +3,11 @@ using UnityEngine;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
 	[RequireComponent(typeof(Rigidbody))]
-	[RequireComponent(typeof(CapsuleCollider))]
+	//[RequireComponent(typeof(CapsuleCollider))]
 	[RequireComponent(typeof(Animator))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
+		private const float RotateInPlaceSpeed = 100f;
 		[SerializeField] float m_MovingTurnSpeed = 360;
 		[SerializeField] float m_StationaryTurnSpeed = 180;
 		[SerializeField] float m_JumpPower = 6f;
@@ -24,28 +25,32 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		float m_TurnAmount;
 		float m_ForwardAmount;
 		Vector3 m_GroundNormal;
-		float m_CapsuleHeight;
-		Vector3 m_CapsuleCenter;
-		CapsuleCollider m_Capsule;
+		//float m_CapsuleHeight;
+		//Vector3 m_CapsuleCenter;
+		//CapsuleCollider m_Capsule;
 		bool m_Crouching;
+		private bool isAttacking;
 
 
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
-			m_Capsule = GetComponent<CapsuleCollider>();
-			m_CapsuleHeight = m_Capsule.height;
-			m_CapsuleCenter = m_Capsule.center;
+			//m_Capsule = GetComponent<CapsuleCollider>();
+			//m_CapsuleHeight = m_Capsule.height;
+			//m_CapsuleCenter = m_Capsule.center;
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
+        public void RotateInPlace(Vector3 playersPosition)
+        {
+			transform.Rotate(0, Vector3.RotateTowards(transform.forward, playersPosition, RotateInPlaceSpeed * Time.deltaTime, 0f).y, 0);
+		}
 
-		public void Move(Vector3 move, bool crouch, bool jump)
+        public void Move(Vector3 move, bool crouch, bool jump, bool attack)
 		{
-
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
@@ -62,6 +67,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (m_IsGrounded)
 			{
 				HandleGroundedMovement(crouch, jump);
+				isAttacking = attack;
 			}
 			else
 			{
@@ -122,6 +128,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetBool("Attack", isAttacking);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);

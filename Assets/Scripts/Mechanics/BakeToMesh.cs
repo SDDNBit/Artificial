@@ -1,13 +1,14 @@
 using Autohand;
 using SoftBit.Utils;
 using UnityEngine;
+using Constants = SoftBit.Utils.Constants;
 
 namespace SoftBit.Mechanics
 {
     public class BakeToMesh : MonoBehaviour
     {
         [ContextMenu("BakeMe")]
-        public void BakeMesh()
+        public void BakeMesh() //float explosionForce, Vector3 explosionPosition
         {
             var mesh = new Mesh();
             var skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
@@ -24,7 +25,9 @@ namespace SoftBit.Mechanics
 
             var meshParent = CorrectPivotWithParent(meshRenderer, bakedMeshGameObject);
 
-            AddAttractableBehaviour(meshParent);
+            var parentRigidbody = AddAttractableBehaviour(meshParent);
+
+            //parentRigidbody.AddExplosionForce(explosionForce, explosionPosition, Constants.ExplosionRadius);
         }
 
         private GameObject CorrectPivotWithParent(MeshRenderer meshRenderer, GameObject bakedMeshGameObject)
@@ -36,15 +39,16 @@ namespace SoftBit.Mechanics
             return meshParent;
         }
 
-        private void AddAttractableBehaviour(GameObject meshParent)
+        private Rigidbody AddAttractableBehaviour(GameObject meshParent)
         {
-            meshParent.AddComponent<Rigidbody>();
+            var parentRigidbody = meshParent.AddComponent<Rigidbody>();
             var grabbable = meshParent.AddComponent<Grabbable>();
             grabbable.singleHandOnly = true;
             grabbable.jointBreakForce = float.PositiveInfinity;
             meshParent.AddComponent<FlyToObject>();
             meshParent.AddComponent<DestroyIfNotInUse>();
             meshParent.AddComponent<AttractableObject>();
+            return parentRigidbody;
         }
     }
 }

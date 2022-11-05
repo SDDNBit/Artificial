@@ -61,15 +61,19 @@ namespace SoftBit.Autohand.Custom
             Invoke("DoSmash", delay);
         }
 
-        public void DoSmash(Smasher smash, Collision collision)
+        public void DoSmash(Smasher smasher, Collision collision)
         {
             if (effect)
             {
                 ParticleSystem particles;
                 if (createNewEffect)
+                {
                     particles = Instantiate(effect, grabbable.transform.position, grabbable.transform.rotation);
+                }
                 else
+                {
                     particles = effect;
+                }
 
                 particles.transform.parent = null;
                 particles.Play();
@@ -86,15 +90,20 @@ namespace SoftBit.Autohand.Custom
 
             //Play the audio sound
             if (smashSound)
+            {
                 AudioSource.PlayClipAtPoint(smashSound, transform.position, smashVolume);
-
-            OnSmashEvent?.Invoke(smash, this, collision);
+            }
+            OnSmashEvent?.Invoke(smasher, this, collision);
 
             if ((destroyOnSmash || releaseOnSmash) && grabbable)
+            {
                 grabbable.ForceHandsRelease();
+            }
 
             if (destroyOnSmash)
+            {
                 Destroy(gameObject);
+            }
         }
     }
 }

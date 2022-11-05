@@ -22,5 +22,8 @@ namespace SoftBit.Utils
         /// Layers names
         /// </summary>
         public static string AttractableObjectLayer = "AttractableObject";
+
+        public static float CollisionForceMultiplier = 20f;
+        public static float ExplosionRadius = 1f;
     }
 }

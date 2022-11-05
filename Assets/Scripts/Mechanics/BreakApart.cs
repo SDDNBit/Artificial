@@ -1,3 +1,4 @@
+using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,11 +26,16 @@ namespace SoftBit.Mechanics
             }
         }
 
-        public void DestroyPart(ConnectionPart connectionPart)
+        public void DestroyPart(ConnectionPart connectionPart, Collision collision)
         {
             partsToSpawn.Clear();
+            if (collision != null)
+            {
+                var explosionForce = collision.relativeVelocity.magnitude * Constants.CollisionForceMultiplier;
+            }
             foreach (var cell in connectionPart.cells)
             {
+                //cell.BakeMesh(explosionForce, collision.GetContact(0).point);
                 cell.BakeMesh();
             }
             DeactivatePart(connectionPart);
