@@ -69,7 +69,11 @@ namespace SoftBit.Movement
                 //else
                 //{
                 //}
-                var x = Vector3.Angle(player.position - selfTransform.position, selfTransform.forward);
+                var flattenVector = player.position - selfTransform.position;
+                flattenVector.y = 0;
+                var forwardFlattenVector = selfTransform.forward;
+                forwardFlattenVector.y = 0;
+                var x = Vector3.Angle(flattenVector, forwardFlattenVector);
                 if (x < FacingAngle)
                 {
                     thirdPersonCharacter.Move(Vector3.zero, false, false, true);
