@@ -8,7 +8,7 @@ namespace SoftBit.Movement
 {
     public class EnemyController : MonoBehaviour
     {
-        private const float FacingAngle = 10f;
+        private const float FacingAngle = 20f;
         private const float ChaseRange = 4f;
         private const float AttackRange = 1.5f;
 
@@ -61,7 +61,7 @@ namespace SoftBit.Movement
 
             if (enemyState == EnemyState.Attacking)
             {
-                //navMeshAgent.SetDestination(player.position);
+                navMeshAgent.SetDestination(player.position);
                 //if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
                 //{
                 //    thirdPersonCharacter.Move(navMeshAgent.desiredVelocity, false, false, true);
@@ -69,14 +69,17 @@ namespace SoftBit.Movement
                 //else
                 //{
                 //}
-                var flattenVector = player.position - selfTransform.position;
-                flattenVector.y = 0;
-                var forwardFlattenVector = selfTransform.forward;
-                forwardFlattenVector.y = 0;
-                var x = Vector3.Angle(flattenVector, forwardFlattenVector);
+
+                var direction = player.position - selfTransform.position;
+                var x = Vector3.Angle(direction, selfTransform.forward);
                 if (x < FacingAngle)
                 {
                     thirdPersonCharacter.Move(Vector3.zero, false, false, true);
+                }
+                else
+                {
+                    //thirdPersonCharacter.Move(Vector3.zero, false, false, false);
+                    thirdPersonCharacter.RotateTowardsInPlace(player.position);
                 }
             }
 
