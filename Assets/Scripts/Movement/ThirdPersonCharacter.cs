@@ -52,7 +52,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
             m_TurnAmount = Mathf.Clamp(angle, -RotateInPlaceMaxTurnAmount, RotateInPlaceMaxTurnAmount);
             m_Animator.applyRootMotion = true;
-            ApplyExtraTurnRotation();
+            transform.Rotate(0, m_TurnAmount * m_StationaryTurnSpeed * Time.deltaTime, 0);
             UpdateAnimator(Vector3.zero);
         }
 

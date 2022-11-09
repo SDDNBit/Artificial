@@ -8,7 +8,7 @@ namespace SoftBit.Movement
 {
     public class EnemyController : MonoBehaviour
     {
-        private const float FacingAngle = 20f;
+        private const float FacingAngle = 10f;
         private const float ChaseRange = 4f;
         private const float AttackRange = 1.5f;
 
