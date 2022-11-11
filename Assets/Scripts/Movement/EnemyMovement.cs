@@ -6,18 +6,12 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField]
-    private LookAt lookAt;
-    [SerializeField]
-    [Range(0f, 3f)]
-    private float waitDelay = 1f;
+    [SerializeField] private LookAt lookAt;
+    [SerializeField] [Range(0f, 50f)] private float waitDelay = 1f;
 
     private NavMeshTriangulation triangulation;
     private NavMeshAgent agent;
     private Animator animator;
-
-    private Vector2 velocity;
-    private Vector2 smoothDeltaPosition;
 
     private void Awake()
     {
@@ -61,33 +55,18 @@ public class EnemyMovement : MonoBehaviour
         float dx = Vector3.Dot(transform.right, worldDeltaPosition);
         float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
         Vector2 deltaPosition = new Vector2(dx, dy);
+        deltaPosition = deltaPosition.normalized;
 
-        // Low-pass filter the deltaMove
-        //float smooth = Mathf.Min(1, Time.deltaTime / 0.1f);
-        //smoothDeltaPosition = Vector2.Lerp(smoothDeltaPosition, deltaPosition, smooth);
-
-        velocity = deltaPosition / Time.deltaTime;
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            velocity = Vector2.Lerp(Vector2.zero, velocity, agent.remainingDistance);
-        }
-
-        bool shouldMove = velocity.magnitude > 0.5f && agent.remainingDistance > agent.stoppingDistance;
+        bool shouldMove = deltaPosition.magnitude > 0.5f && agent.remainingDistance > agent.stoppingDistance;
 
         animator.SetBool("Move", shouldMove);
-        animator.SetFloat("Turn", velocity.x);
-        animator.SetFloat("Forward", velocity.y);
+        animator.SetFloat("Turn", deltaPosition.x);
+        animator.SetFloat("Forward", deltaPosition.y);
 
         if (lookAt != null)
         {
-            lookAt.lookAtTargetPosition = agent.steeringTarget + transform.forward;
+            lookAt.lookAtTargetPosition = agent.destination;
         }
-
-        //float deltaMagnitude = worldDeltaPosition.magnitude;
-        //if (deltaMagnitude > Agent.radius / 2)
-        //{
-        //    transform.position = Vector3.Lerp(Animator.rootPosition, Agent.nextPosition, smooth);
-        //}
     }
 
     public void StopMoving()
@@ -104,11 +83,7 @@ public class EnemyMovement : MonoBehaviour
         while (true)
         {
             int index = Random.Range(1, triangulation.vertices.Length - 1);
-            agent.SetDestination(Vector3.Lerp(
-                triangulation.vertices[index],
-                triangulation.vertices[index + (Random.value > 0.5f ? -1 : 1)],
-                Random.value)
-            );
+            agent.SetDestination(Vector3.Lerp(agent.transform.position, triangulation.vertices[index], 0.5f));
 
             yield return null;
             yield return new WaitUntil(() => agent.remainingDistance <= agent.stoppingDistance);

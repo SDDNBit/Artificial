@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: fe4fc724ae4b2f04f826ce1d70dc220e
+guid: 074a50c3a6ff52f45ac9ee1c0c1dc6c4
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Sword And Shield Idle (1)
+    second: Sword And Shield Idle (2)
   - first:
       74: -7512871879049407541
-    second: Sword And Shield Idle2
+    second: Sword And Shield Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -39,11 +39,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sword And Shield Idle2
+      name: Sword And Shield Idle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 260
+      lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -52,12 +52,12 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

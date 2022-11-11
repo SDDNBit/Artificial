@@ -25,5 +25,10 @@ namespace SoftBit.Utils
 
         public static float CollisionForceMultiplier = 20f;
         public static float ExplosionRadius = 1f;
+
+        /// <summary>
+        /// Animator animation names
+        /// </summary>
+        public static string AnimatorIdleState = "IdleState";
     }
 }
