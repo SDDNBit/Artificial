@@ -7,39 +7,20 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private LookAt lookAt;
-    [SerializeField] [Range(0f, 50f)] private float waitDelay = 1f;
 
-    private NavMeshTriangulation triangulation;
     private NavMeshAgent agent;
     private Animator animator;
+    private Vector3 rootPosition;
+    private Vector3 worldDeltaPosition;
+    private Vector2 deltaPosition;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        triangulation = NavMesh.CalculateTriangulation();
         animator.applyRootMotion = true;
         agent.updatePosition = false;
-        agent.updateRotation = false;
-    }
-
-    private void Start()
-    {
-        GoToRandomPoint();
-    }
-
-    public void GoToRandomPoint()
-    {
-        StartCoroutine(DoMoveToRandomPoint());
-    }
-
-    private void OnAnimatorMove()
-    {
-        Vector3 rootPosition = animator.rootPosition;
-        rootPosition.y = agent.nextPosition.y;
-        transform.position = rootPosition;
-        transform.rotation = animator.rootRotation;
-        agent.nextPosition = rootPosition;
+        //agent.updateRotation = false;
     }
 
     private void Update()
@@ -47,47 +28,33 @@ public class EnemyMovement : MonoBehaviour
         SynchronizeAnimatorAndAgent();
     }
 
+    private void OnAnimatorMove()
+    {
+        rootPosition = animator.rootPosition;
+        rootPosition.y = agent.nextPosition.y;
+        transform.position = rootPosition;
+        if (!agent.updateRotation)
+        {
+            transform.rotation = animator.rootRotation;
+        }
+        agent.nextPosition = rootPosition;
+    }
+
     private void SynchronizeAnimatorAndAgent()
     {
-        Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
+        worldDeltaPosition = agent.nextPosition - transform.position;
         worldDeltaPosition.y = 0;
         // Map 'worldDeltaPosition' to local space
-        float dx = Vector3.Dot(transform.right, worldDeltaPosition);
-        float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
-        Vector2 deltaPosition = new Vector2(dx, dy);
+        deltaPosition = new Vector2(Vector3.Dot(transform.right, worldDeltaPosition), Vector3.Dot(transform.forward, worldDeltaPosition));
         deltaPosition = deltaPosition.normalized;
 
-        bool shouldMove = deltaPosition.magnitude > 0.5f && agent.remainingDistance > agent.stoppingDistance;
-
-        animator.SetBool("Move", shouldMove);
+        //animator.SetBool("Move", !agent.isStopped);
         animator.SetFloat("Turn", deltaPosition.x);
         animator.SetFloat("Forward", deltaPosition.y);
 
         if (lookAt != null)
         {
             lookAt.lookAtTargetPosition = agent.destination;
-        }
-    }
-
-    public void StopMoving()
-    {
-        agent.isStopped = true;
-        StopAllCoroutines();
-    }
-
-    private IEnumerator DoMoveToRandomPoint()
-    {
-        agent.enabled = true;
-        agent.isStopped = false;
-        WaitForSeconds Wait = new WaitForSeconds(waitDelay);
-        while (true)
-        {
-            int index = Random.Range(1, triangulation.vertices.Length - 1);
-            agent.SetDestination(Vector3.Lerp(agent.transform.position, triangulation.vertices[index], 0.5f));
-
-            yield return null;
-            yield return new WaitUntil(() => agent.remainingDistance <= agent.stoppingDistance);
-            yield return Wait;
         }
     }
 }

@@ -30,5 +30,6 @@ namespace SoftBit.Utils
         /// Animator animation names
         /// </summary>
         public static string AnimatorIdleState = "IdleState";
+        public static string AnimatorAttackingState = "IsAttacking";
     }
 }

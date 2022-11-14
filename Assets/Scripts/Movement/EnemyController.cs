@@ -1,4 +1,6 @@
 ﻿using SoftBit.States;
+using SoftBit.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,82 +13,103 @@ namespace SoftBit.Movement
         private const float FacingAngle = 10f;
         private const float ChaseRange = 4f;
         private const float AttackRange = 1.5f;
+        private const float RangeMargin = 0.5f;
 
-        public Camera cam;
-        public NavMeshAgent navMeshAgent;
-        public ThirdPersonCharacter thirdPersonCharacter;
-        [SerializeField] private List<Transform> navPoints;
         [SerializeField] private Transform player;
+        [SerializeField] [Range(0f, 50f)] private float waitDelay = 1f;
 
-        private RaycastHit hit;
-        private int navPointIndex = 0;
+        private Animator animator;
+        private NavMeshAgent navMeshAgent;
         private EnemyState enemyState;
         private Transform selfTransform;
         private float distanceToThePlayer;
+        private NavMeshTriangulation triangulation;
 
         private void Start()
         {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            navMeshAgent.enabled = true;
+            navMeshAgent.isStopped = false;
+            triangulation = NavMesh.CalculateTriangulation();
             selfTransform = transform;
-            navMeshAgent.updateRotation = false;
-            CheckForChase();
+            animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()
         {
-            if (enemyState == EnemyState.Patrolling)
-            {
-                if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-                {
-                    thirdPersonCharacter.Move(navMeshAgent.desiredVelocity, false, false, false);
-                }
-                else
-                {
-                    SetDestination();
-                    //thirdPersonCharacter.Move(Vector3.zero, false, false);
-                }
-            }
+            SetState();
 
-            if (enemyState == EnemyState.Chasing)
-            {
-                navMeshAgent.SetDestination(player.position);
-                if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-                {
-                    thirdPersonCharacter.Move(navMeshAgent.desiredVelocity, false, false, false);
-                }
-                else
-                {
-                    //make sure to treat the case when is just chasing because it can't attack
-                }
-            }
-
-            if (enemyState == EnemyState.Attacking)
-            {
-                navMeshAgent.SetDestination(player.position);
-                //if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-                //{
-                //    thirdPersonCharacter.Move(navMeshAgent.desiredVelocity, false, false, true);
-                //}
-                //else
-                //{
-                //}
-
-                var direction = player.position - selfTransform.position;
-                var x = Vector3.Angle(direction, selfTransform.forward);
-                if (x < FacingAngle)
-                {
-                    thirdPersonCharacter.Move(Vector3.zero, false, false, true);
-                }
-                else
-                {
-                    //thirdPersonCharacter.Move(Vector3.zero, false, false, false);
-                    thirdPersonCharacter.RotateTowardsInPlace(player.position);
-                }
-            }
-
-            CheckForChase();
+            CheckForPatrolling();
+            CheckForChasing();
+            CheckForAttacking();
         }
 
-        private void CheckForChase()
+        [ContextMenu("Stop")]
+        private void Stop()
+        {
+            navMeshAgent.isStopped = !navMeshAgent.isStopped;
+        }
+
+        private void CheckForAttacking()
+        {
+            if (enemyState == EnemyState.Attacking)
+            {
+                animator.SetBool(Constants.AnimatorAttackingState, true);
+                animator.SetBool("Move", false);
+                navMeshAgent.SetDestination(player.position);
+
+                var relative = transform.InverseTransformPoint(player.position);
+                float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                if (Mathf.Abs(angle) < FacingAngle)
+                {
+                    animator.SetBool("TurnRight", false);
+                    animator.SetBool("TurnLeft", false);
+                    navMeshAgent.updateRotation = true;
+                }
+                else
+                {
+                    if (angle > 0)
+                    {
+                        animator.SetBool("TurnRight", true);
+                        animator.SetBool("TurnLeft", false);
+                        navMeshAgent.updateRotation = false;
+                    }
+                    else
+                    {
+                        animator.SetBool("TurnRight", false);
+                        animator.SetBool("TurnLeft", true);
+                        navMeshAgent.updateRotation = false;
+                    }
+                }
+            }
+        }
+
+        private void CheckForChasing()
+        {
+            if (enemyState == EnemyState.Chasing)
+            {
+                animator.SetBool(Constants.AnimatorAttackingState, false);
+                animator.SetBool("Move", true);
+                navMeshAgent.updateRotation = true;
+                navMeshAgent.SetDestination(player.position);
+            }
+        }
+
+        private void CheckForPatrolling()
+        {
+            if (enemyState == EnemyState.Patrolling)
+            {
+                animator.SetBool(Constants.AnimatorAttackingState, false);
+                animator.SetBool("Move", true);
+                navMeshAgent.updateRotation = true;
+                if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
+                {
+                    NavigateAtRandomPosition();
+                }
+            }
+        }
+
+        private void SetState()
         {
             distanceToThePlayer = Vector3.Distance(selfTransform.position, player.position);
             if (distanceToThePlayer < ChaseRange)
@@ -97,23 +120,26 @@ namespace SoftBit.Movement
                 }
                 else
                 {
-                    enemyState = EnemyState.Chasing;
+                    if (enemyState == EnemyState.Attacking && distanceToThePlayer < AttackRange + RangeMargin)
+                    {
+                        enemyState = EnemyState.Attacking;
+                    }
+                    else
+                    {
+                        enemyState = EnemyState.Chasing;
+                    }
                 }
             }
             else
             {
-                if (enemyState != EnemyState.Patrolling)
-                {
-                    enemyState = EnemyState.Patrolling;
-                    SetDestination();
-                }
+                enemyState = EnemyState.Patrolling;
             }
         }
 
-        private void SetDestination()
+        private void NavigateAtRandomPosition()
         {
-            navMeshAgent.SetDestination(navPoints[navPointIndex].position);
-            navPointIndex = (navPointIndex + 1) % navPoints.Count;
+            int index = Random.Range(1, triangulation.vertices.Length - 1);
+            navMeshAgent.SetDestination(Vector3.Lerp(navMeshAgent.transform.position, triangulation.vertices[index], 0.5f));
         }
 
         private void OnDrawGizmos()
