@@ -1,3 +1,4 @@
+using Autohand;
 using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace SoftBit.Mechanics
             partsToSpawn.Clear();
             if (collision != null)
             {
-                var explosionForce = collision.relativeVelocity.magnitude * Constants.CollisionForceMultiplier;
+                var explosionForce = collision.relativeVelocity.magnitude * Utils.Constants.CollisionForceMultiplier;
             }
             foreach (var cell in connectionPart.cells)
             {
@@ -45,11 +46,34 @@ namespace SoftBit.Mechanics
             {
                 scrap = Instantiate(prefab);
                 scrap.AddComponent<Rigidbody>();
+                scrap.AddComponent<Grabbable>();
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
                 scrapBreakApart.SetActiveParts(partsToSpawn);
+                scrapBreakApart.Cleanup();
                 scrap.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
             DestroyIfGarbage();
+        }
+
+        public void Cleanup()
+        {
+            foreach (var connectionPart in connectionParts)
+            {
+                if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+                {
+                    foreach (var collider in connectionPart.colliders)
+                    {
+                        if (collider != null)
+                        {
+                            var enemyCollider = collider.GetComponent<EnemyCollider>();
+                            if (enemyCollider)
+                            {
+                                enemyCollider.AttachedObject = null;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void SetActiveParts(List<ConnectionPart> activeParts)

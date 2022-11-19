@@ -14,7 +14,7 @@ namespace SoftBit.Mechanics
             selfRigidbody = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (PivotToFollow)
             {
