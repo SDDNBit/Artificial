@@ -6,6 +6,7 @@ namespace SoftBit.Mechanics
     public class EnemyCollider : MonoBehaviour
     {
         [SerializeField] private ConnectionPart connectionPart;
+        [SerializeField] private FollowPivot attachedObject;
 
         private Smash smash;
 
@@ -18,7 +19,16 @@ namespace SoftBit.Mechanics
         private void DestroyPart(Smasher smasher, Collision collision)
         {
             print("Destroy part");
+            DetachAttachedObject();
             connectionPart.DestroyPart(collision);
+        }
+
+        private void DetachAttachedObject()
+        {
+            if (attachedObject != null)
+            {
+                attachedObject.PivotToFollow = null;
+            }
         }
 
         [ContextMenu("Test_DestroyPart")]
