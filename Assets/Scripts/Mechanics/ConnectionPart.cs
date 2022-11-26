@@ -14,9 +14,9 @@ namespace SoftBit.Mechanics
         [HideInInspector] public BreakApart breakApart;
 
         [ContextMenu("DestroyPart")]
-        public void DestroyPart()
+        public void DestroyPart(Collision collision)
         {
-            breakApart.DestroyPart(this);
+            breakApart.DestroyPart(this, collision);
         }
     }
 }
