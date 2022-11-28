@@ -1,4 +1,5 @@
 using Autohand;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,6 @@ namespace SoftBit.Autohand.Custom
     [RequireComponent(typeof(Rigidbody))]
     public class Smasher : MonoBehaviour
     {
-        Rigidbody rb;
         [Header("Options")]
         public LayerMask smashableLayers;
         [Tooltip("How much to multiply the magnitude on smash")]
@@ -23,11 +23,19 @@ namespace SoftBit.Autohand.Custom
         //Progammer Events <3
         public SmashEvent OnSmashEvent;
 
-        Vector3[] velocityOverTime = new Vector3[3];
-        Vector3 lastPos;
+        [Header("Cleanup")]
+        public bool SelfRemovable = false;
+        public float RemoveAfterSeconds = 0f;
+
+        private Rigidbody rb;
+        private Vector3[] velocityOverTime = new Vector3[3];
+        private Vector3 lastPos;
+        private Coroutine removeCoroutine;
 
         private void Start()
         {
+            StartSelfRemove();
+
             rb = GetComponent<Rigidbody>();
             if (smashableLayers == 0)
                 smashableLayers = LayerMask.GetMask(Hand.grabbableLayerNameDefault);
@@ -36,7 +44,7 @@ namespace SoftBit.Autohand.Custom
         }
 
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             for (int i = 1; i < velocityOverTime.Length; i++)
             {
@@ -46,7 +54,6 @@ namespace SoftBit.Autohand.Custom
 
             lastPos = centerOfMassPoint ? centerOfMassPoint.position : rb.position;
         }
-
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -63,8 +70,24 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
+        public void ResetSelfRemoveClock()
+        {
+            if (removeCoroutine != null)
+            {
+                StopCoroutine(removeCoroutine);
+            }
+            StartSelfRemove();
+        }
 
-        float GetMagnitude()
+        private void StartSelfRemove()
+        {
+            if (SelfRemovable)
+            {
+                removeCoroutine = StartCoroutine(SelfRemove());
+            }
+        }
+
+        private float GetMagnitude()
         {
             Vector3 velocity = Vector3.zero;
             for (int i = 0; i < velocityOverTime.Length; i++)
@@ -73,6 +96,12 @@ namespace SoftBit.Autohand.Custom
             }
 
             return (velocity.magnitude / velocityOverTime.Length) * forceMulti * 10;
+        }
+
+        private IEnumerator SelfRemove()
+        {
+            yield return new WaitForSeconds(RemoveAfterSeconds);
+            Destroy(this);
         }
     }
 }

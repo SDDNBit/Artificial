@@ -33,17 +33,20 @@ public class LookAt : MonoBehaviour
 
     void OnAnimatorIK()
     {
-        lookAtTargetPosition.y = head.position.y;
-        float lookAtTargetWeight = looking ? 1.0f : 0.0f;
+        if (head)
+        {
+            lookAtTargetPosition.y = head.position.y;
+            float lookAtTargetWeight = looking ? 1.0f : 0.0f;
 
-        Vector3 curDir = lookAtPosition - head.position;
-        Vector3 futDir = lookAtTargetPosition - head.position;
-        curDir = Vector3.RotateTowards(curDir, futDir, HeadMaxRadiansDelta * Time.deltaTime, float.PositiveInfinity);
-        lookAtPosition = head.position + curDir;
+            Vector3 curDir = lookAtPosition - head.position;
+            Vector3 futDir = lookAtTargetPosition - head.position;
+            curDir = Vector3.RotateTowards(curDir, futDir, HeadMaxRadiansDelta * Time.deltaTime, float.PositiveInfinity);
+            lookAtPosition = head.position + curDir;
 
-        float blendTime = lookAtTargetWeight > lookAtWeight ? lookAtHeatTime : lookAtCoolTime;
-        lookAtWeight = Mathf.MoveTowards(lookAtWeight, lookAtTargetWeight, Time.deltaTime / blendTime);
-        anim.SetLookAtWeight(lookAtWeight, 0.2f, 0.5f, 0f, 0.5f);
-        anim.SetLookAtPosition(lookAtPosition);
+            float blendTime = lookAtTargetWeight > lookAtWeight ? lookAtHeatTime : lookAtCoolTime;
+            lookAtWeight = Mathf.MoveTowards(lookAtWeight, lookAtTargetWeight, Time.deltaTime / blendTime);
+            anim.SetLookAtWeight(lookAtWeight, 0.2f, 0.5f, 0f, 0.5f);
+            anim.SetLookAtPosition(lookAtPosition);
+        }
     }
 }
