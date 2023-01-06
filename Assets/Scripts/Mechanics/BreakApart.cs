@@ -40,13 +40,15 @@ namespace SoftBit.Mechanics
                 cell.BakeMesh();
             }
             DeactivatePart(connectionPart);
-            print(partsToSpawn.Count);
             partsToSpawn.RemoveAt(0);
             if (partsToSpawn.Count > 0)
             {
                 scrap = Instantiate(prefab);
-                scrap.AddComponent<Rigidbody>();
-                scrap.AddComponent<Grabbable>();
+                if (scrap.GetComponent<Rigidbody>() == null)
+                {
+                    scrap.AddComponent<Rigidbody>();
+                    scrap.AddComponent<Grabbable>();
+                }
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
                 scrapBreakApart.SetActiveParts(partsToSpawn);
                 scrapBreakApart.Cleanup();

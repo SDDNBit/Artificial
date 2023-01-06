@@ -7,6 +7,7 @@ namespace SoftBit.Mechanics
     [RequireComponent(typeof(FlyToObject))]
     public class AttractableObject : MonoBehaviour
     {
+        public bool AddSmasherOnShoot = false;
         [HideInInspector] public bool IsGrabbed = false;
         [HideInInspector] public bool IsAlreadyOrbiting = false;
         [HideInInspector] public FlyToObject FlyToObjectComponent;

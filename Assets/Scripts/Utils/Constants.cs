@@ -10,6 +10,8 @@ namespace SoftBit.Utils
         public static float AttractableShootPower = 20f;
         public static int MaxAvailableOrbitingPoints = 8; // Make sure to adjust also in HandObjectsAttraction script the transforms in the list if this is changed
         public static float OrbitingPointsSpeed = 200f;
+        public static float AddSmasherOnShootRemoveAfterSeconds = 2f;
+
         /// <summary>
         /// Be careful with this constant, if it is set to .5f, then make sure the OrbitingPointsSpeed is set to 200, otherwise jitter appear, 
         /// also, if you double one of them, make sure that you double the other one as well

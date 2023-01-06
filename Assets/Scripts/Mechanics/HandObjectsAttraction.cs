@@ -1,4 +1,5 @@
 using Autohand;
+using SoftBit.Autohand.Custom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -176,6 +177,27 @@ namespace SoftBit.Mechanics
             attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
             attractableObject.transform.rotation = transform.rotation;
             attractableObject.RigidbodyComponent.velocity = transform.forward * Utils.Constants.AttractableShootPower;
+            AddSmasherOnShootBehaviour(attractableObject);
+        }
+
+        private void AddSmasherOnShootBehaviour(AttractableObject attractableObject)
+        {
+            if (attractableObject.AddSmasherOnShoot)
+            {
+                var smasher = attractableObject.gameObject.GetComponent<Smasher>();
+                if (smasher == null)
+                {
+                    var newSmasher = attractableObject.gameObject.AddComponent<Smasher>();
+                    newSmasher.SelfRemovable = true;
+                    newSmasher.RemoveAfterSeconds = Utils.Constants.AddSmasherOnShootRemoveAfterSeconds;
+                }
+                else
+                {
+                    smasher.SelfRemovable = true;
+                    smasher.RemoveAfterSeconds = Utils.Constants.AddSmasherOnShootRemoveAfterSeconds;
+                    smasher.ResetSelfRemoveClock();
+                }
+            }
         }
 
         private void AddAvailableOrbitPoints()

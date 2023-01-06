@@ -47,7 +47,8 @@ namespace SoftBit.Mechanics
             grabbable.jointBreakForce = float.PositiveInfinity;
             meshParent.AddComponent<FlyToObject>();
             meshParent.AddComponent<DestroyIfNotInUse>();
-            meshParent.AddComponent<AttractableObject>();
+            var attractableComponent = meshParent.AddComponent<AttractableObject>();
+            attractableComponent.AddSmasherOnShoot = true;
             return parentRigidbody;
         }
     }

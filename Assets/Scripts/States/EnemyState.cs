@@ -5,6 +5,7 @@ namespace SoftBit.States
         None = 0,
         Patrolling = 1,
         Chasing = 2,
-        Attacking = 3
+        Attacking = 3,
+        Waiting = 4
     }
 }
