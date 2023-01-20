@@ -591,7 +591,7 @@ namespace Autohand
                 }
                 lastUpdatePosition = transform.position;
 
-                trackingContainer.RotateAround(headCamera.transform.position, Vector3.up, smoothTurnSpeed * (turningAxis) * deltaTime);
+                trackingContainer.RotateAround(headCamera.transform.position, Vector3.up, smoothTurnSpeed * turningAxis * deltaTime);
 
                 targetPosOffset = Vector3.zero;
                 targetTrackedPos = new Vector3(trackingContainer.position.x, targetTrackedPos.y, trackingContainer.position.z);
