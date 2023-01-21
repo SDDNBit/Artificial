@@ -42,7 +42,7 @@ namespace SoftBit.Autohand.Custom
         [Tooltip("If this is true the object will be grabbed when entering the radius")]
         public bool instantGrabAssist = true;
         [Tooltip("The radius around of thrown object")]
-        public float catchAssistRadius = 0.2f;
+        public float catchAssistRadius = 0.1f;
 
         [AutoToggleHeader("Show Events")]
         public bool showEvents = true;
@@ -193,20 +193,6 @@ namespace SoftBit.Autohand.Custom
         private void SetInstantPull()
         {
             useInstantPull = true;
-        }
-
-        private void SetPull(float distance)
-        {
-            useInstantPull = false;
-            useFlickPull = false;
-            pullGrabDistance = distance;
-        }
-
-        private void SetFlickPull(float threshold)
-        {
-            useInstantPull = false;
-            useFlickPull = true;
-            flickThreshold = threshold;
         }
 
         private void CheckTargetAndHighlightIt()
