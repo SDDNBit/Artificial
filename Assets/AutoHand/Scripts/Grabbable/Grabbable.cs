@@ -9,15 +9,18 @@ using UnityEditor;
 using UnityEngine.Serialization;
 
 
-namespace Autohand {
-    public enum HandGrabType {
+namespace Autohand
+{
+    public enum HandGrabType
+    {
         Default,
         HandToGrabbable,
         GrabbableToHand
     }
 
     [HelpURL("https://earnestrobot.notion.site/Grabbables-9308c564e60848a882eb23e9778ee2b6"), DefaultExecutionOrder(-2)]
-    public class Grabbable : GrabbableBase {
+    public class Grabbable : GrabbableBase
+    {
 
 
         [Tooltip("This will copy the given grabbables settings to this grabbable when applied"), OnValueChanged("EditorCopyGrabbable")]
@@ -146,7 +149,8 @@ namespace Autohand {
 
 
         /// <summary>Legacy value for Throw Power</summary>
-        public float throwMultiplyer {
+        public float throwMultiplyer
+        {
             get { return throwPower; }
             set { throwPower = value; }
         }
@@ -172,45 +176,53 @@ namespace Autohand {
         float lastUpdateTime;
 
 #if UNITY_EDITOR
-        void EditorCopyGrabbable() {
-            if(CopySettings != null)
+        void EditorCopyGrabbable()
+        {
+            if (CopySettings != null)
                 EditorUtility.CopySerialized(CopySettings, this);
         }
 #endif
 
 
-        protected new virtual void Awake() {
-            if(makeChildrenGrabbable)
+        protected new virtual void Awake()
+        {
+            if (makeChildrenGrabbable)
                 MakeChildrenGrabbable();
 
             base.Awake();
 
-            for(int i = 0; i < jointedBodies.Count; i++) {
+            for (int i = 0; i < jointedBodies.Count; i++)
+            {
                 jointedParents.Add(jointedBodies[i].transform.parent ?? null);
-                if(jointedBodies[i].gameObject.HasGrabbable(out var grabbable) && jointedGrabbables.Contains(grabbable))
+                if (jointedBodies[i].gameObject.HasGrabbable(out var grabbable) && jointedGrabbables.Contains(grabbable))
                     jointedGrabbables.Add(grabbable);
             }
         }
 
 
-        protected new virtual void FixedUpdate() {
+        protected new virtual void FixedUpdate()
+        {
             base.FixedUpdate();
-            if(wasIsGrabbable && !(isGrabbable || enabled))
+            if (wasIsGrabbable && !(isGrabbable || enabled))
                 ForceHandsRelease();
             wasIsGrabbable = isGrabbable || enabled;
             lastUpdateTime = Time.realtimeSinceStartup;
         }
 
-        protected virtual void Update() {
+        protected virtual void Update()
+        {
             bool isGrabbing = false;
-            for(int i = 0; i < heldBy.Count; i++)
+            for (int i = 0; i < heldBy.Count; i++)
                 isGrabbing = isGrabbing || heldBy[i].IsGrabbing();
 
-            if(heldBy.Count > 0 && jointedBodies.Count == 0 && parentOnGrab && CollisionCount() == 0 && !isGrabbing && !body.isKinematic && body.constraints == RigidbodyConstraints.None && HeldCount() == heldBy.Count) {
-                if(body.mass / 4f < heldBy[0].body.mass) {
+            if (heldBy.Count > 0 && jointedBodies.Count == 0 && parentOnGrab && CollisionCount() == 0 && !isGrabbing && !body.isKinematic && body.constraints == RigidbodyConstraints.None && HeldCount() == heldBy.Count)
+            {
+                if (body.mass / 4f < heldBy[0].body.mass)
+                {
                     var pos = transform.position;
                     var deltaTime = (Time.realtimeSinceStartup - lastUpdateTime) / heldBy.Count;
-                    for(int i = 0; i < heldBy.Count; i++) {
+                    for (int i = 0; i < heldBy.Count; i++)
+                    {
                         body.transform.position = Vector3.MoveTowards(body.transform.position, heldBy[i].grabPosition.position, body.velocity.magnitude * deltaTime);
                         body.velocity = Vector3.MoveTowards(body.velocity, Vector3.zero, body.drag * deltaTime);
                         body.position = body.transform.position;
@@ -221,8 +233,10 @@ namespace Autohand {
                     }
 
                     var deltaPos = transform.position - pos;
-                    if(body.SweepTest(deltaPos, out var hit, deltaPos.magnitude)) {
-                        if(hit.rigidbody != heldBy[0].body && (heldBy.Count == 1 || heldBy[1].body != hit.rigidbody)) {
+                    if (body.SweepTest(deltaPos, out var hit, deltaPos.magnitude))
+                    {
+                        if (hit.rigidbody != heldBy[0].body && (heldBy.Count == 1 || heldBy[1].body != hit.rigidbody))
+                        {
                             transform.position -= deltaPos;
                             body.position = transform.position;
                         }
@@ -235,39 +249,55 @@ namespace Autohand {
         }
 
 
-        public virtual void OnTriggerEnter(Collider other) {
-            if(other.CanGetComponent(out PlacePoint otherPoint)) {
-                if(placePoint == null && otherPoint.CanPlace(this)) {
+        public virtual void OnTriggerEnter(Collider other)
+        {
+            if (other.CanGetComponent(out PlacePoint otherPoint))
+            {
+                if (placePoint == null && otherPoint.CanPlace(this))
+                {
                     otherPoint.Highlight(this);
                 }
             }
         }
 
-        public virtual void OnTriggerExit(Collider other) {
-            if(other.CanGetComponent(out PlacePoint otherPoint)) {
-                if(placePoint != null && otherPoint != null && placePoint.Equals(otherPoint) && placePoint.placedObject != this) {
+        public virtual void OnTriggerExit(Collider other)
+        {
+            if (other.CanGetComponent(out PlacePoint otherPoint))
+            {
+                if (placePoint != null && otherPoint != null && placePoint.Equals(otherPoint) && placePoint.placedObject != this)
+                {
                     placePoint.StopHighlight(this);
                 }
             }
         }
 
-        internal void IgnoreColliders(Collider bodyCapsule, bool ignore = true) {
-            foreach(var col in grabColliders)
-                Physics.IgnoreCollision(bodyCapsule, col, ignore);
+        internal void IgnoreColliders(Collider bodyCapsule, bool ignore = true)
+        {
+            foreach (var col in grabColliders)
+            {
+                if (col != null)
+                {
+                    Physics.IgnoreCollision(bodyCapsule, col, ignore);
+                }
+            }
         }
 
 
         /// <summary>Called when the hand starts aiming at this item for pickup</summary>
-        internal virtual void Highlight(Hand hand, Material customMat = null) {
-            if(!hightlighting) {
+        internal virtual void Highlight(Hand hand, Material customMat = null)
+        {
+            if (!hightlighting)
+            {
                 hightlighting = true;
                 onHighlight?.Invoke(hand, this);
                 OnHighlightEvent?.Invoke(hand, this);
                 var highlightMat = customMat != null ? customMat : hightlightMaterial;
                 highlightMat = highlightMat != null ? highlightMat : hand.defaultHighlight;
-                if(highlightMat != null) {
+                if (highlightMat != null)
+                {
                     MeshRenderer meshRenderer;
-                    if(gameObject.CanGetComponent(out meshRenderer)) {
+                    if (gameObject.CanGetComponent(out meshRenderer))
+                    {
                         //Creates a slightly larger copy of the mesh and sets its material to highlight material
                         highlightObj = new GameObject();
                         highlightObj.transform.parent = transform;
@@ -277,7 +307,7 @@ namespace Autohand {
                         highlightObj.AddComponent<MeshFilter>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
                         var highlightRenderer = highlightObj.AddComponent<MeshRenderer>();
                         var mats = new Material[meshRenderer.materials.Length];
-                        for(int i = 0; i < mats.Length; i++)
+                        for (int i = 0; i < mats.Length; i++)
                             mats[i] = highlightMat;
                         highlightRenderer.materials = mats;
                     }
@@ -287,12 +317,14 @@ namespace Autohand {
 
 
         /// <summary>Called when the hand stops aiming at this item</summary>
-        internal virtual void Unhighlight(Hand hand) {
-            if(hightlighting) {
+        internal virtual void Unhighlight(Hand hand)
+        {
+            if (hightlighting)
+            {
                 onUnhighlight?.Invoke(hand, this);
                 OnUnhighlightEvent?.Invoke(hand, this);
                 hightlighting = false;
-                if(highlightObj != null)
+                if (highlightObj != null)
                     Destroy(highlightObj);
             }
         }
@@ -300,23 +332,27 @@ namespace Autohand {
 
 
         /// <summary>Called by the hands Squeeze() function is called and this item is being held</summary>
-        internal virtual void OnSqueeze(Hand hand) {
+        internal virtual void OnSqueeze(Hand hand)
+        {
             OnSqueezeEvent?.Invoke(hand, this);
             onSqueeze?.Invoke(hand, this);
         }
 
         /// <summary>Called by the hands Unsqueeze() function is called and this item is being held</summary>
-        internal virtual void OnUnsqueeze(Hand hand) {
+        internal virtual void OnUnsqueeze(Hand hand)
+        {
             OnUnsqueezeEvent?.Invoke(hand, this);
             onUnsqueeze?.Invoke(hand, this);
         }
 
         /// <summary>Called by the hand when this item is started being grabbed</summary>
-        internal virtual void OnBeforeGrab(Hand hand) {
+        internal virtual void OnBeforeGrab(Hand hand)
+        {
             OnBeforeGrabEvent?.Invoke(hand, this);
             Unhighlight(hand);
             beingGrabbed = true;
-            if(resetLayerRoutine != null) {
+            if (resetLayerRoutine != null)
+            {
                 StopCoroutine(resetLayerRoutine);
                 resetLayerRoutine = null;
             }
@@ -324,24 +360,28 @@ namespace Autohand {
         }
 
         /// <summary>Called by the hand whenever this item is grabbed</summary>
-        internal virtual void OnGrab(Hand hand) {
-            if(lockHandOnGrab)
+        internal virtual void OnGrab(Hand hand)
+        {
+            if (lockHandOnGrab)
                 hand.body.isKinematic = true;
 
             body.collisionDetectionMode = body.isKinematic ? CollisionDetectionMode.ContinuousSpeculative : CollisionDetectionMode.ContinuousDynamic;
             body.interpolation = RigidbodyInterpolation.None;
 
-            if(parentOnGrab) {
+            if (parentOnGrab)
+            {
                 body.transform.parent = hand.transform.parent;
-                foreach(var jointedBody in jointedBodies) {
+                foreach (var jointedBody in jointedBodies)
+                {
                     jointedBody.transform.parent = hand.transform.parent;
-                    if(jointedBody.gameObject.HasGrabbable(out var grab))
+                    if (jointedBody.gameObject.HasGrabbable(out var grab))
                         grab.heldBodyJointed = true;
                 }
             }
 
-            if(ignoreWeight) {
-                if(!gameObject.CanGetComponent(out WeightlessFollower heldFollower) || singleHandOnly)
+            if (ignoreWeight)
+            {
+                if (!gameObject.CanGetComponent(out WeightlessFollower heldFollower) || singleHandOnly)
                     heldFollower = gameObject.AddComponent<WeightlessFollower>();
                 heldFollower?.Set(hand, this);
             }
@@ -358,22 +398,26 @@ namespace Autohand {
         }
 
         /// <summary>Whether or not the hand can grab this grabbable</summary>
-        public virtual bool CanGrab(HandBase hand) {
+        public virtual bool CanGrab(HandBase hand)
+        {
             return enabled && isGrabbable && (handType == HandType.both || (handType == HandType.left && hand.left) || (handType == HandType.right && !hand.left));
         }
 
         /// <summary>Called by the hand whenever this item is release</summary>
-        internal virtual void OnRelease(Hand hand) {
-            if(heldBy.Contains(hand)) {
-                if(placePoint != null && placePoint.CanPlace(this))
+        internal virtual void OnRelease(Hand hand)
+        {
+            if (heldBy.Contains(hand))
+            {
+                if (placePoint != null && placePoint.CanPlace(this))
                     placePoint.Place(this);
 
                 BreakHandConnection(hand);
 
-                if(body != null && heldBy.Count == 0) {
+                if (body != null && heldBy.Count == 0)
+                {
                     body.velocity = hand.ThrowVelocity() * throwMultiplyer;
                     var throwAngularVel = hand.ThrowAngularVelocity();
-                    if(!float.IsNaN(throwAngularVel.x) && !float.IsNaN(throwAngularVel.y) && !float.IsNaN(throwAngularVel.z))
+                    if (!float.IsNaN(throwAngularVel.x) && !float.IsNaN(throwAngularVel.y) && !float.IsNaN(throwAngularVel.z))
                         body.angularVelocity = throwAngularVel;
                 }
 
@@ -384,25 +428,29 @@ namespace Autohand {
             }
         }
 
-        internal virtual void BreakHandConnection(Hand hand) {
-            if(!heldBy.Remove(hand))
+        internal virtual void BreakHandConnection(Hand hand)
+        {
+            if (!heldBy.Remove(hand))
                 return;
 
-            if(lockHandOnGrab)
+            if (lockHandOnGrab)
                 hand.body.isKinematic = false;
 
-            if(gameObject.activeInHierarchy) {
-                if(resetLayerRoutine != null) {
+            if (gameObject.activeInHierarchy)
+            {
+                if (resetLayerRoutine != null)
+                {
                     StopCoroutine(resetLayerRoutine);
                     resetLayerRoutine = null;
                 }
                 resetLayerRoutine = StartCoroutine(IgnoreHandCollision(ignoreReleaseTime, hand));
             }
 
-            foreach(var collider in heldIgnoreColliders)
+            foreach (var collider in heldIgnoreColliders)
                 hand.HandIgnoreCollider(collider, false);
 
-            if(HeldCount() == 0) {
+            if (HeldCount() == 0)
+            {
                 beingGrabbed = false;
                 ResetGrabbableAfterRlease();
             }
@@ -412,21 +460,26 @@ namespace Autohand {
         }
 
         /// <summary>Tells each hand holding this object to release</summary>
-        public virtual void HandsRelease() {
-            for(int i = heldBy.Count - 1; i >= 0; i--)
+        public virtual void HandsRelease()
+        {
+            for (int i = heldBy.Count - 1; i >= 0; i--)
                 heldBy[i].Release();
         }
 
         /// <summary>Tells each hand holding this object to release</summary>
-        public virtual void HandRelease(Hand hand) {
-            if(heldBy.Contains(hand)) {
+        public virtual void HandRelease(Hand hand)
+        {
+            if (heldBy.Contains(hand))
+            {
                 hand.Release();
             }
         }
 
         /// <summary>Forces all the hands on this object to relese without applying throw force or calling OnRelease event</summary>
-        public virtual void ForceHandsRelease() {
-            for(int i = heldBy.Count - 1; i >= 0; i--) {
+        public virtual void ForceHandsRelease()
+        {
+            for (int i = heldBy.Count - 1; i >= 0; i--)
+            {
                 wasForceReleased = true;
                 ForceHandRelease(heldBy[i]);
             }
@@ -434,8 +487,10 @@ namespace Autohand {
         }
 
         /// <summary>Forces all the hands on this object to relese without applying throw force</summary>
-        public virtual void ForceHandRelease(Hand hand) {
-            if(heldBy.Contains(hand)) {
+        public virtual void ForceHandRelease(Hand hand)
+        {
+            if (heldBy.Contains(hand))
+            {
                 var throwMult = throwPower;
                 throwPower = 0;
                 wasForceReleased = true;
@@ -446,25 +501,29 @@ namespace Autohand {
 
 
         /// <summary>Called when the joint between the hand and this item is broken\n - Works to simulate pulling item apart event</summary>
-        public virtual void OnHandJointBreak(Hand hand) {
-            if(heldBy.Contains(hand)) {
+        public virtual void OnHandJointBreak(Hand hand)
+        {
+            if (heldBy.Contains(hand))
+            {
                 body.WakeUp();
 
                 body.velocity *= 0;
                 body.angularVelocity *= 0;
 
-                if(!pullApartBreakOnly) {
+                if (!pullApartBreakOnly)
+                {
                     OnJointBreakEvent?.Invoke(hand, this);
                     OnJointBreak?.Invoke(hand, this);
                 }
-                if(pullApartBreakOnly && HeldCount() > 1) {
+                if (pullApartBreakOnly && HeldCount() > 1)
+                {
                     OnJointBreakEvent?.Invoke(hand, this);
                     OnJointBreak?.Invoke(hand, this);
                 }
 
                 ForceHandRelease(hand);
 
-                if(heldBy.Count > 0)
+                if (heldBy.Count > 0)
                     heldBy[0].SetHandLocation(heldBy[0].moveTo.position, heldBy[0].transform.rotation);
             }
         }
@@ -474,91 +533,109 @@ namespace Autohand {
         //=================================================================
 
 
-        public Vector3 GetVelocity() {
+        public Vector3 GetVelocity()
+        {
             return lastCenterOfMassPos - body.position;
         }
 
-        public Vector3 GetAngularVelocity() {
+        public Vector3 GetAngularVelocity()
+        {
             Quaternion deltaRotation = body.rotation * Quaternion.Inverse(lastCenterOfMassRot);
             deltaRotation.ToAngleAxis(out var angle, out var axis);
             angle *= Mathf.Deg2Rad;
             return (1.0f / Time.fixedDeltaTime) * angle / 1.2f * axis;
         }
 
-        public List<Hand> GetHeldBy() {
+        public List<Hand> GetHeldBy()
+        {
             return heldBy;
         }
-        public int HeldCount(bool includedJointedCount = true) {
+        public int HeldCount(bool includedJointedCount = true)
+        {
             var count = heldBy.Count;
-            if(includedJointedCount)
-                for(int i = 0; i < jointedGrabbables.Count; i++)
+            if (includedJointedCount)
+                for (int i = 0; i < jointedGrabbables.Count; i++)
                     count += jointedGrabbables[i].heldBy.Count;
             return heldBy.Count;
         }
 
-        public bool IsHeld() {
+        public bool IsHeld()
+        {
             return heldBy.Count > 0;
         }
 
         /// <summary>Returns true during hand grabbing coroutine</summary>
-        public bool BeingGrabbed() {
+        public bool BeingGrabbed()
+        {
             return beingGrabbed;
         }
 
         /// <summary>Plays haptic on each hand holding this grabbable</summary>
-        public void PlayHapticVibration() {
-            foreach(var hand in heldBy) {
+        public void PlayHapticVibration()
+        {
+            foreach (var hand in heldBy)
+            {
                 hand.PlayHapticVibration();
             }
         }
 
         /// <summary>Plays haptic on each hand holding this grabbable</summary>
-        public void PlayHapticVibration(float duration = 0.025f) {
-            foreach(var hand in heldBy) {
+        public void PlayHapticVibration(float duration = 0.025f)
+        {
+            foreach (var hand in heldBy)
+            {
                 hand.PlayHapticVibration(duration);
             }
         }
 
         /// <summary>Plays haptic on each hand holding this grabbable</summary>
-        public void PlayHapticVibration(float duration, float amp = 0.5f) {
-            foreach(var hand in heldBy) {
+        public void PlayHapticVibration(float duration, float amp = 0.5f)
+        {
+            foreach (var hand in heldBy)
+            {
                 hand.PlayHapticVibration(duration, amp);
             }
         }
 
 
 
-        protected virtual void OnDestroy() {
+        protected virtual void OnDestroy()
+        {
             beingDestroyed = true;
-            if(heldBy.Count != 0)
+            if (heldBy.Count != 0)
                 ForceHandsRelease();
             MakeChildrenUngrabbable();
-            if(resetLayerRoutine != null) {
+            if (resetLayerRoutine != null)
+            {
                 StopCoroutine(resetLayerRoutine);
                 resetLayerRoutine = null;
             }
-            if(placePoint != null)
+            if (placePoint != null)
                 placePoint.Remove(this);
         }
 
 
 
-        public void SetParentOnGrab(bool parentOnGrab) {
+        public void SetParentOnGrab(bool parentOnGrab)
+        {
             this.parentOnGrab = parentOnGrab;
         }
 
-        public void AddJointedBody(Rigidbody body) {
+        public void AddJointedBody(Rigidbody body)
+        {
             Grabbable grab;
             jointedBodies.Add(body);
 
-            if(body.gameObject.HasGrabbable(out grab))
+            if (body.gameObject.HasGrabbable(out grab))
                 jointedParents.Add(grab.originalParent);
             else
                 jointedParents.Add(body.transform.parent);
 
-            if(transform.parent != originalParent) {
-                if(grab != null) {
-                    if(grab.HeldCount() == 0)
+            if (transform.parent != originalParent)
+            {
+                if (grab != null)
+                {
+                    if (grab.HeldCount() == 0)
                         grab.transform.parent = transform.parent;
                     grab.heldBodyJointed = true;
                 }
@@ -567,10 +644,12 @@ namespace Autohand {
             }
         }
 
-        public void RemoveJointedBody(Rigidbody body) {
+        public void RemoveJointedBody(Rigidbody body)
+        {
             var i = jointedBodies.IndexOf(body);
-            if(jointedBodies[i].gameObject.HasGrabbable(out var grab)) {
-                if(grab.HeldCount() == 0)
+            if (jointedBodies[i].gameObject.HasGrabbable(out var grab))
+            {
+                if (grab.HeldCount() == 0)
                     grab.transform.parent = grab.originalParent;
                 grab.heldBodyJointed = false;
             }
@@ -581,36 +660,44 @@ namespace Autohand {
             jointedParents.RemoveAt(i);
         }
 
-        public void DoDestroy() {
+        public void DoDestroy()
+        {
             Destroy(gameObject);
         }
 
-        public int CollisionCount() {
+        public int CollisionCount()
+        {
             return collisionTracker.collisionObjects.Count;
         }
 
-        public int JointedCollisionCount() {
+        public int JointedCollisionCount()
+        {
             int count = 0;
-            for(int i = 0; i < jointedGrabbables.Count; i++)
+            for (int i = 0; i < jointedGrabbables.Count; i++)
                 count += jointedGrabbables[i].HeldCount();
 
             return count;
         }
 
         //Adds a reference script to child colliders so they can be grabbed
-        void MakeChildrenGrabbable() {
-            for(int i = 0; i < transform.childCount; i++) {
+        void MakeChildrenGrabbable()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
                 AddChildGrabbableRecursive(transform.GetChild(i));
             }
 
-            void AddChildGrabbableRecursive(Transform obj) {
-                if(obj.CanGetComponent(out Collider col) && col.isTrigger == false && !obj.CanGetComponent<Grabbable>(out _) && !obj.CanGetComponent<GrabbableChild>(out _) && !obj.CanGetComponent<PlacePoint>(out _)) {
+            void AddChildGrabbableRecursive(Transform obj)
+            {
+                if (obj.CanGetComponent(out Collider col) && col.isTrigger == false && !obj.CanGetComponent<Grabbable>(out _) && !obj.CanGetComponent<GrabbableChild>(out _) && !obj.CanGetComponent<PlacePoint>(out _))
+                {
                     var child = obj.gameObject.AddComponent<GrabbableChild>();
                     child.gameObject.layer = originalLayer;
                     child.grabParent = this;
                 }
-                for(int i = 0; i < obj.childCount; i++) {
-                    if(!obj.CanGetComponent<Grabbable>(out _))
+                for (int i = 0; i < obj.childCount; i++)
+                {
+                    if (!obj.CanGetComponent<Grabbable>(out _))
                         AddChildGrabbableRecursive(obj.GetChild(i));
                 }
             }
@@ -618,37 +705,46 @@ namespace Autohand {
 
 
         //Adds a reference script to child colliders so they can be grabbed
-        void MakeChildrenUngrabbable() {
-            for(int i = 0; i < transform.childCount; i++) {
+        void MakeChildrenUngrabbable()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
                 RemoveChildGrabbableRecursive(transform.GetChild(i));
             }
 
-            void RemoveChildGrabbableRecursive(Transform obj) {
-                if(obj.GetComponent<GrabbableChild>() && obj.GetComponent<GrabbableChild>().grabParent == this) {
+            void RemoveChildGrabbableRecursive(Transform obj)
+            {
+                if (obj.GetComponent<GrabbableChild>() && obj.GetComponent<GrabbableChild>().grabParent == this)
+                {
                     Destroy(obj.gameObject.GetComponent<GrabbableChild>());
                 }
-                for(int i = 0; i < obj.childCount; i++) {
+                for (int i = 0; i < obj.childCount; i++)
+                {
                     RemoveChildGrabbableRecursive(obj.GetChild(i));
                 }
             }
         }
 
         /// <summary>INTERNAL - Sets the grabbables original layers</summary>
-        internal void ResetGrabbableAfterRlease() {
+        internal void ResetGrabbableAfterRlease()
+        {
 
-            if(!beingDestroyed) {
+            if (!beingDestroyed)
+            {
                 ResetRigidbody();
 
-                if(!heldBodyJointed)
+                if (!heldBodyJointed)
                     body.transform.parent = originalParent;
 
-                for(int i = 0; i < jointedBodies.Count; i++) {
-                    if(jointedBodies[i].gameObject.HasGrabbable(out var grab)) {
-                        if(grab.HeldCount() == 0)
+                for (int i = 0; i < jointedBodies.Count; i++)
+                {
+                    if (jointedBodies[i].gameObject.HasGrabbable(out var grab))
+                    {
+                        if (grab.HeldCount() == 0)
                             grab.transform.parent = grab.originalParent;
                         grab.heldBodyJointed = false;
                     }
-                    else if(!heldBodyJointed)
+                    else if (!heldBodyJointed)
                         jointedBodies[i].transform.parent = jointedParents[i];
                 }
             }
