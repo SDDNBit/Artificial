@@ -8,17 +8,17 @@ namespace SoftBit.Autohand.Custom
     public class OpenXRHandDistanceGrabLink : MonoBehaviour
     {
         public HandDistanceGrabberCustom pointGrab;
-        public InputActionProperty pointAction;
-        public InputActionProperty stopPointAction;
+        public InputActionProperty grabAction;
+        public InputActionProperty stopGrabAction;
         //public InputActionProperty selectAction;
         //public InputActionProperty stopSelectAction;
 
         void OnEnable()
         {
-            if (pointAction.action != null) pointAction.action.Enable();
-            if (pointAction.action != null) pointAction.action.performed += OnPoint;
-            if (stopPointAction.action != null) stopPointAction.action.Enable();
-            if (stopPointAction.action != null) stopPointAction.action.performed += OnStopPoint;
+            if (grabAction.action != null) grabAction.action.Enable();
+            if (grabAction.action != null) grabAction.action.performed += OnGrab;
+            if (stopGrabAction.action != null) stopGrabAction.action.Enable();
+            if (stopGrabAction.action != null) stopGrabAction.action.performed += OnStopGrab;
 
             //if (selectAction.action != null) selectAction.action.Enable();
             //if (selectAction.action != null) selectAction.action.performed += OnSelect;
@@ -28,23 +28,23 @@ namespace SoftBit.Autohand.Custom
 
         private void OnDisable()
         {
-            if (pointAction.action != null) pointAction.action.performed -= OnPoint;
-            if (stopPointAction.action != null) stopPointAction.action.performed -= OnStopPoint;
+            if (grabAction.action != null) grabAction.action.performed -= OnGrab;
+            if (stopGrabAction.action != null) stopGrabAction.action.performed -= OnStopGrab;
 
             //if (selectAction.action != null) selectAction.action.performed -= OnSelect;
             //if (stopSelectAction.action != null) stopSelectAction.action.performed -= OnDeselect;
 
         }
 
-        void OnPoint(InputAction.CallbackContext e)
+        void OnGrab(InputAction.CallbackContext e)
         {
-            pointGrab.StartPointing();
+            //pointGrab.StartPointing();
             pointGrab.SelectTarget();
         }
 
-        void OnStopPoint(InputAction.CallbackContext e)
+        void OnStopGrab(InputAction.CallbackContext e)
         {
-            pointGrab.StopPointing();
+            //pointGrab.StopPointing();
             pointGrab.CancelSelect();
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
 using Autohand;
+using Constants = SoftBit.Utils.Constants;
 
 namespace SoftBit.Autohand.Custom
 {
@@ -18,15 +19,9 @@ namespace SoftBit.Autohand.Custom
 
         [Header("Pointing Options")]
         public Transform forwardPointer;
-        public LineRenderer line;
         [Space]
-        public float maxRange = 5;
         [Tooltip("Defaults to grabbable on start if none")]
         public LayerMask layers;
-        [Space]
-        public Material defaultTargetedMaterial;
-        [Tooltip("The highlight material to use when pulling")]
-        public Material defaultSelectedMaterial;
 
         [Header("Pull Options")]
         public bool useInstantPull = false;
@@ -54,10 +49,6 @@ namespace SoftBit.Autohand.Custom
 
         [ShowIf("showEvents")]
         public UnityHandGrabEvent OnPull;
-        [ShowIf("showEvents")]
-        public UnityHandEvent StartPoint;
-        [ShowIf("showEvents")]
-        public UnityHandEvent StopPoint;
         [ShowIf("showEvents"), Tooltip("Targeting is started when object is highlighted")]
         public UnityHandGrabEvent StartTarget;
         [ShowIf("showEvents")]
@@ -75,20 +66,21 @@ namespace SoftBit.Autohand.Custom
         DistanceGrabbable selectingDistanceGrabbable;
 
         float catchAssistSeconds = 3f;
-        bool pointing;
-        bool pulling;
+        bool grabbing;
         Vector3 startPullPosition;
         RaycastHit hit;
         Quaternion lastRotation;
         private RaycastHit selectionHit;
         float selectedEstimatedRadius;
-        float startLookAssist;
         bool lastInstantPull;
 
         GameObject _hitPoint;
         Coroutine catchAssistRoutine;
         private DistanceGrabbable catchAsistGrabbable;
         private CatchAssistData catchAssistData;
+
+        private DistanceGrabbable hitGrabbable;
+        private GrabbableChild hitGrabbableChild;
 
         GameObject hitPoint
         {
@@ -108,7 +100,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-        void Start()
+        private void Start()
         {
             catchAssisted = new List<CatchAssistData>();
             if (layers == 0)
@@ -123,7 +115,7 @@ namespace SoftBit.Autohand.Custom
             primaryHand.OnTriggerGrab += TryCatchAssist;
             if (secondaryHand != null)
                 secondaryHand.OnTriggerGrab += TryCatchAssist;
-            primaryHand.OnBeforeGrabbed += (hand, grabbable) => { StopPointing(); CancelSelect(); };
+            primaryHand.OnBeforeGrabbed += (hand, grabbable) => { StopTargeting(); CancelSelect(); };
 
         }
 
@@ -132,7 +124,7 @@ namespace SoftBit.Autohand.Custom
             primaryHand.OnTriggerGrab -= TryCatchAssist;
             if (secondaryHand != null)
                 secondaryHand.OnTriggerGrab -= TryCatchAssist;
-            primaryHand.OnBeforeGrabbed -= (hand, grabbable) => { StopPointing(); CancelSelect(); };
+            primaryHand.OnBeforeGrabbed -= (hand, grabbable) => { StopTargeting(); CancelSelect(); };
 
             if (catchAssistRoutine != null)
             {
@@ -143,8 +135,9 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-        void Update()
+        private void Update()
         {
+            CheckTargetAndHighlightIt();
             CheckDistanceGrabbable();
             if (lastInstantPull != useInstantPull)
             {
@@ -161,34 +154,66 @@ namespace SoftBit.Autohand.Custom
         {
             Destroy(hitPoint);
         }
-        public void SetInstantPull()
+
+        public virtual void SelectTarget()
+        {
+            if (targetingDistanceGrabbable != null)
+            {
+                grabbing = true;
+                startPullPosition = primaryHand.transform.localPosition;
+                lastRotation = transform.rotation;
+                selectionHit = hit;
+                if (catchAssistRoutine == null)
+                {
+                    hitPoint.transform.position = selectionHit.point;
+                    hitPoint.transform.parent = selectionHit.transform;
+                }
+                selectingDistanceGrabbable = targetingDistanceGrabbable;
+                selectedEstimatedRadius = Vector3.Distance(hitPoint.transform.position, selectingDistanceGrabbable.transform.position);
+                selectingDistanceGrabbable?.StartSelecting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+                targetingDistanceGrabbable?.StopTargeting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+                targetingDistanceGrabbable = null;
+                StartSelect?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+                StopTargeting();
+            }
+        }
+
+        public virtual void CancelSelect()
+        {
+            StopTargeting();
+            grabbing = false;
+            selectingDistanceGrabbable?.StopSelecting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+            if (selectingDistanceGrabbable != null)
+            {
+                StopSelect?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+            }
+            selectingDistanceGrabbable = null;
+        }
+
+        private void SetInstantPull()
         {
             useInstantPull = true;
         }
 
-        public void SetPull(float distance)
+        private void SetPull(float distance)
         {
             useInstantPull = false;
             useFlickPull = false;
             pullGrabDistance = distance;
         }
 
-        public void SetFlickPull(float threshold)
+        private void SetFlickPull(float threshold)
         {
             useInstantPull = false;
             useFlickPull = true;
             flickThreshold = threshold;
         }
 
-
-        void CheckDistanceGrabbable()
+        private void CheckTargetAndHighlightIt()
         {
-            if (!pulling && pointing && primaryHand.holdingObj == null)
+            if (primaryHand.holdingObj == null && Physics.SphereCast(forwardPointer.position, Constants.DistangeGrabRadius, forwardPointer.forward, out hit, Constants.HandDistangeGrabRange, layers))
             {
-                bool didHit = Physics.SphereCast(forwardPointer.position, 0.03f, forwardPointer.forward, out hit, maxRange, layers);
-                DistanceGrabbable hitGrabbable;
-                GrabbableChild hitGrabbableChild;
-                if (didHit)
+                if (!grabbing)
                 {
                     if (hit.transform.CanGetComponent(out hitGrabbable))
                     {
@@ -208,26 +233,16 @@ namespace SoftBit.Autohand.Custom
                         }
                     }
                 }
-                else
-                {
-                    StopTargeting();
-                }
-
-                if (line != null)
-                {
-                    if (didHit)
-                    {
-                        line.positionCount = 2;
-                        line.SetPositions(new Vector3[] { forwardPointer.position, hit.point });
-                    }
-                    else
-                    {
-                        line.positionCount = 2;
-                        line.SetPositions(new Vector3[] { forwardPointer.position, forwardPointer.position + forwardPointer.forward * maxRange });
-                    }
-                }
             }
-            else if (pulling && primaryHand.holdingObj == null)
+            else
+            {
+                StopTargeting();
+            }
+        }
+
+        private void CheckDistanceGrabbable()
+        {
+            if (grabbing)
             {
                 if (useFlickPull)
                 {
@@ -238,96 +253,37 @@ namespace SoftBit.Autohand.Custom
                     TryDistancePull();
                 }
             }
-            else if (targetingDistanceGrabbable != null)
-            {
-                StopTargeting();
-            }
         }
 
-
-
-
-        public virtual void StartPointing()
-        {
-            pointing = true;
-            StartPoint?.Invoke(primaryHand);
-        }
-
-        public virtual void StopPointing()
-        {
-            pointing = false;
-            if (line != null)
-            {
-                line.positionCount = 0;
-                line.SetPositions(new Vector3[0]);
-            }
-            StopPoint?.Invoke(primaryHand);
-            StopTargeting();
-        }
-
-
-
-        public virtual void StartTargeting(DistanceGrabbable target)
+        private void StartTargeting(DistanceGrabbable target)
         {
             if (target.enabled && primaryHand.CanGrab(target.grabbable))
             {
                 if (targetingDistanceGrabbable != null)
+                {
                     StopTargeting();
+                }
                 targetingDistanceGrabbable = target;
-                targetingDistanceGrabbable?.grabbable.Highlight(primaryHand, GetTargetedMaterial(targetingDistanceGrabbable));
                 targetingDistanceGrabbable?.StartTargeting?.Invoke(primaryHand, target.grabbable);
                 StartTarget?.Invoke(primaryHand, target.grabbable);
             }
         }
 
-        public virtual void StopTargeting()
+        private void StopTargeting()
         {
-            targetingDistanceGrabbable?.grabbable.Unhighlight(primaryHand);
             targetingDistanceGrabbable?.StopTargeting?.Invoke(primaryHand, targetingDistanceGrabbable.grabbable);
             if (targetingDistanceGrabbable != null)
+            {
                 StopTarget?.Invoke(primaryHand, targetingDistanceGrabbable.grabbable);
+            }
             else if (selectingDistanceGrabbable != null)
+            {
                 StopTarget?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
+            }
             targetingDistanceGrabbable = null;
         }
 
-        public virtual void SelectTarget()
-        {
-            if (targetingDistanceGrabbable != null)
-            {
-                pulling = true;
-                startPullPosition = primaryHand.transform.localPosition;
-                lastRotation = transform.rotation;
-                selectionHit = hit;
-                if (catchAssistRoutine == null)
-                {
-                    hitPoint.transform.position = selectionHit.point;
-                    hitPoint.transform.parent = selectionHit.transform;
-                }
-                selectingDistanceGrabbable = targetingDistanceGrabbable;
-                selectedEstimatedRadius = Vector3.Distance(hitPoint.transform.position, selectingDistanceGrabbable.transform.position);
-                selectingDistanceGrabbable.grabbable.Unhighlight(primaryHand);
-                selectingDistanceGrabbable.grabbable.Highlight(primaryHand, GetSelectedMaterial(selectingDistanceGrabbable));
-                selectingDistanceGrabbable?.StartSelecting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
-                targetingDistanceGrabbable?.StopTargeting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
-                targetingDistanceGrabbable = null;
-                StartSelect?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
-                StopPointing();
-            }
-        }
-
-        public virtual void CancelSelect()
-        {
-            StopTargeting();
-            pulling = false;
-            selectingDistanceGrabbable?.grabbable.Unhighlight(primaryHand);
-            selectingDistanceGrabbable?.StopSelecting?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
-            if (selectingDistanceGrabbable != null)
-                StopSelect?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
-            selectingDistanceGrabbable = null;
-        }
-
-        public virtual void ActivatePull()
+        private void ActivatePull()
         {
             if (selectingDistanceGrabbable)
             {
@@ -363,8 +319,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-
-        void TryDistancePull()
+        private void TryDistancePull()
         {
             if (Vector3.Distance(startPullPosition, primaryHand.transform.localPosition) > pullGrabDistance)
             {
@@ -372,7 +327,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-        void TryFlickPull()
+        private void TryFlickPull()
         {
             Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(lastRotation);
             lastRotation = transform.rotation;
@@ -391,23 +346,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-
-
-
-        Material GetSelectedMaterial(DistanceGrabbable grabbable)
-        {
-            if (grabbable.ignoreHighlights)
-                return null;
-            return grabbable.selectedMaterial != null ? grabbable.selectedMaterial : defaultSelectedMaterial;
-        }
-        Material GetTargetedMaterial(DistanceGrabbable grabbable)
-        {
-            if (grabbable.ignoreHighlights)
-                return null;
-            return grabbable.selectedMaterial != null ? grabbable.targetedMaterial : defaultTargetedMaterial;
-        }
-
-        void TryCatchAssist(Hand hand, Grabbable grab)
+        private void TryCatchAssist(Hand hand, Grabbable grab)
         {
             for (int i = 0; i < catchAssisted.Count; i++)
             {
@@ -429,8 +368,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-
-        IEnumerator StartCatchAssist(DistanceGrabbable grab, float estimatedRadius)
+        private IEnumerator StartCatchAssist(DistanceGrabbable grab, float estimatedRadius)
         {
             catchAssistData = new CatchAssistData(grab.grabbable, catchAssistRadius);
             catchAssisted.Add(catchAssistData);
