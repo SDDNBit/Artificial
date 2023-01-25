@@ -1,6 +1,7 @@
 using Autohand;
 using SoftBit.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SoftBit.Mechanics
 {
@@ -13,6 +14,9 @@ namespace SoftBit.Mechanics
         [HideInInspector] public FlyToObject FlyToObjectComponent;
         [HideInInspector] public DestroyIfNotInUse DestroyIfNotInUseComponent;
         [HideInInspector] public Rigidbody RigidbodyComponent;
+
+        [Tooltip("Called when the object is or not attracted")]
+        public UnityEvent<Grabbable, bool> ObjectTargeted = new();
 
         private HandObjectsAttraction handObjectsAttraction;
         private Grabbable grabbable;
@@ -29,6 +33,27 @@ namespace SoftBit.Mechanics
             if (layer != -1)
             {
                 SetLayerRecursively(gameObject, layer);
+            }
+        }
+
+        public void SetAttractableAsTargeted(bool isTargeted)
+        {
+            ObjectTargeted.Invoke(grabbable, isTargeted);
+        }
+
+        public void SetAttractableState(bool isAttracted, bool inUse, Transform target = null)
+        {
+            DestroyIfNotInUseComponent.InUse = inUse;
+            FlyToObjectComponent.Target = target;
+            IsAlreadyOrbiting = isAttracted;
+            
+            if (isAttracted)
+            {
+                gameObject.layer = LayerMask.NameToLayer(Utils.Constants.DefaultLayer);
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
             }
         }
 

@@ -4849,17 +4849,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2616898226628517715, guid: 4057683bdad7eb9459728993b6fedb4a, type: 3}
   m_PrefabInstance: {fileID: 183316783}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &186107516 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3470751537793146070, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
-  m_PrefabInstance: {fileID: 377016495709674048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377016495709674049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935aaf7da50abf94697c8d70a7a71efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &187825326
 GameObject:
   m_ObjectHideFlags: 0
@@ -16131,17 +16120,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 774900119562137220, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
   m_PrefabInstance: {fileID: 628876287}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &628876289 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3470751537793146070, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
-  m_PrefabInstance: {fileID: 628876287}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628876288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935aaf7da50abf94697c8d70a7a71efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &628876290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16154,7 +16132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329bdfe6007cc4d45a3600ea3e0cfe7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceGrabbable: {fileID: 628876289}
+  DistanceGrabbable: {fileID: 0}
+  AttractableObject: {fileID: 0}
 --- !u!1001 &633469507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17922,6 +17901,9 @@ MonoBehaviour:
   FlyToObjectComponent: {fileID: 717700769}
   DestroyIfNotInUseComponent: {fileID: 717700768}
   RigidbodyComponent: {fileID: 717700771}
+  ObjectTargeted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &717700768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38250,17 +38232,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 774900119562137220, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
   m_PrefabInstance: {fileID: 1487581382}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1487581384 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3470751537793146070, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
-  m_PrefabInstance: {fileID: 1487581382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487581383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935aaf7da50abf94697c8d70a7a71efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1487581385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38273,7 +38244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329bdfe6007cc4d45a3600ea3e0cfe7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceGrabbable: {fileID: 1487581384}
+  DistanceGrabbable: {fileID: 0}
+  AttractableObject: {fileID: 0}
 --- !u!1001 &1488422803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53707,7 +53679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 774900119562137223, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
       propertyPath: ignoreWeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 774900119562137223, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
       propertyPath: jointBreakForce
@@ -53751,24 +53723,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
---- !u!1 &377016495709674049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 774900119562137220, guid: 9325c47caedc05e4f992bcf3af8de06e, type: 3}
-  m_PrefabInstance: {fileID: 377016495709674048}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &377016495709674050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377016495709674049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 329bdfe6007cc4d45a3600ea3e0cfe7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceGrabbable: {fileID: 186107516}
 --- !u!4 &408633268521524576
 Transform:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ namespace SoftBit.Utils
         /// <summary>
         /// Layers names
         /// </summary>
+        public const string DefaultLayer = "Default";
         public const string AttractableObjectLayer = "AttractableObject";
 
         public const float CollisionForceMultiplier = 20f;

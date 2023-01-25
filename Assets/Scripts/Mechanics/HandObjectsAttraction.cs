@@ -18,17 +18,18 @@ namespace SoftBit.Mechanics
         [SerializeField] private bool attractByPlayersHandPointing = true;
         [SerializeField] private List<Transform> orbitingPoints;
 
-        private bool isGrabbing;
+        private bool isAttracting;
         private bool handIsBusy;
         private bool onGrabbedCalled;
 
-        private List<Transform> availableOrbitingPoints = new List<Transform>();
-        private List<AttractableObject> objectsAttracted;
+        private List<Transform> availableOrbitingPoints = new();
+        private List<AttractableObject> objectsAttracted = new();
         private Collider[] hitColliders;
         private Coroutine onGrabbedWasCalledCoroutine;
         private Transform myTransform;
         private RaycastHit hit;
         private int attractablesArround;
+        private List<AttractableObject> targetedAttractables = new();
 
         private void Start()
         {
@@ -37,7 +38,6 @@ namespace SoftBit.Mechanics
             attractablesArround = 0;
             handIsBusy = true;
             hitColliders = new Collider[8];
-            objectsAttracted = new List<AttractableObject>();
             if (layers == 0)
             {
                 layers = LayerMask.GetMask(DefaultLayer);
@@ -62,13 +62,13 @@ namespace SoftBit.Mechanics
 
         public virtual void StartAttracting()
         {
-            isGrabbing = true;
+            isAttracting = true;
             onGrabbedWasCalledCoroutine = StartCoroutine(CheckIfOnGrabbedWasCalled());
         }
 
         public virtual void StopAttracting()
         {
-            isGrabbing = false;
+            isAttracting = false;
             handIsBusy = true;
             onGrabbedCalled = false;
             if (onGrabbedWasCalledCoroutine != null)
@@ -79,9 +79,7 @@ namespace SoftBit.Mechanics
 
         public void DetachAttractedObject(AttractableObject attractableObject)
         {
-            attractableObject.FlyToObjectComponent.Target = null;
-            attractableObject.IsAlreadyOrbiting = false;
-            attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            attractableObject.SetAttractableState(false, true, null);
             objectsAttracted.Remove(attractableObject);
         }
 
@@ -105,13 +103,19 @@ namespace SoftBit.Mechanics
 
         private void CheckForObjectAttraction()
         {
-            if (isGrabbing && !handIsBusy)
+            //if (!handIsBusy)
+            //{
+            if (availableOrbitingPoints.Count > 0)
             {
                 if (attractByPlayersHandPointing)
                 {
                     if (Physics.SphereCast(myTransform.position, Utils.Constants.AttractionRadius, myTransform.forward, out hit, Utils.Constants.HandAttractionRange, layers, QueryTriggerInteraction.Ignore))
                     {
                         AttractObjectByPlayersHand(hit);
+                    }
+                    else
+                    {
+                        RemoveTagetedAttractables();
                     }
                 }
                 else
@@ -121,26 +125,40 @@ namespace SoftBit.Mechanics
                     {
                         AttractObjectsArroundPlayer(attractablesArround);
                     }
-                }
-            }
-            else
-            {
-                if (objectsAttracted.Count > 0)
-                {
-                    foreach (var objectAttracted in objectsAttracted)
+                    else
                     {
-                        ShootAttractedObject(objectAttracted);
+                        RemoveTagetedAttractables();
                     }
-                    CleanupOrbitPoints();
                 }
             }
+            //}
+            //else
+            //{
+            if (!isAttracting && objectsAttracted.Count > 0)
+            {
+                foreach (var objectAttracted in objectsAttracted)
+                {
+                    ShootAttractedObject(objectAttracted);
+                }
+                CleanupOrbitPoints();
+            }
+            //}
+        }
+
+        private void RemoveTagetedAttractables()
+        {
+            foreach (var attractable in targetedAttractables)
+            {
+                attractable.SetAttractableAsTargeted(false);
+            }
+            targetedAttractables.Clear();
         }
 
         private void AttractObjectByPlayersHand(RaycastHit hit)
         {
             if (hit.transform.TryGetComponent(out AttractableObject attractableObject))
             {
-                AttractObject(attractableObject);
+                AttractOrTargetTheAttractable(attractableObject);
             }
         }
 
@@ -150,31 +168,43 @@ namespace SoftBit.Mechanics
             {
                 if (hitColliders[i].transform.TryGetComponent(out AttractableObject attractableObject))
                 {
-                    AttractObject(attractableObject);
+                    AttractOrTargetTheAttractable(attractableObject);
+                }
+            }
+        }
+
+        private void AttractOrTargetTheAttractable(AttractableObject attractableObject)
+        {
+            if (isAttracting && !attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed)
+            {
+                if (targetedAttractables.Contains(attractableObject))
+                {
+                    targetedAttractables.Remove(attractableObject);
+                    attractableObject.SetAttractableAsTargeted(false);
+                }
+                AttractObject(attractableObject);
+            }
+            else
+            {
+                if (!targetedAttractables.Contains(attractableObject))
+                {
+                    targetedAttractables.Add(attractableObject);
+                    attractableObject.SetAttractableAsTargeted(true);
                 }
             }
         }
 
         private void AttractObject(AttractableObject attractableObject)
         {
-            if (!attractableObject.IsAlreadyOrbiting && !attractableObject.IsGrabbed && availableOrbitingPoints.Count > 0)
-            {
-                attractableObject.IsAlreadyOrbiting = true;
-                attractableObject.DestroyIfNotInUseComponent.InUse = true;
-                attractableObject.FlyToObjectComponent.Target = availableOrbitingPoints[0].transform;
-                attractableObject.gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
-                attractableObject.SetObjectAttractionComponent(this);
-                availableOrbitingPoints.RemoveAt(0);
-                objectsAttracted.Add(attractableObject);
-            }
+            attractableObject.SetAttractableState(true, true, availableOrbitingPoints[0].transform);
+            attractableObject.SetObjectAttractionComponent(this);
+            availableOrbitingPoints.RemoveAt(0);
+            objectsAttracted.Add(attractableObject);
         }
 
         private void ShootAttractedObject(AttractableObject attractableObject)
         {
-            attractableObject.FlyToObjectComponent.Target = null;
-            attractableObject.IsAlreadyOrbiting = false;
-            attractableObject.DestroyIfNotInUseComponent.InUse = false;
-            attractableObject.gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            attractableObject.SetAttractableState(false, false, null);
             attractableObject.transform.rotation = transform.rotation;
             attractableObject.RigidbodyComponent.velocity = transform.forward * Utils.Constants.AttractableShootPower;
             AddSmasherOnShootBehaviour(attractableObject);

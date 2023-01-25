@@ -22,9 +22,13 @@ namespace SoftBit.ObjectPooling
 
         public InteractableHint UseInteractableHint(Transform target)
         {
-            var interactableHint = interactableHints.Dequeue();
-            interactableHint.SetState(true, target);
-            return interactableHint;
+            if (interactableHints.Count > 0)
+            {
+                var interactableHint = interactableHints.Dequeue();
+                interactableHint.SetState(true, target);
+                return interactableHint;
+            }
+            return null;
         }
 
         public void DiscardInteractableHint(InteractableHint interactableHint)

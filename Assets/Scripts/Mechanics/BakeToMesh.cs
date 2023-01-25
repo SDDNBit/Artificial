@@ -49,6 +49,7 @@ namespace SoftBit.Mechanics
             meshParent.AddComponent<DestroyIfNotInUse>();
             var attractableComponent = meshParent.AddComponent<AttractableObject>();
             attractableComponent.AddSmasherOnShoot = true;
+            meshParent.AddComponent<HighlightBehaviour>();
             return parentRigidbody;
         }
     }

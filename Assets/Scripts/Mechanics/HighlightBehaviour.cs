@@ -8,10 +8,17 @@ namespace SoftBit.Mechanics
 {
     public class HighlightBehaviour : MonoBehaviour
     {
-        [SerializeField] private DistanceGrabbable distanceGrabbable;
+        public DistanceGrabbable DistanceGrabbable;
+        public AttractableObject AttractableObject;
 
         private InteractableHintPool interactableHintPool;
         private InteractableHint interactableHint;
+
+        private void Awake()
+        {
+            TryGetComponent(out DistanceGrabbable);
+            TryGetComponent(out AttractableObject);
+        }
 
         private void Start()
         {
@@ -20,17 +27,43 @@ namespace SoftBit.Mechanics
 
         private void OnEnable()
         {
-            distanceGrabbable.StartTargeting.AddListener(OnStartTargeting);
-            distanceGrabbable.StopTargeting.AddListener(OnStopTargeting);
+            if (DistanceGrabbable != null)
+            {
+                DistanceGrabbable.StartTargeting.AddListener(OnStartTargeting);
+                DistanceGrabbable.StopTargeting.AddListener(OnStopTargeting);
+            }
+            if(AttractableObject != null)
+            {
+                AttractableObject.ObjectTargeted.AddListener(OnObjectTargeted);
+            }
         }
 
         private void OnDisable()
         {
-            distanceGrabbable.StartTargeting.RemoveListener(OnStartTargeting);
-            distanceGrabbable.StopTargeting.RemoveListener(OnStopTargeting);
+            if (DistanceGrabbable != null)
+            {
+                DistanceGrabbable.StartTargeting.RemoveListener(OnStartTargeting);
+                DistanceGrabbable.StopTargeting.RemoveListener(OnStopTargeting);
+            }
+            if (AttractableObject != null)
+            {
+                AttractableObject.ObjectTargeted.RemoveListener(OnObjectTargeted);
+            }
         }
 
-        private void OnStartTargeting(Hand hand, Grabbable grabbable)
+        private void OnObjectTargeted(Grabbable grabbable, bool isTargeted)
+        {
+            if (isTargeted)
+            {
+                ShowHint();
+            }
+            else
+            {
+                HideHint();
+            }
+        }
+
+        private void ShowHint()
         {
             if (interactableHint == null)
             {
@@ -38,13 +71,23 @@ namespace SoftBit.Mechanics
             }
         }
 
-        private void OnStopTargeting(Hand hand, Grabbable grabbable)
+        private void HideHint()
         {
             if (interactableHint)
             {
                 interactableHintPool.DiscardInteractableHint(interactableHint);
                 interactableHint = null;
             }
+        }
+
+        private void OnStartTargeting(Hand hand, Grabbable grabbable)
+        {
+            ShowHint();
+        }
+
+        private void OnStopTargeting(Hand hand, Grabbable grabbable)
+        {
+            HideHint();
         }
 
         #region TestMethods
