@@ -25,12 +25,12 @@ namespace SoftBit.Autohand.Custom
 
         private void OnGrab(InputAction.CallbackContext e)
         {
-            handDistanceGrabberCustom.SelectTarget();
+            handDistanceGrabberCustom.GrabTarget();
         }
 
         private void OnStopGrab(InputAction.CallbackContext e)
         {
-            handDistanceGrabberCustom.CancelSelect();
+            handDistanceGrabberCustom.CancelGrab();
         }
     }
 }

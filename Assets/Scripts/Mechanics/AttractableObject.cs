@@ -1,5 +1,6 @@
 using Autohand;
 using SoftBit.Utils;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,7 +37,7 @@ namespace SoftBit.Mechanics
             }
         }
 
-        public void SetAttractableAsTargeted(bool isTargeted)
+        public void SetTargetOnAttractable(bool isTargeted)
         {
             ObjectTargeted.Invoke(grabbable, isTargeted);
         }
@@ -49,10 +50,12 @@ namespace SoftBit.Mechanics
             
             if (isAttracted)
             {
+                //SetLayerRecursively(gameObject, LayerMask.NameToLayer(Utils.Constants.DefaultLayer));
                 gameObject.layer = LayerMask.NameToLayer(Utils.Constants.DefaultLayer);
             }
             else
             {
+                //SetLayerRecursively(gameObject, LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer));
                 gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
             }
         }

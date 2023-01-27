@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using NaughtyAttributes;
 using Autohand;
 using Constants = SoftBit.Utils.Constants;
+using Autohand.Demo;
 
 namespace SoftBit.Autohand.Custom
 {
@@ -60,27 +61,30 @@ namespace SoftBit.Autohand.Custom
         public UnityHandGrabEvent StopSelect;
 
 
-        List<CatchAssistData> catchAssisted;
+        private List<CatchAssistData> catchAssisted;
 
-        DistanceGrabbable targetingDistanceGrabbable;
-        DistanceGrabbable selectingDistanceGrabbable;
+        private DistanceGrabbable targetingDistanceGrabbable;
+        private DistanceGrabbable selectingDistanceGrabbable;
 
-        float catchAssistSeconds = 3f;
-        bool grabbing;
-        Vector3 startPullPosition;
-        RaycastHit hit;
-        Quaternion lastRotation;
+        private float catchAssistSeconds = 3f;
+        private bool grabbing;
+        private Vector3 startPullPosition;
+        private RaycastHit hit;
+        private Quaternion lastRotation;
         private RaycastHit selectionHit;
-        float selectedEstimatedRadius;
-        bool lastInstantPull;
+        private float selectedEstimatedRadius;
+        private bool lastInstantPull;
 
-        GameObject _hitPoint;
-        Coroutine catchAssistRoutine;
+        private GameObject _hitPoint;
+        private Coroutine catchAssistRoutine;
         private DistanceGrabbable catchAsistGrabbable;
         private CatchAssistData catchAssistData;
 
         private DistanceGrabbable hitGrabbable;
         private GrabbableChild hitGrabbableChild;
+
+        [Tooltip("The primaryHand listeners to deactivate when this is grabbing")]
+        private OpenXRHandControllerLink openXRHandControllerLink;
 
         GameObject hitPoint
         {
@@ -100,6 +104,11 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
+        private void Awake()
+        {
+            openXRHandControllerLink = primaryHand.GetComponent<OpenXRHandControllerLink>();
+        }
+
         private void Start()
         {
             catchAssisted = new List<CatchAssistData>();
@@ -115,7 +124,7 @@ namespace SoftBit.Autohand.Custom
             primaryHand.OnTriggerGrab += TryCatchAssist;
             if (secondaryHand != null)
                 secondaryHand.OnTriggerGrab += TryCatchAssist;
-            primaryHand.OnBeforeGrabbed += (hand, grabbable) => { StopTargeting(); CancelSelect(); };
+            primaryHand.OnBeforeGrabbed += (hand, grabbable) => { StopTargeting(); CancelGrab(); };
 
         }
 
@@ -124,7 +133,7 @@ namespace SoftBit.Autohand.Custom
             primaryHand.OnTriggerGrab -= TryCatchAssist;
             if (secondaryHand != null)
                 secondaryHand.OnTriggerGrab -= TryCatchAssist;
-            primaryHand.OnBeforeGrabbed -= (hand, grabbable) => { StopTargeting(); CancelSelect(); };
+            primaryHand.OnBeforeGrabbed -= (hand, grabbable) => { StopTargeting(); CancelGrab(); };
 
             if (catchAssistRoutine != null)
             {
@@ -155,7 +164,7 @@ namespace SoftBit.Autohand.Custom
             Destroy(hitPoint);
         }
 
-        public virtual void SelectTarget()
+        public virtual void GrabTarget()
         {
             if (targetingDistanceGrabbable != null)
             {
@@ -178,7 +187,7 @@ namespace SoftBit.Autohand.Custom
             }
         }
 
-        public virtual void CancelSelect()
+        public virtual void CancelGrab()
         {
             StopTargeting();
             grabbing = false;
@@ -249,6 +258,7 @@ namespace SoftBit.Autohand.Custom
                 {
                     StopTargeting();
                 }
+                //openXRHandControllerLink.GrabbingLockedByOthers(true);
                 targetingDistanceGrabbable = target;
                 targetingDistanceGrabbable?.StartTargeting?.Invoke(primaryHand, target.grabbable);
                 StartTarget?.Invoke(primaryHand, target.grabbable);
@@ -257,6 +267,7 @@ namespace SoftBit.Autohand.Custom
 
         private void StopTargeting()
         {
+            //openXRHandControllerLink.GrabbingLockedByOthers(false);
             targetingDistanceGrabbable?.StopTargeting?.Invoke(primaryHand, targetingDistanceGrabbable.grabbable);
             if (targetingDistanceGrabbable != null)
             {
@@ -281,7 +292,7 @@ namespace SoftBit.Autohand.Custom
                     selectingDistanceGrabbable.grabbable.body.angularVelocity = Vector3.zero;
                     selectionHit.point = hitPoint.transform.position;
                     primaryHand.Grab(selectionHit, selectingDistanceGrabbable.grabbable);
-                    CancelSelect();
+                    CancelGrab();
                     selectingDistanceGrabbable?.CancelTarget();
                 }
                 else if (selectingDistanceGrabbable.grabType == DistanceGrabType.Velocity)
@@ -296,12 +307,12 @@ namespace SoftBit.Autohand.Custom
                     selectingDistanceGrabbable.grabbable.body.angularVelocity = Vector3.zero;
                     selectionHit.point = hitPoint.transform.position;
                     primaryHand.Grab(selectionHit, selectingDistanceGrabbable.grabbable, GrabType.GrabbableToHand);
-                    CancelSelect();
+                    CancelGrab();
                     selectingDistanceGrabbable?.CancelTarget();
 
                 }
 
-                CancelSelect();
+                CancelGrab();
             }
         }
 
@@ -347,7 +358,7 @@ namespace SoftBit.Autohand.Custom
                             catchAssisted[i].grab.body.velocity = Vector3.zero;
                             catchAssisted[i].grab.body.angularVelocity = Vector3.zero;
                             hand.Grab(catchHit, catchAssisted[i].grab);
-                            CancelSelect();
+                            CancelGrab();
                         }
                     }
                 }
@@ -389,7 +400,7 @@ namespace SoftBit.Autohand.Custom
                                     grab.grabbable.body.angularVelocity = Vector3.zero;
                                     hand.Grab(hits[i], grab.grabbable);
                                     grab.CancelTarget();
-                                    CancelSelect();
+                                    CancelGrab();
                                     return true;
                                 }
                             }

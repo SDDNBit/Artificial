@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &156989663406254691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectionParts: []
   prefab: {fileID: 1776834077367692683}
+  collisionDetectionModeForParts: 1
 --- !u!1 &1777734856887017704
 GameObject:
   m_ObjectHideFlags: 0
@@ -6654,6 +6656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &3468299454349886948
 GameObject:
   m_ObjectHideFlags: 0
@@ -8720,6 +8723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &4094527013576306144
 GameObject:
   m_ObjectHideFlags: 0
@@ -9196,6 +9200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &4380381465216596520
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,6 +9347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &4602631746283086172
 GameObject:
   m_ObjectHideFlags: 0
@@ -16545,6 +16551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 1
 --- !u!1 &8030901416803647341
 GameObject:
   m_ObjectHideFlags: 0
@@ -16888,6 +16895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &8132663455789174013
 GameObject:
   m_ObjectHideFlags: 0
@@ -18093,6 +18101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7103dd0b09a3942a3820dff747392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDetectionModeForParts: 0
 --- !u!1 &8726424375115574884
 GameObject:
   m_ObjectHideFlags: 0

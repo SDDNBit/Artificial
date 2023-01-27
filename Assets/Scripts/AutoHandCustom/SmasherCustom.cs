@@ -5,10 +5,10 @@ using UnityEngine.Events;
 
 namespace SoftBit.Autohand.Custom
 {
-    public delegate void SmashEvent(Smasher smasher, Smash smashable, Collision collision);
+    public delegate void SmashEvent(SmasherCustom smasher, SmashCustom smashable, Collision collision);
 
     [RequireComponent(typeof(Rigidbody))]
-    public class Smasher : MonoBehaviour
+    public class SmasherCustom : MonoBehaviour
     {
         [Header("Options")]
         public LayerMask smashableLayers;
@@ -17,15 +17,11 @@ namespace SoftBit.Autohand.Custom
         [Tooltip("Can be left empty - The center of mass point to calculate velocity magnitude - for example: the camera of the hammer is a better point vs the pivot center of the hammer object")]
         public Transform centerOfMassPoint;
 
-        [Header("Event")]
-        public UnityEvent OnSmash;
-
-        //Progammer Events <3
-        public SmashEvent OnSmashEvent;
-
         [Header("Cleanup")]
         public bool SelfRemovable = false;
         public float RemoveAfterSeconds = 0f;
+
+        [HideInInspector] public GameObject LastCollisionGameObject;
 
         private Rigidbody rb;
         private Vector3[] velocityOverTime = new Vector3[3];
@@ -38,12 +34,11 @@ namespace SoftBit.Autohand.Custom
 
             rb = GetComponent<Rigidbody>();
             if (smashableLayers == 0)
+            {
                 smashableLayers = LayerMask.GetMask(Hand.grabbableLayerNameDefault);
+            }
 
-            OnSmashEvent += (smasher, smashable, collision) => { OnSmash?.Invoke(); };
         }
-
-
         private void FixedUpdate()
         {
             for (int i = 1; i < velocityOverTime.Length; i++)
@@ -57,17 +52,7 @@ namespace SoftBit.Autohand.Custom
 
         private void OnCollisionEnter(Collision collision)
         {
-            Smash smash;
-            if (collision.collider.transform.CanGetComponent(out smash))
-            {
-                print("Smash component received");
-                if (GetMagnitude() >= smash.smashForce)
-                {
-                    print("Smash it");
-                    smash.DoSmash(this, collision);
-                    OnSmashEvent?.Invoke(this, smash, collision);
-                }
-            }
+            LastCollisionGameObject = collision.collider.gameObject;
         }
 
         public void ResetSelfRemoveClock()
@@ -79,15 +64,7 @@ namespace SoftBit.Autohand.Custom
             StartSelfRemove();
         }
 
-        private void StartSelfRemove()
-        {
-            if (SelfRemovable)
-            {
-                removeCoroutine = StartCoroutine(SelfRemove());
-            }
-        }
-
-        private float GetMagnitude()
+        public float GetMagnitude()
         {
             Vector3 velocity = Vector3.zero;
             for (int i = 0; i < velocityOverTime.Length; i++)
@@ -96,6 +73,14 @@ namespace SoftBit.Autohand.Custom
             }
 
             return (velocity.magnitude / velocityOverTime.Length) * forceMulti * 10;
+        }
+
+        private void StartSelfRemove()
+        {
+            if (SelfRemovable)
+            {
+                removeCoroutine = StartCoroutine(SelfRemove());
+            }
         }
 
         private IEnumerator SelfRemove()

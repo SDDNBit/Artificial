@@ -1,5 +1,6 @@
 using Autohand;
 using SoftBit.ObjectPooling;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace SoftBit.Mechanics
 {
     public class HighlightBehaviour : MonoBehaviour
     {
-        public DistanceGrabbable DistanceGrabbable;
-        public AttractableObject AttractableObject;
+        [HideInInspector] public DistanceGrabbable DistanceGrabbable;
+        [HideInInspector] public AttractableObject AttractableObject;
 
         private InteractableHintPool interactableHintPool;
         private InteractableHint interactableHint;

@@ -16,17 +16,17 @@ namespace SoftBit.Autohand.Custom
         private Vector3[] offsets = { new Vector3(0.25f, 0.25f, 0.25f), new Vector3(-0.25f, 0.25f, 0.25f), new Vector3(0.25f, 0.25f, -0.25f), new Vector3(-0.25f, 0.25f, -0.25f),
                             new Vector3(0.25f, -0.25f, 0.25f), new Vector3(-0.25f, -0.25f, 0.25f), new Vector3(0.25f, -0.25f, -0.25f), new Vector3(-0.25f, -0.25f, -0.25f),};
         private Rigidbody rb;
-        private Smash smash;
+        private SmashCustom smash;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            smash = GetComponent<Smash>();
-            smash.OnSmash.AddListener(Break);
+            smash = GetComponent<SmashCustom>();
+            //smash.OnSmash.AddListener(Break);
         }
 
         [ContextMenu("Break")]
-        public void Break(Smasher smasher, Collision collision)
+        public void Break(SmasherCustom smasher, Collision collision)
         {
             for (var i = 0; i < DropObjectsCount; ++i)
             {
