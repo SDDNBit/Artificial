@@ -9,17 +9,11 @@ namespace SoftBit.Mechanics
 
         [SerializeField] private ConnectionPart connectionPart;
 
-        private Smash smash;
+        [HideInInspector] public bool IsDestroyed = false;
 
-        private void Awake()
+        public void DestroyPart(Collision collision)
         {
-            smash = GetComponent<Smash>();
-            smash.OnSmash.AddListener(DestroyPart);
-        }
-
-        private void DestroyPart(Smasher smasher, Collision collision)
-        {
-            print("Destroy part");
+            IsDestroyed = true;
             DetachAttachedObject();
             connectionPart.DestroyPart(collision);
         }
@@ -30,12 +24,6 @@ namespace SoftBit.Mechanics
             {
                 AttachedObject.PivotToFollow = null;
             }
-        }
-
-        [ContextMenu("Test_DestroyPart")]
-        private void DestroyTest()
-        {
-            DestroyPart(null, null);
         }
     }
 }

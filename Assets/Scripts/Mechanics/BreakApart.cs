@@ -9,6 +9,7 @@ namespace SoftBit.Mechanics
     {
         public List<ConnectionPart> connectionParts;
         [SerializeField] private GameObject prefab;
+        [SerializeField] private CollisionDetectionMode collisionDetectionModeForParts;
 
         private List<ConnectionPart> partsToSpawn;
         private int parentsActive;
@@ -30,25 +31,18 @@ namespace SoftBit.Mechanics
         public void DestroyPart(ConnectionPart connectionPart, Collision collision)
         {
             partsToSpawn.Clear();
-            if (collision != null)
-            {
-                var explosionForce = collision.relativeVelocity.magnitude * Utils.Constants.CollisionForceMultiplier;
-            }
+            var explosionForce = collision.relativeVelocity.magnitude * Utils.Constants.CollisionForceMultiplier;
             foreach (var cell in connectionPart.cells)
             {
-                //cell.BakeMesh(explosionForce, collision.GetContact(0).point);
-                cell.BakeMesh();
+                cell.BakeMesh(explosionForce, collision.GetContact(0).point);
             }
             DeactivatePart(connectionPart);
             partsToSpawn.RemoveAt(0);
             if (partsToSpawn.Count > 0)
             {
                 scrap = Instantiate(prefab);
-                if (scrap.GetComponent<Rigidbody>() == null)
-                {
-                    scrap.AddComponent<Rigidbody>();
-                    scrap.AddComponent<Grabbable>();
-                }
+                SetRigidbodyOnScrap(scrap);
+                SetGrabbableOnScrap(scrap);
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
                 scrapBreakApart.SetActiveParts(partsToSpawn);
                 scrapBreakApart.Cleanup();
@@ -97,6 +91,31 @@ namespace SoftBit.Mechanics
                     connectionPart.gameObject.SetActive(false);
                     RemoveColliders(connectionPart);
                 }
+            }
+        }
+
+        private void SetGrabbableOnScrap(GameObject scrap)
+        {
+            Grabbable grabbable;
+            if (!scrap.CanGetComponent(out grabbable))
+            {
+                scrap.AddComponent<Grabbable>();
+            }
+        }
+
+        private void SetRigidbodyOnScrap(GameObject scrap)
+        {
+            Rigidbody scrapRigidbody;
+            if (scrap.CanGetComponent(out scrapRigidbody))
+            {
+                scrapRigidbody.useGravity = true;
+                scrapRigidbody.isKinematic = false;
+                scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
+            }
+            else
+            {
+                scrapRigidbody = scrap.AddComponent<Rigidbody>();
+                scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
             }
         }
 

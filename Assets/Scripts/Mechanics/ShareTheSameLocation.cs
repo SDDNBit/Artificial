@@ -1,14 +1,20 @@
+using SoftBit.Utils;
 using UnityEngine;
 
 namespace SoftBit.Mechanics
 {
     public class ShareTheSameLocation : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        public Transform Target;
 
-        private void FixedUpdate()
+        private void Update()
         {
-            transform.position = target.position;
+            transform.position = Target ? Target.position : Constants.DefaultVisibleLocation;
+        }
+
+        public void ForceUpdatePosition(Vector3 position)
+        {
+            transform.position = position;
         }
     }
 }

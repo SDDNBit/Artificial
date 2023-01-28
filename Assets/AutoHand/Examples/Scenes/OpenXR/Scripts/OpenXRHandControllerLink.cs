@@ -14,6 +14,7 @@ namespace Autohand.Demo
 
         private bool squeezing;
         private bool grabbing;
+
         private void Start() {
             if(hand.left)
                 handLeft = this;
@@ -52,14 +53,16 @@ namespace Autohand.Demo
         }
 
         private void Grab(InputAction.CallbackContext grab){
-            if (!grabbing){
+            if (!grabbing)
+            {
                 hand.Grab();
                 grabbing = true;
             }
         }
         
         private void Release(InputAction.CallbackContext grab){
-            if (grabbing){
+            if (grabbing)
+            {
                 hand.Release();
                 grabbing = false;
             }

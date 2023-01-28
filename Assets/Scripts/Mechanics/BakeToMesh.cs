@@ -7,8 +7,9 @@ namespace SoftBit.Mechanics
 {
     public class BakeToMesh : MonoBehaviour
     {
-        [ContextMenu("BakeMe")]
-        public void BakeMesh() //float explosionForce, Vector3 explosionPosition
+        private const CollisionDetectionMode CollisionDetectionModeForPart = CollisionDetectionMode.Continuous;
+
+        public void BakeMesh(float explosionForce, Vector3 explosionPosition)
         {
             var mesh = new Mesh();
             var skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
@@ -27,7 +28,7 @@ namespace SoftBit.Mechanics
 
             var parentRigidbody = AddAttractableBehaviour(meshParent);
 
-            //parentRigidbody.AddExplosionForce(explosionForce, explosionPosition, Constants.ExplosionRadius);
+            parentRigidbody.AddExplosionForce(explosionForce, explosionPosition, Constants.ExplosionRadius);
         }
 
         private GameObject CorrectPivotWithParent(MeshRenderer meshRenderer, GameObject bakedMeshGameObject)
@@ -42,6 +43,7 @@ namespace SoftBit.Mechanics
         private Rigidbody AddAttractableBehaviour(GameObject meshParent)
         {
             var parentRigidbody = meshParent.AddComponent<Rigidbody>();
+            parentRigidbody.collisionDetectionMode = CollisionDetectionModeForPart;
             var grabbable = meshParent.AddComponent<Grabbable>();
             grabbable.singleHandOnly = true;
             grabbable.jointBreakForce = float.PositiveInfinity;
@@ -49,6 +51,7 @@ namespace SoftBit.Mechanics
             meshParent.AddComponent<DestroyIfNotInUse>();
             var attractableComponent = meshParent.AddComponent<AttractableObject>();
             attractableComponent.AddSmasherOnShoot = true;
+            meshParent.AddComponent<HighlightBehaviour>();
             return parentRigidbody;
         }
     }

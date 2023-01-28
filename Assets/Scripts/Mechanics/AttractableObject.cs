@@ -1,6 +1,8 @@
 using Autohand;
 using SoftBit.Utils;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SoftBit.Mechanics
 {
@@ -13,6 +15,9 @@ namespace SoftBit.Mechanics
         [HideInInspector] public FlyToObject FlyToObjectComponent;
         [HideInInspector] public DestroyIfNotInUse DestroyIfNotInUseComponent;
         [HideInInspector] public Rigidbody RigidbodyComponent;
+
+        [Tooltip("Called when the object is or not attracted")]
+        public UnityEvent<Grabbable, bool> ObjectTargeted = new();
 
         private HandObjectsAttraction handObjectsAttraction;
         private Grabbable grabbable;
@@ -32,6 +37,30 @@ namespace SoftBit.Mechanics
             }
         }
 
+        public void SetTargetOnAttractable(bool isTargeted)
+        {
+            ObjectTargeted.Invoke(grabbable, isTargeted);
+        }
+
+        public void SetAttractableState(bool isAttracted, bool inUse, Transform target = null)
+        {
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = inUse;
+            }
+            FlyToObjectComponent.Target = target;
+            IsAlreadyOrbiting = isAttracted;
+
+            if (isAttracted)
+            {
+                gameObject.layer = LayerMask.NameToLayer(Utils.Constants.DefaultLayer);
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
+            }
+        }
+
         public void SetObjectAttractionComponent(HandObjectsAttraction handObjectsAttraction)
         {
             this.handObjectsAttraction = handObjectsAttraction;
@@ -43,13 +72,19 @@ namespace SoftBit.Mechanics
             {
                 handObjectsAttraction.DetachAttractedObject(this);
             }
-            DestroyIfNotInUseComponent.InUse = true;
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = true;
+            }
             IsGrabbed = true;
         }
 
         private void ReleaseListener(Hand hand, Grabbable grabbable)
         {
-            DestroyIfNotInUseComponent.InUse = false;
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = false;
+            }
             IsGrabbed = false;
         }
 

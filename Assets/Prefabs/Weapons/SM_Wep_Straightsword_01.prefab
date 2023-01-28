@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 774900119562137223}
   - component: {fileID: 774900119562137222}
   - component: {fileID: 3470751537793146070}
+  - component: {fileID: 5884086287850793693}
   m_Layer: 0
   m_Name: SM_Wep_Straightsword_01
   m_TagString: Untagged
@@ -227,7 +228,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &774900119562137223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,3 +351,17 @@ MonoBehaviour:
   StopSelecting:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5884086287850793693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774900119562137220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329bdfe6007cc4d45a3600ea3e0cfe7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanceGrabbable: {fileID: 0}
+  AttractableObject: {fileID: 0}

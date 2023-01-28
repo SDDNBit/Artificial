@@ -8,7 +8,7 @@ namespace SoftBit.OpenXR{
         public InputActionProperty AttractingAction;
         public InputActionProperty StopAttractingAction;
 
-        void OnEnable(){
+        private void OnEnable(){
             if(AttractingAction.action != null) AttractingAction.action.Enable();
             if (AttractingAction.action != null) AttractingAction.action.performed += AttractingActionListener;
             if (StopAttractingAction.action != null) StopAttractingAction.action.Enable();
@@ -21,11 +21,11 @@ namespace SoftBit.OpenXR{
         }
 
         void AttractingActionListener(InputAction.CallbackContext e) {
-            HandObjectsAttraction.StartAttracting();
+            HandObjectsAttraction.ShouldAttract(true);
         }
 
         void StopAttractingActionListener(InputAction.CallbackContext e) {
-            HandObjectsAttraction.StopAttracting();
+            HandObjectsAttraction.ShouldAttract(false);
         }
     }
 }
