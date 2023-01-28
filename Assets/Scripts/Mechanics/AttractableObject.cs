@@ -37,6 +37,18 @@ namespace SoftBit.Mechanics
             }
         }
 
+        private void FixedUpdate()
+        {
+            if(RigidbodyComponent.velocity.magnitude > Utils.Constants.AttractableShootPower)
+            {
+                RigidbodyComponent.velocity = RigidbodyComponent.velocity.normalized * Utils.Constants.AttractableShootPower;
+            }
+            if (RigidbodyComponent.angularVelocity.magnitude > Utils.Constants.AttractableShootPower)
+            {
+                RigidbodyComponent.angularVelocity = RigidbodyComponent.angularVelocity.normalized * Utils.Constants.AttractableShootPower;
+            }
+        }
+
         public void SetTargetOnAttractable(bool isTargeted)
         {
             ObjectTargeted.Invoke(grabbable, isTargeted);
