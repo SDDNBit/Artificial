@@ -23,7 +23,7 @@ namespace SoftBit.Autohand.Custom
             EnemyCollider enemyCollider;
             if (collision.transform.CanGetComponent(out smasher))
             {
-                if (smasher.LastCollisionGameObject.CanGetComponent(out enemyCollider))
+                if (smasher.LastCollisionGameObject != null && smasher.LastCollisionGameObject.CanGetComponent(out enemyCollider))
                 {
                     if (!enemyCollider.IsDestroyed && smasher.GetMagnitude() >= smashForce)
                     {

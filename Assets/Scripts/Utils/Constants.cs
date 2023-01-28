@@ -17,8 +17,11 @@ namespace SoftBit.Utils
         /// <summary>
         /// Hand custom distance grab constants
         /// </summary>
-        public const float DistangeGrabRadius = 0.5f;
+        public const float DistangeGrabRadius = 1f;
         public const float HandDistangeGrabRange = 5f;
+        /// <summary>
+        /// Used to bypass a visual glitch when an object is visible just for one/couple frame/s, this location should never be visible in user's sight 
+        /// </summary>
         public static readonly Vector3 DefaultVisibleLocation = new Vector3(0, -100, 0);
 
         /// <summary>

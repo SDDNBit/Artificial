@@ -21,9 +21,8 @@ namespace SoftBit.Mechanics
         private bool isAttracting;
 
         private List<Transform> availableOrbitingPoints = new();
-        private List<AttractableObject> objectsAttracted = new();
+        private Dictionary<AttractableObject, Transform> objectsAttractedWithOrbitingPoint = new();
         private Collider[] hitColliders;
-        private Coroutine onGrabbedWasCalledCoroutine;
         private Transform myTransform;
         private RaycastHit hit;
         private int attractablesArround;
@@ -46,24 +45,16 @@ namespace SoftBit.Mechanics
             CheckForObjectAttraction();
         }
 
-        public virtual void StartAttracting()
+        public void ShouldAttract(bool isAttracting)
         {
-            isAttracting = true;
-        }
-
-        public virtual void StopAttracting()
-        {
-            isAttracting = false;
-            if (onGrabbedWasCalledCoroutine != null)
-            {
-                StopCoroutine(onGrabbedWasCalledCoroutine);
-            }
+            this.isAttracting = isAttracting;
         }
 
         public void DetachAttractedObject(AttractableObject attractableObject)
         {
             attractableObject.SetAttractableState(false, true, null);
-            objectsAttracted.Remove(attractableObject);
+            availableOrbitingPoints.Add(objectsAttractedWithOrbitingPoint[attractableObject]);
+            objectsAttractedWithOrbitingPoint.Remove(attractableObject);
         }
 
         private void CheckForObjectAttraction()
@@ -74,26 +65,11 @@ namespace SoftBit.Mechanics
                 {
                     if (attractByPlayersHandPointing)
                     {
-                        if (Physics.SphereCast(myTransform.position, Utils.Constants.AttractionRadius, myTransform.forward, out hit, Utils.Constants.HandAttractionRange, layers, QueryTriggerInteraction.Ignore))
-                        {
-                            AttractObjectByPlayersHand(hit);
-                        }
-                        else
-                        {
-                            RemoveTagetedAttractables();
-                        }
+                        HandPointingAttraction();
                     }
                     else
                     {
-                        attractablesArround = Physics.OverlapSphereNonAlloc(transform.position, Utils.Constants.HandAttractionRange, hitColliders, layers, QueryTriggerInteraction.Ignore);
-                        if (attractablesArround > 0)
-                        {
-                            AttractObjectsArroundPlayer(attractablesArround);
-                        }
-                        else
-                        {
-                            RemoveTagetedAttractables();
-                        }
+                        SurroundingAttraction();
                     }
                 }
                 else
@@ -101,14 +77,39 @@ namespace SoftBit.Mechanics
                     RemoveTagetedAttractables();
                 }
 
-                if (!isAttracting && objectsAttracted.Count > 0)
+                if (!isAttracting && objectsAttractedWithOrbitingPoint.Count > 0)
                 {
-                    foreach (var objectAttracted in objectsAttracted)
+                    foreach (var objectAttracted in objectsAttractedWithOrbitingPoint)
                     {
-                        ShootAttractedObject(objectAttracted);
+                        ShootAttractedObject(objectAttracted.Key);
                     }
                     CleanupOrbitPoints();
                 }
+            }
+        }
+
+        private void HandPointingAttraction()
+        {
+            if (Physics.SphereCast(myTransform.position, Utils.Constants.AttractionRadius, myTransform.forward, out hit, Utils.Constants.HandAttractionRange, layers, QueryTriggerInteraction.Ignore))
+            {
+                AttractObjectByPlayersHand(hit);
+            }
+            else
+            {
+                RemoveTagetedAttractables();
+            }
+        }
+
+        private void SurroundingAttraction()
+        {
+            attractablesArround = Physics.OverlapSphereNonAlloc(myTransform.position, Utils.Constants.HandAttractionRange, hitColliders, layers, QueryTriggerInteraction.Ignore);
+            if (attractablesArround > 0)
+            {
+                AttractObjectsArroundPlayer(attractablesArround);
+            }
+            else
+            {
+                RemoveTagetedAttractables();
             }
         }
 
@@ -171,15 +172,15 @@ namespace SoftBit.Mechanics
         {
             attractableObject.SetAttractableState(true, true, availableOrbitingPoints[0].transform);
             attractableObject.SetObjectAttractionComponent(this);
+            objectsAttractedWithOrbitingPoint.Add(attractableObject, availableOrbitingPoints[0].transform);
             availableOrbitingPoints.RemoveAt(0);
-            objectsAttracted.Add(attractableObject);
         }
 
         private void ShootAttractedObject(AttractableObject attractableObject)
         {
             attractableObject.SetAttractableState(false, false, null);
-            attractableObject.transform.rotation = transform.rotation;
-            attractableObject.RigidbodyComponent.velocity = transform.forward * Utils.Constants.AttractableShootPower;
+            attractableObject.transform.rotation = myTransform.rotation;
+            attractableObject.RigidbodyComponent.velocity = myTransform.forward * Utils.Constants.AttractableShootPower;
             AddSmasherOnShootBehaviour(attractableObject);
         }
 
@@ -205,14 +206,14 @@ namespace SoftBit.Mechanics
 
         private void AddAvailableOrbitPoints()
         {
-            availableOrbitingPoints = new List<Transform>();
+            availableOrbitingPoints.Clear();
             availableOrbitingPoints.AddRange(orbitingPoints);
         }
 
         private void CleanupOrbitPoints()
         {
             AddAvailableOrbitPoints();
-            objectsAttracted = new List<AttractableObject>();
+            objectsAttractedWithOrbitingPoint.Clear();
         }
     }
 }

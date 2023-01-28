@@ -42,6 +42,7 @@ namespace SoftBit.Mechanics
             {
                 scrap = Instantiate(prefab);
                 SetRigidbodyOnScrap(scrap);
+                SetGrabbableOnScrap(scrap);
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
                 scrapBreakApart.SetActiveParts(partsToSpawn);
                 scrapBreakApart.Cleanup();
@@ -93,6 +94,15 @@ namespace SoftBit.Mechanics
             }
         }
 
+        private void SetGrabbableOnScrap(GameObject scrap)
+        {
+            Grabbable grabbable;
+            if (!scrap.CanGetComponent(out grabbable))
+            {
+                scrap.AddComponent<Grabbable>();
+            }
+        }
+
         private void SetRigidbodyOnScrap(GameObject scrap)
         {
             Rigidbody scrapRigidbody;
@@ -106,7 +116,6 @@ namespace SoftBit.Mechanics
             {
                 scrapRigidbody = scrap.AddComponent<Rigidbody>();
                 scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
-                scrap.AddComponent<Grabbable>();
             }
         }
 

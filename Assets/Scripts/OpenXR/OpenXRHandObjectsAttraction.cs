@@ -21,11 +21,11 @@ namespace SoftBit.OpenXR{
         }
 
         void AttractingActionListener(InputAction.CallbackContext e) {
-            HandObjectsAttraction.StartAttracting();
+            HandObjectsAttraction.ShouldAttract(true);
         }
 
         void StopAttractingActionListener(InputAction.CallbackContext e) {
-            HandObjectsAttraction.StopAttracting();
+            HandObjectsAttraction.ShouldAttract(false);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace SoftBit.Autohand.Custom
     public class SmasherCustom : MonoBehaviour
     {
         [Header("Options")]
-        public LayerMask smashableLayers;
         [Tooltip("How much to multiply the magnitude on smash")]
         public float forceMulti = 1;
         [Tooltip("Can be left empty - The center of mass point to calculate velocity magnitude - for example: the camera of the hammer is a better point vs the pivot center of the hammer object")]
@@ -31,13 +30,7 @@ namespace SoftBit.Autohand.Custom
         private void Start()
         {
             StartSelfRemove();
-
             rb = GetComponent<Rigidbody>();
-            if (smashableLayers == 0)
-            {
-                smashableLayers = LayerMask.GetMask(Hand.grabbableLayerNameDefault);
-            }
-
         }
         private void FixedUpdate()
         {

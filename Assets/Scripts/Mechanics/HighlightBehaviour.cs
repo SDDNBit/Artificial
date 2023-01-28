@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace SoftBit.Mechanics
 {
+    [DisallowMultipleComponent]
     public class HighlightBehaviour : MonoBehaviour
     {
         [HideInInspector] public DistanceGrabbable DistanceGrabbable;

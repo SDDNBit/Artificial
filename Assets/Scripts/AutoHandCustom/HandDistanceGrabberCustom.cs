@@ -258,7 +258,6 @@ namespace SoftBit.Autohand.Custom
                 {
                     StopTargeting();
                 }
-                //openXRHandControllerLink.GrabbingLockedByOthers(true);
                 targetingDistanceGrabbable = target;
                 targetingDistanceGrabbable?.StartTargeting?.Invoke(primaryHand, target.grabbable);
                 StartTarget?.Invoke(primaryHand, target.grabbable);
@@ -267,7 +266,6 @@ namespace SoftBit.Autohand.Custom
 
         private void StopTargeting()
         {
-            //openXRHandControllerLink.GrabbingLockedByOthers(false);
             targetingDistanceGrabbable?.StopTargeting?.Invoke(primaryHand, targetingDistanceGrabbable.grabbable);
             if (targetingDistanceGrabbable != null)
             {

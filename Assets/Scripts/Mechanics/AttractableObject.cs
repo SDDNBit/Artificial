@@ -47,7 +47,7 @@ namespace SoftBit.Mechanics
             DestroyIfNotInUseComponent.InUse = inUse;
             FlyToObjectComponent.Target = target;
             IsAlreadyOrbiting = isAttracted;
-            
+
             if (isAttracted)
             {
                 //SetLayerRecursively(gameObject, LayerMask.NameToLayer(Utils.Constants.DefaultLayer));
