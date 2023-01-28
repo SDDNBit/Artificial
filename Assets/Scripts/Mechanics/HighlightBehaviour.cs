@@ -42,6 +42,7 @@ namespace SoftBit.Mechanics
 
         private void OnDisable()
         {
+            HideHint();
             if (DistanceGrabbable != null)
             {
                 DistanceGrabbable.StartTargeting.RemoveListener(OnStartTargeting);
@@ -51,6 +52,11 @@ namespace SoftBit.Mechanics
             {
                 AttractableObject.ObjectTargeted.RemoveListener(OnObjectTargeted);
             }
+        }
+
+        private void OnDestroy()
+        {
+            HideHint();
         }
 
         private void OnObjectTargeted(Grabbable grabbable, bool isTargeted)

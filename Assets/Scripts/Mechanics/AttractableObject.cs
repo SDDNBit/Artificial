@@ -44,18 +44,19 @@ namespace SoftBit.Mechanics
 
         public void SetAttractableState(bool isAttracted, bool inUse, Transform target = null)
         {
-            DestroyIfNotInUseComponent.InUse = inUse;
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = inUse;
+            }
             FlyToObjectComponent.Target = target;
             IsAlreadyOrbiting = isAttracted;
 
             if (isAttracted)
             {
-                //SetLayerRecursively(gameObject, LayerMask.NameToLayer(Utils.Constants.DefaultLayer));
                 gameObject.layer = LayerMask.NameToLayer(Utils.Constants.DefaultLayer);
             }
             else
             {
-                //SetLayerRecursively(gameObject, LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer));
                 gameObject.layer = LayerMask.NameToLayer(Utils.Constants.AttractableObjectLayer);
             }
         }
@@ -71,13 +72,19 @@ namespace SoftBit.Mechanics
             {
                 handObjectsAttraction.DetachAttractedObject(this);
             }
-            DestroyIfNotInUseComponent.InUse = true;
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = true;
+            }
             IsGrabbed = true;
         }
 
         private void ReleaseListener(Hand hand, Grabbable grabbable)
         {
-            DestroyIfNotInUseComponent.InUse = false;
+            if (DestroyIfNotInUseComponent != null)
+            {
+                DestroyIfNotInUseComponent.InUse = false;
+            }
             IsGrabbed = false;
         }
 

@@ -8,16 +8,24 @@ namespace SoftBit.ObjectPooling
 {
     public class InteractableHintPool : Singleton<InteractableHintPool>
     {
-        Queue<InteractableHint> interactableHints = new();
+        [SerializeField] private InteractableHint interactableHintPrefab;
+        private Queue<InteractableHint> interactableHints = new();
+
 
         protected override void Awake()
         {
             base.Awake();
-            foreach (Transform child in transform)
+            for (var i = 0; i < Constants.InteractableHintPoolCount; ++i)
             {
-                interactableHints.Enqueue(child.GetComponent<InteractableHint>());
-                child.gameObject.SetActive(false);
+                var instantiatedInteractableHint = Instantiate(interactableHintPrefab, transform);
+                interactableHints.Enqueue(instantiatedInteractableHint);
+                instantiatedInteractableHint.gameObject.SetActive(false);
             }
+            //foreach (Transform child in transform)
+            //{
+            //    interactableHints.Enqueue(child.GetComponent<InteractableHint>());
+            //    child.gameObject.SetActive(false);
+            //}
         }
 
         public InteractableHint UseInteractableHint(Transform target)

@@ -80,11 +80,8 @@ namespace SoftBit.Autohand.Custom
         private DistanceGrabbable catchAsistGrabbable;
         private CatchAssistData catchAssistData;
 
-        private DistanceGrabbable hitGrabbable;
+        private DistanceGrabbable distanceGrabbable;
         private GrabbableChild hitGrabbableChild;
-
-        [Tooltip("The primaryHand listeners to deactivate when this is grabbing")]
-        private OpenXRHandControllerLink openXRHandControllerLink;
 
         GameObject hitPoint
         {
@@ -102,11 +99,6 @@ namespace SoftBit.Autohand.Custom
 
                 return _hitPoint;
             }
-        }
-
-        private void Awake()
-        {
-            openXRHandControllerLink = primaryHand.GetComponent<OpenXRHandControllerLink>();
         }
 
         private void Start()
@@ -210,20 +202,20 @@ namespace SoftBit.Autohand.Custom
             {
                 if (!grabbing)
                 {
-                    if (hit.transform.CanGetComponent(out hitGrabbable))
+                    if (hit.transform.CanGetComponent(out distanceGrabbable))
                     {
-                        if (hitGrabbable != targetingDistanceGrabbable)
+                        if (distanceGrabbable != targetingDistanceGrabbable)
                         {
-                            StartTargeting(hitGrabbable);
+                            StartTargeting(distanceGrabbable);
                         }
                     }
                     else if (hit.transform.CanGetComponent(out hitGrabbableChild))
                     {
-                        if (hitGrabbableChild.grabParent.transform.CanGetComponent(out hitGrabbable))
+                        if (hitGrabbableChild.grabParent.transform.CanGetComponent(out distanceGrabbable))
                         {
-                            if (hitGrabbable != targetingDistanceGrabbable)
+                            if (distanceGrabbable != targetingDistanceGrabbable)
                             {
-                                StartTargeting(hitGrabbable);
+                                StartTargeting(distanceGrabbable);
                             }
                         }
                     }

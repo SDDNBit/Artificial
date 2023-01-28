@@ -4,10 +4,12 @@ namespace SoftBit.Utils
 {
     public static class Constants
     {
+        public const int InteractableHintPoolCount = 40;
+
         /// <summary>
         /// Hand levitating constants
         /// </summary>
-        public const float AttractionRadius = 1f;
+        public const float AttractionRadius = 0.5f;
         public const float HandAttractionRange = 20f;
         public const float AttractableShootPower = 20f;
         public const int MaxAvailableOrbitingPoints = 8; // Make sure to adjust also in HandObjectsAttraction script the transforms in the list if this is changed
