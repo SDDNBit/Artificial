@@ -8,5 +8,6 @@ public class CountTrigger : MonoBehaviour
     {
         ++counter;
         print($"{counter}. This was counted: {other.name} at {other.transform.position}");
+        Debug.Break();
     }
 }
