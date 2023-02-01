@@ -136,6 +136,7 @@ namespace SoftBit.Mechanics
         {
             attractableObject.SetAttractableState(false, false, null);
             attractableObject.transform.rotation = myTransform.rotation;
+            attractableObject.RigidbodyComponent.angularVelocity = Vector3.zero;
             attractableObject.RigidbodyComponent.velocity = myTransform.forward * Constants.AttractableShootPower;
             AddSmasherOnShootBehaviour(attractableObject);
         }
