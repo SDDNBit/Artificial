@@ -35,7 +35,6 @@ public class TestPhysics : MonoBehaviour
         if (applyCustomCollisionDetection)
         {
             directionFromLastPosition = selfTransform.position - lastPosition;
-
             if (Physics.Raycast(lastPosition, directionFromLastPosition, out hitInfo, directionFromLastPosition.magnitude, layers, QueryTriggerInteraction.Ignore))
             {
                 selfRigidbody.velocity = Vector3.zero;
