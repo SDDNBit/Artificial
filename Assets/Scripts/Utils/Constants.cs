@@ -48,5 +48,16 @@ namespace SoftBit.Utils
         /// </summary>
         public const string AnimatorIdleState = "IdleState";
         public const string AnimatorAttackingState = "IsAttacking";
+
+        public enum EnemyAnimatorParams
+        {
+            Forward = 0,
+            Turn = 1,
+            Move = 2,
+            IdleState = 3,
+            IsAttacking = 4,
+            TurnRight = 5,
+            TurnLeft = 6
+        }
     }
 }

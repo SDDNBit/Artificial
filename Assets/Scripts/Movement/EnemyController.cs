@@ -1,4 +1,5 @@
-﻿using SoftBit.States;
+﻿using SoftBit.Mechanics;
+using SoftBit.States;
 using SoftBit.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace SoftBit.Movement
         private const float RangeMargin = 0.5f;
 
         [SerializeField] private Transform player;
+        [SerializeField] private Ragdoll ragdoll;
         [SerializeField] [Range(0f, 50f)] private float waitDelay = 1f;
 
         private Animator animator;
@@ -42,6 +44,14 @@ namespace SoftBit.Movement
             CheckForPatrolling();
             CheckForChasing();
             CheckForAttacking();
+        }
+
+        [ContextMenu("ActivateRagdoll")]
+        private void ActivateRagdoll()
+        {
+            ragdoll.EnableRagdoll();
+            animator.enabled = false;
+            navMeshAgent.enabled = false;
         }
 
         [ContextMenu("Stop")]
