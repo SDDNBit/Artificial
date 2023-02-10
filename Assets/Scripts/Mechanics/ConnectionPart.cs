@@ -13,7 +13,6 @@ namespace SoftBit.Mechanics
         public List<BakeToMesh> cells;
         [HideInInspector] public BreakApart breakApart;
 
-        [ContextMenu("DestroyPart")]
         public void DestroyPart(Collision collision)
         {
             breakApart.DestroyPart(this, collision);

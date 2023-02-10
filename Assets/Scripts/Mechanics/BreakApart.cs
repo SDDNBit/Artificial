@@ -31,10 +31,14 @@ namespace SoftBit.Mechanics
         public void DestroyPart(ConnectionPart connectionPart, Collision collision)
         {
             partsToSpawn.Clear();
-            var explosionForce = collision.relativeVelocity.magnitude * Utils.Constants.CollisionForceMultiplier;
+            var explosionForce = Utils.Constants.CollisionForceMultiplier;
+            if (collision != null)
+            {
+                explosionForce *= collision.relativeVelocity.magnitude;
+            }
             foreach (var cell in connectionPart.cells)
             {
-                cell.BakeMesh(explosionForce, collision.GetContact(0).point);
+                cell.BakeMesh(explosionForce, collision != null ? collision.GetContact(0).point : cell.transform.position);
             }
             DeactivatePart(connectionPart);
             partsToSpawn.RemoveAt(0);
@@ -44,35 +48,35 @@ namespace SoftBit.Mechanics
                 SetRigidbodyOnScrap(scrap);
                 SetGrabbableOnScrap(scrap);
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
-                scrapBreakApart.SetActiveParts(partsToSpawn);
-                scrapBreakApart.Cleanup();
+                scrapBreakApart.SetupScrap(partsToSpawn);
+                //scrapBreakApart.Cleanup();
                 scrap.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
             DestroyIfGarbage();
         }
 
-        public void Cleanup()
-        {
-            foreach (var connectionPart in connectionParts)
-            {
-                if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
-                {
-                    foreach (var collider in connectionPart.colliders)
-                    {
-                        if (collider != null)
-                        {
-                            var enemyCollider = collider.GetComponent<EnemyCollider>();
-                            if (enemyCollider)
-                            {
-                                enemyCollider.AttachedObject = null;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //private void Cleanup()
+        //{
+        //    foreach (var connectionPart in connectionParts)
+        //    {
+        //        if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+        //        {
+        //            foreach (var collider in connectionPart.colliders)
+        //            {
+        //                if (collider != null)
+        //                {
+        //                    var enemyCollider = collider.GetComponent<EnemyCollider>();
+        //                    if (enemyCollider)
+        //                    {
+        //                        enemyCollider.AttachedObject = null;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
-        public void SetActiveParts(List<ConnectionPart> activeParts)
+        private void SetupScrap(List<ConnectionPart> activeParts)
         {
             foreach (var connectionPart in connectionParts)
             {
@@ -86,12 +90,54 @@ namespace SoftBit.Mechanics
                         break;
                     }
                 }
-                if (!found)
+                //if (!found)
+                //{
+                //    //connectionPart.gameObject.SetActive(false);
+                //    //RemoveColliders(connectionPart);
+                //    //DestroyConnectionPart(connectionPart);
+                //}
+                if (found)
                 {
-                    connectionPart.gameObject.SetActive(false);
-                    RemoveColliders(connectionPart);
+                    if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+                    {
+                        foreach (var collider in connectionPart.colliders)
+                        {
+                            if (collider != null)
+                            {
+                                var enemyCollider = collider.GetComponent<EnemyCollider>();
+                                if (enemyCollider)
+                                {
+                                    if (enemyCollider.RagdollRigidbodyToApplyForceTo != null)
+                                    {
+                                        enemyCollider.RagdollRigidbodyToApplyForceTo.isKinematic = false;
+                                    }
+                                    enemyCollider.AttachedObject = null;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+                    {
+                        foreach (var collider in connectionPart.colliders)
+                        {
+                            if (collider != null)
+                            {
+                                var enemyCollider = collider.GetComponent<EnemyCollider>();
+                                if (enemyCollider)
+                                {
+                                    enemyCollider.RemoveJointAndRigidbody();
+                                }
+                                Destroy(collider.gameObject);
+                            }
+                        }
+                    }
+                    DestroyConnectionPart(connectionPart);
                 }
             }
+            connectionParts.RemoveAll(connectionPart => connectionPart == null);
         }
 
         private void SetGrabbableOnScrap(GameObject scrap)
@@ -182,10 +228,20 @@ namespace SoftBit.Mechanics
                 {
                     if (collider != null)
                     {
-                        Destroy(collider.transform.gameObject);
+                        Destroy(collider.gameObject);
                     }
                 }
             }
+        }
+
+        private void DestroyConnectionPart(ConnectionPart connectionPart)
+        {
+            foreach (var cell in connectionPart.cells)
+            {
+                Destroy(cell.gameObject);
+            }
+            //connectionParts.Remove(connectionPart);
+            Destroy(connectionPart.gameObject);
         }
 
         private void DeactivateSibling(ConnectionPart sibling)

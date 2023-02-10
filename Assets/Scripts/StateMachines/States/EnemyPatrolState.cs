@@ -30,7 +30,8 @@ namespace SoftBit.States
                 return;
             }
             UpdateTraveledDistance();
-            if (enemyStateMachine.NavMeshAgent.remainingDistance < enemyStateMachine.NavMeshAgent.stoppingDistance)
+
+            if (enemyStateMachine.NavMeshAgent.enabled && enemyStateMachine.NavMeshAgent.remainingDistance < enemyStateMachine.NavMeshAgent.stoppingDistance)
             {
                 if (traveledDistance > TravelDistanceBeforeResting)
                 {

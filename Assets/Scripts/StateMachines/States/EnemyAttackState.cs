@@ -23,9 +23,11 @@ namespace SoftBit.States
                 enemyStateMachine.SwitchState(enemyStateMachine.EnemyChaseState);
                 return;
             }
-
-            enemyStateMachine.NavMeshAgent.SetDestination(enemyStateMachine.Player.position);
-            FaceThePlayer();
+            if (enemyStateMachine.NavMeshAgent.enabled)
+            {
+                enemyStateMachine.NavMeshAgent.SetDestination(enemyStateMachine.Player.position);
+                FaceThePlayer();
+            }
         }
 
         private void FaceThePlayer()

@@ -1,3 +1,4 @@
+using SoftBit.Mechanics;
 using SoftBit.States.Abstract;
 using SoftBit.Utils;
 using UnityEngine;
@@ -12,9 +13,12 @@ namespace SoftBit.States
         public EnemyAttackState EnemyAttackState = new();
         public EnemyPatrolState EnemyPatrolState = new();
         public EnemyChaseState EnemyChaseState = new();
+        public EnemyRagdollState EnemyRagdollState = new();
         #endregion
 
         public Transform Player;
+
+        [HideInInspector] public Ragdoll Ragdoll;
         [HideInInspector] public float DistanceToPlayer;
         [HideInInspector] public Animator Animator;
         [HideInInspector] public NavMeshAgent NavMeshAgent;
@@ -27,8 +31,11 @@ namespace SoftBit.States
         {
             Animator = GetComponent<Animator>();
             NavMeshAgent = GetComponent<NavMeshAgent>();
-            NavMeshTriangulation = NavMesh.CalculateTriangulation();
+            Ragdoll = GetComponent<Ragdoll>();
             SelfTransform = transform;
+
+            NavMeshAgent.isStopped = false;
+            NavMeshTriangulation = NavMesh.CalculateTriangulation();
 
             SwitchState(EnemyPatrolState);
         }

@@ -28,7 +28,10 @@ namespace SoftBit.States
                 enemyStateMachine.SwitchState(enemyStateMachine.EnemyPatrolState);
                 return;
             }
-            enemyStateMachine.NavMeshAgent.SetDestination(enemyStateMachine.Player.position);
+            if (enemyStateMachine.NavMeshAgent.enabled)
+            {
+                enemyStateMachine.NavMeshAgent.SetDestination(enemyStateMachine.Player.position);
+            }
         }
     }
 }

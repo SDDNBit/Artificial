@@ -1,7 +1,5 @@
-using SoftBit.States;
 using SoftBit.States.Abstract;
 using SoftBit.Utils;
-using UnityEngine;
 
 namespace SoftBit.States
 {
@@ -12,9 +10,7 @@ namespace SoftBit.States
         public void Enter(IStateMachine stateMachine)
         {
             enemyStateMachine = (EnemyStateMachine)stateMachine;
-            enemyStateMachine.Animator.SetBool("Move", false);
-
-            Debug.Log($"Enter in Idle State");
+            enemyStateMachine.Animator.SetBool(Constants.EnemyAnimatorParams.Move.ToString(), false);
         }
 
         public void Update()
@@ -24,7 +20,6 @@ namespace SoftBit.States
                 enemyStateMachine.SwitchState(enemyStateMachine.EnemyChaseState);
                 return;
             }
-            Debug.Log("Update in Idle State");
         }
 
     }
