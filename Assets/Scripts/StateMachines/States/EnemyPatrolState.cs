@@ -6,7 +6,11 @@ namespace SoftBit.States
 {
     public class EnemyPatrolState : IState
     {
+        private const float TravelDistanceBeforeResting = 100f;
+
         private EnemyStateMachine enemyStateMachine;
+        private float traveledDistance;
+        private Vector3 previousPosition;
 
         public void Enter(IStateMachine stateMachine)
         {
@@ -15,24 +19,51 @@ namespace SoftBit.States
             enemyStateMachine.Animator.SetBool(Constants.EnemyAnimatorParams.IsAttacking.ToString(), false);
             enemyStateMachine.Animator.SetBool(Constants.EnemyAnimatorParams.Move.ToString(), true);
             enemyStateMachine.NavMeshAgent.updateRotation = true;
+            previousPosition = GetPosition();
         }
 
         public void Update()
         {
+            if (enemyStateMachine.DistanceToPlayer < Constants.ChaseRange)
+            {
+                enemyStateMachine.SwitchState(enemyStateMachine.EnemyChaseState);
+                return;
+            }
+            UpdateTraveledDistance();
             if (enemyStateMachine.NavMeshAgent.remainingDistance < enemyStateMachine.NavMeshAgent.stoppingDistance)
             {
-                NavigateAtRandomPosition();
+                if (traveledDistance > TravelDistanceBeforeResting)
+                {
+                    traveledDistance = 0f;
+                    TakeSomeRest();
+                }
+                else
+                {
+                    NavigateAtRandomPosition();
+                }
             }
         }
-
-        public void Exit() { }
 
         private void NavigateAtRandomPosition()
         {
             int index = Random.Range(1, enemyStateMachine.NavMeshTriangulation.vertices.Length - 1);
-            enemyStateMachine.NavMeshAgent.SetDestination(
-                Vector3.Lerp(enemyStateMachine.NavMeshAgent.transform.position, enemyStateMachine.NavMeshTriangulation.vertices[index], 0.5f)
-                );
+            enemyStateMachine.NavMeshAgent.SetDestination(Vector3.Lerp(GetPosition(), enemyStateMachine.NavMeshTriangulation.vertices[index], 0.5f));
+        }
+
+        private void UpdateTraveledDistance()
+        {
+            traveledDistance += Vector3.Distance(previousPosition, GetPosition());
+            previousPosition = GetPosition();
+        }
+
+        private Vector3 GetPosition()
+        {
+            return enemyStateMachine.NavMeshAgent.transform.position;
+        }
+
+        private void TakeSomeRest()
+        {
+            enemyStateMachine.SwitchState(enemyStateMachine.EnemyIdleState);
         }
     }
 

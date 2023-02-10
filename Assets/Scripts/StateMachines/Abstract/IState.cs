@@ -4,6 +4,5 @@ namespace SoftBit.States.Abstract
     {
         public void Enter(IStateMachine stateMachine);
         public void Update();
-        public void Exit();
     }
 }

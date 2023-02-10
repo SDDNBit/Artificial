@@ -46,9 +46,6 @@ namespace SoftBit.Utils
         /// <summary>
         /// Animator animation names
         /// </summary>
-        public const string AnimatorIdleState = "IdleState";
-        public const string AnimatorAttackingState = "IsAttacking";
-
         public enum EnemyAnimatorParams
         {
             Forward = 0,
@@ -59,5 +56,13 @@ namespace SoftBit.Utils
             TurnRight = 5,
             TurnLeft = 6
         }
+
+        /// <summary>
+        /// EnemyConstants
+        /// </summary>
+        public const float FacingAngle = 10f;
+        public const float ChaseRange = 4f;
+        public const float AttackRange = 1.5f;
+        public const float RangeMargin = 0.5f;
     }
 }

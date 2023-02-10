@@ -1,10 +1,10 @@
 using SoftBit.States;
 using SoftBit.States.Abstract;
+using SoftBit.Utils;
 using UnityEngine;
 
 namespace SoftBit.States
 {
-
     public class EnemyIdleState : IState
     {
         private EnemyStateMachine enemyStateMachine;
@@ -19,12 +19,12 @@ namespace SoftBit.States
 
         public void Update()
         {
+            if (enemyStateMachine.DistanceToPlayer < Constants.ChaseRange)
+            {
+                enemyStateMachine.SwitchState(enemyStateMachine.EnemyChaseState);
+                return;
+            }
             Debug.Log("Update in Idle State");
-        }
-
-        public void Exit()
-        {
-            Debug.Log("Exit from Idle State");
         }
 
     }

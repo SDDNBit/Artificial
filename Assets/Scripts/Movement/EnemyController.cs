@@ -64,7 +64,7 @@ namespace SoftBit.Movement
         {
             if (enemyState == EnemyState.Attacking)
             {
-                animator.SetBool(Constants.AnimatorAttackingState, true);
+                animator.SetBool(Constants.EnemyAnimatorParams.IsAttacking.ToString(), true);
                 animator.SetBool("Move", false);
                 navMeshAgent.SetDestination(player.position);
 
@@ -98,7 +98,7 @@ namespace SoftBit.Movement
         {
             if (enemyState == EnemyState.Chasing)
             {
-                animator.SetBool(Constants.AnimatorAttackingState, false);
+                animator.SetBool(Constants.EnemyAnimatorParams.IsAttacking.ToString(), false);
                 animator.SetBool("Move", true);
                 navMeshAgent.updateRotation = true;
                 navMeshAgent.SetDestination(player.position);
@@ -109,7 +109,7 @@ namespace SoftBit.Movement
         {
             if (enemyState == EnemyState.Patrolling)
             {
-                animator.SetBool(Constants.AnimatorAttackingState, false);
+                animator.SetBool(Constants.EnemyAnimatorParams.IsAttacking.ToString(), false);
                 animator.SetBool("Move", true);
                 navMeshAgent.updateRotation = true;
                 if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)

@@ -32,14 +32,14 @@ namespace SoftBit.AnimatorBehaviours
                     boredAnimationIndex = Random.Range(1, numberOfBoredAnimations + 1);
                     boredAnimationIndex = boredAnimationIndex * 2 - 1;
 
-                    animator.SetFloat(Constants.AnimatorIdleState, boredAnimationIndex - 1);
+                    animator.SetFloat(Constants.EnemyAnimatorParams.IdleState.ToString(), boredAnimationIndex - 1);
                 }
             }
             else if (stateInfo.normalizedTime % 1 > NormalizeMargin)
             {
                 PlayIdleAnimation();
             }
-            animator.SetFloat(Constants.AnimatorIdleState, boredAnimationIndex, DamperTime, Time.deltaTime);
+            animator.SetFloat(Constants.EnemyAnimatorParams.IdleState.ToString(), boredAnimationIndex, DamperTime, Time.deltaTime);
         }
 
         private void PlayIdleAnimation()
