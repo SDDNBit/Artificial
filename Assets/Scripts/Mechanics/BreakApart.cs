@@ -11,17 +11,24 @@ namespace SoftBit.Mechanics
         [SerializeField] private GameObject prefab;
         [SerializeField] private CollisionDetectionMode collisionDetectionModeForParts;
 
-        private List<ConnectionPart> partsToSpawn;
+        private List<ConnectionPart> partsToActivate;
         private int parentsActive;
         private int granpasActive;
         private GameObject scrap;
         private BreakApart scrapBreakApart;
         private Transform selfTransform;
+        private Ragdoll ragdoll;
 
         private void Awake()
         {
+            ragdoll = GetComponent<Ragdoll>();
             selfTransform = transform;
-            partsToSpawn = new List<ConnectionPart>();
+            partsToActivate = new List<ConnectionPart>();
+        }
+
+        private void Start()
+        {
+            //connectionParts.RemoveAll(connectionPart => connectionPart == null);
             foreach (var connectionPart in connectionParts)
             {
                 connectionPart.breakApart = this;
@@ -30,7 +37,7 @@ namespace SoftBit.Mechanics
 
         public void DestroyPart(ConnectionPart connectionPart, Collision collision)
         {
-            partsToSpawn.Clear();
+            partsToActivate.Clear();
             var explosionForce = Utils.Constants.CollisionForceMultiplier;
             if (collision != null)
             {
@@ -41,14 +48,14 @@ namespace SoftBit.Mechanics
                 cell.BakeMesh(explosionForce, collision != null ? collision.GetContact(0).point : cell.transform.position);
             }
             DeactivatePart(connectionPart);
-            partsToSpawn.RemoveAt(0);
-            if (partsToSpawn.Count > 0)
+            partsToActivate.RemoveAt(0);
+            if (partsToActivate.Count > 0)
             {
-                scrap = Instantiate(prefab);
+                scrap = Instantiate(prefab); // this will clone this object at this moment
                 SetRigidbodyOnScrap(scrap);
                 SetGrabbableOnScrap(scrap);
                 scrapBreakApart = scrap.GetComponent<BreakApart>();
-                scrapBreakApart.SetupScrap(partsToSpawn);
+                scrapBreakApart.SetupScrap(partsToActivate);
                 //scrapBreakApart.Cleanup();
                 scrap.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
@@ -76,68 +83,84 @@ namespace SoftBit.Mechanics
         //    }
         //}
 
-        private void SetupScrap(List<ConnectionPart> activeParts)
+        private void SetupScrap(List<ConnectionPart> partsToActivate)
         {
-            foreach (var connectionPart in connectionParts)
+            foreach (var activePart in partsToActivate)
             {
-                var found = false;
-                foreach (var activePart in activeParts)
+                foreach (var connectionPart in connectionParts)
                 {
                     if (activePart.guid.Equals(connectionPart.guid))
                     {
                         connectionPart.gameObject.SetActive(true);
-                        found = true;
                         break;
                     }
                 }
-                //if (!found)
-                //{
-                //    //connectionPart.gameObject.SetActive(false);
-                //    //RemoveColliders(connectionPart);
-                //    //DestroyConnectionPart(connectionPart);
-                //}
-                if (found)
-                {
-                    if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
-                    {
-                        foreach (var collider in connectionPart.colliders)
-                        {
-                            if (collider != null)
-                            {
-                                var enemyCollider = collider.GetComponent<EnemyCollider>();
-                                if (enemyCollider)
-                                {
-                                    if (enemyCollider.RagdollRigidbodyToApplyForceTo != null)
-                                    {
-                                        enemyCollider.RagdollRigidbodyToApplyForceTo.isKinematic = false;
-                                    }
-                                    enemyCollider.AttachedObject = null;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
-                    {
-                        foreach (var collider in connectionPart.colliders)
-                        {
-                            if (collider != null)
-                            {
-                                var enemyCollider = collider.GetComponent<EnemyCollider>();
-                                if (enemyCollider)
-                                {
-                                    enemyCollider.RemoveJointAndRigidbody();
-                                }
-                                Destroy(collider.gameObject);
-                            }
-                        }
-                    }
-                    DestroyConnectionPart(connectionPart);
-                }
             }
-            connectionParts.RemoveAll(connectionPart => connectionPart == null);
+
+            ragdoll.SetRagdollForScrap(partsToActivate);
+
+            //foreach (var connectionPart in connectionParts)
+            //{
+            //    var found = false;
+            //    foreach (var activePart in partsToActivate)
+            //    {
+            //        if (activePart.guid.Equals(connectionPart.guid))
+            //        {
+            //            connectionPart.gameObject.SetActive(true);
+            //            found = true;
+            //            break;
+            //        }
+            //    }
+            //    //if (!found)
+            //    //{
+            //    //    //connectionPart.gameObject.SetActive(false);
+            //    //    //RemoveColliders(connectionPart);
+            //    //    //DestroyConnectionPart(connectionPart);
+            //    //}
+            //    if (found)
+            //    {
+            //        //if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+            //        //{
+            //        //    foreach (var collider in connectionPart.colliders)
+            //        //    {
+            //        //        if (collider != null)
+            //        //        {
+            //        //            var enemyCollider = collider.GetComponent<EnemyCollider>();
+            //        //            if (enemyCollider)
+            //        //            {
+            //        //                if (enemyCollider.RagdollRigidbodyToApplyForceTo != null)
+            //        //                {
+            //        //                    enemyCollider.RagdollRigidbodyToApplyForceTo.isKinematic = false;
+            //        //                }
+            //        //                enemyCollider.AttachedObject = null;
+            //        //            }
+            //        //        }
+            //        //    }
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        //if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+            //        //{
+            //        //    foreach (var collider in connectionPart.colliders)
+            //        //    {
+            //        //        if (collider != null)
+            //        //        {
+            //        //            var enemyCollider = collider.GetComponent<EnemyCollider>();
+            //        //            if (enemyCollider)
+            //        //            {
+            //        //                enemyCollider.RemoveJointAndRigidbody();
+            //        //            }
+            //        //            Destroy(collider.gameObject);
+            //        //        }
+            //        //    }
+            //        //}
+
+            //    }
+            //}
+            //DestroyConnectionPart(connectionPart);
+
+            //connectionParts.RemoveAll(connectionPart => connectionPart == null);
         }
 
         private void SetGrabbableOnScrap(GameObject scrap)
@@ -152,17 +175,18 @@ namespace SoftBit.Mechanics
         private void SetRigidbodyOnScrap(GameObject scrap)
         {
             Rigidbody scrapRigidbody;
-            if (scrap.CanGetComponent(out scrapRigidbody))
-            {
-                scrapRigidbody.useGravity = true;
-                scrapRigidbody.isKinematic = false;
-                scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
-            }
-            else
+            if (!scrap.CanGetComponent(out scrapRigidbody))
             {
                 scrapRigidbody = scrap.AddComponent<Rigidbody>();
-                scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
             }
+            SetScrapRigidbodyProperties(scrapRigidbody);
+        }
+
+        private void SetScrapRigidbodyProperties(Rigidbody scrapRigidbody)
+        {
+            scrapRigidbody.useGravity = true;
+            scrapRigidbody.isKinematic = false;
+            scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
         }
 
         private void DestroyIfGarbage()
@@ -212,9 +236,13 @@ namespace SoftBit.Mechanics
             }
         }
 
+        /// <summary>
+        /// This is run on the object itself and not on the instantiated scrap one when it is called first time.
+        /// </summary>
+        /// <param name="connectionPart"></param>
         private void DeactivatePart(ConnectionPart connectionPart)
         {
-            partsToSpawn.Add(connectionPart);
+            partsToActivate.Add(connectionPart);
             connectionPart.gameObject.SetActive(false);
             RemoveColliders(connectionPart);
             DeactivateChilds(connectionPart);
@@ -240,7 +268,7 @@ namespace SoftBit.Mechanics
             {
                 Destroy(cell.gameObject);
             }
-            //connectionParts.Remove(connectionPart);
+            connectionParts.Remove(connectionPart);
             Destroy(connectionPart.gameObject);
         }
 

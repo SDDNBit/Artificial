@@ -14,6 +14,8 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 worldDeltaPosition;
     private Vector2 deltaPosition;
 
+    //private Transform hipsBone;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -21,6 +23,8 @@ public class EnemyMovement : MonoBehaviour
         animator.applyRootMotion = true;
         agent.updatePosition = false;
         //agent.updateRotation = false;
+
+        //hipsBone = animator.GetBoneTransform(HumanBodyBones.Hips);
     }
 
     private void Update()

@@ -57,6 +57,16 @@ namespace SoftBit.Utils
             TurnLeft = 6
         }
 
+        public enum EnemyAnimationStateNames
+        {
+            StandUpFromBack = 0
+        }
+
+        public enum EnemyAnimationClipNames
+        {
+            StandUpFromBack = 0
+        }
+
         /// <summary>
         /// EnemyConstants
         /// </summary>
