@@ -112,30 +112,37 @@ namespace SoftBit.States
 
         private void AlignRotationToHips()
         {
-            var originalHipsPosition = enemyStateMachine.HipsBone.position;
-            var originalHipsRotation = enemyStateMachine.HipsBone.rotation;
+            //var originalHipsPosition = enemyStateMachine.HipsBone.position;
+            //var originalHipsRotation = enemyStateMachine.HipsBone.rotation;
 
-            var desiredDirection = enemyStateMachine.RagdollPivot.up * -1;
-            desiredDirection.y = 0;
-            desiredDirection.Normalize();
+            //var desiredDirection = enemyStateMachine.RagdollPivot.up * -1;
+            //desiredDirection.y = 0;
+            //desiredDirection.Normalize();
 
-            var fromToRotation = Quaternion.FromToRotation(enemyStateMachine.SelfTransform.forward, desiredDirection);
-            enemyStateMachine.SelfTransform.rotation *= fromToRotation;
+            //var fromToRotation = Quaternion.FromToRotation(enemyStateMachine.SelfTransform.forward, desiredDirection);
+            //enemyStateMachine.SelfTransform.rotation *= fromToRotation;
 
-            enemyStateMachine.HipsBone.position = originalHipsPosition;
-            enemyStateMachine.HipsBone.rotation = originalHipsRotation;
+            //enemyStateMachine.HipsBone.position = originalHipsPosition;
+            //enemyStateMachine.HipsBone.rotation = originalHipsRotation;
         }
 
         private void AlignPositionToHips()
         {
             var originalHipsPosition = enemyStateMachine.HipsBone.position;
 
-            enemyStateMachine.SelfTransform.position = enemyStateMachine.RagdollPivot.position;
-            var ragdollPivot = GetStandUpRagdollPivot();
-            var positionOffset = ragdollPivot.Position;
-            positionOffset.y = 0;
-            positionOffset = enemyStateMachine.SelfTransform.rotation * positionOffset;
-            enemyStateMachine.SelfTransform.position -= positionOffset;
+            if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
+            {
+                enemyStateMachine.SelfTransform.position = enemyStateMachine.RagdollPivot.position;
+            }
+            else
+            {
+                enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
+            }
+            //var ragdollPivot = GetRagdollPivotFromStandUpAnim();
+            //var positionOffset = ragdollPivot.Position;
+            //positionOffset.y = 0;
+            //positionOffset = enemyStateMachine.SelfTransform.rotation * positionOffset;
+            //enemyStateMachine.SelfTransform.position -= positionOffset;
 
             //if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycastHit))
             //{
@@ -145,7 +152,7 @@ namespace SoftBit.States
             enemyStateMachine.HipsBone.position = originalHipsPosition;
         }
 
-        private BoneTransform GetStandUpRagdollPivot()
+        private BoneTransform GetRagdollPivotFromStandUpAnim()
         {
             if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
             {
