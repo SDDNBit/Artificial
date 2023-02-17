@@ -59,12 +59,20 @@ namespace SoftBit.Utils
 
         public enum EnemyAnimationStateNames
         {
-            StandUpFromBack = 0
+            StandUpFromBack = 0,
+            StandUpFromFront = 1
         }
 
         public enum EnemyAnimationClipNames
         {
-            StandUpFromBack = 0
+            StandUpFromBack = 0,
+            StandUpFromFront = 1
+        }
+
+        public enum RagdollFacingOrientation
+        {
+            Up = 0,
+            Down = 1
         }
 
         /// <summary>
@@ -74,5 +82,13 @@ namespace SoftBit.Utils
         public const float ChaseRange = 4f;
         public const float AttackRange = 1.5f;
         public const float RangeMargin = 0.5f;
+
+        /// <summary>
+        /// Tags used in game
+        /// </summary>
+        public enum Tags
+        {
+            RagdollPivot = 0,
+        }
     }
 }

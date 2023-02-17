@@ -3,12 +3,13 @@ using SoftBit.States.Abstract;
 using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
+using static SoftBit.Utils.Constants;
 
 namespace SoftBit.States
 {
     public class EnemyRagdollState : IState
     {
-        private const float TimeUntilGetUp = 2f;
+        private const float TimeUntilGetUp = 5f;
         private const float TimeToResetBones = 0.5f;
 
         private EnemyStateMachine enemyStateMachine;
@@ -55,13 +56,13 @@ namespace SoftBit.States
                 enemyStateMachine.AllBoneTransforms[i].localPosition
                     = Vector3.Lerp(
                         ragdollLastFrameAllBoneTransforms[i].Position,
-                        enemyStateMachine.StandUpFirstFrameAllBoneTransforms[i].Position,
+                        GetBoneTransformBasedOnOrientation(i).Position,
                         elapsedPercentage);
 
                 enemyStateMachine.AllBoneTransforms[i].localRotation
                     = Quaternion.Lerp(
                         ragdollLastFrameAllBoneTransforms[i].Rotation,
-                        enemyStateMachine.StandUpFirstFrameAllBoneTransforms[i].Rotation,
+                        GetBoneTransformBasedOnOrientation(i).Rotation,
                         elapsedPercentage);
             }
 
@@ -71,26 +72,70 @@ namespace SoftBit.States
             }
         }
 
+        private BoneTransform GetBoneTransformBasedOnOrientation(int index)
+        {
+            if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
+            {
+                return enemyStateMachine.StandUpFromBackFirstFrameAllBoneTransforms[index];
+            }
+            else
+            {
+                return enemyStateMachine.StandUpFromFrontFirstFrameAllBoneTransforms[index];
+            }
+        }
+
         private void BeforeResettingBones()
         {
             isResettingBones = true;
-            //enemyStateMachine.Animator.enabled = true;
-            //enemyStateMachine.NavMeshAgent.enabled = true;
-            //enemyStateMachine.EnemyMovement.AlignPositionToHips();
-            //enemyStateMachine.Ragdoll.DisableRagdoll();
+
+            EstablishRagdollOrientation();
+            AlignRotationToHips();
             AlignPositionToHips();
 
             ragdollLastFrameAllBoneTransforms = new();
             enemyStateMachine.PopulateBoneTransforms(ragdollLastFrameAllBoneTransforms);
 
             enemyStateMachine.Ragdoll.DisableRagdoll();
-            //enemyStateMachine.SwitchState(enemyStateMachine.EnemyStandUpState);
         }
 
-        public void AlignPositionToHips()
+        private void EstablishRagdollOrientation()
+        {
+            if (Vector3.Angle(enemyStateMachine.HipsBone.right, Vector3.up) < Vector3.Angle(enemyStateMachine.HipsBone.right, Vector3.down))
+            {
+                enemyStateMachine.LastRagdollOrientation = RagdollFacingOrientation.Down;
+            }
+            else
+            {
+                enemyStateMachine.LastRagdollOrientation = RagdollFacingOrientation.Up;
+            }
+        }
+
+        private void AlignRotationToHips()
         {
             var originalHipsPosition = enemyStateMachine.HipsBone.position;
-            enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
+            var originalHipsRotation = enemyStateMachine.HipsBone.rotation;
+
+            var desiredDirection = enemyStateMachine.RagdollPivot.up * -1;
+            desiredDirection.y = 0;
+            desiredDirection.Normalize();
+
+            var fromToRotation = Quaternion.FromToRotation(enemyStateMachine.SelfTransform.forward, desiredDirection);
+            enemyStateMachine.SelfTransform.rotation *= fromToRotation;
+
+            enemyStateMachine.HipsBone.position = originalHipsPosition;
+            enemyStateMachine.HipsBone.rotation = originalHipsRotation;
+        }
+
+        private void AlignPositionToHips()
+        {
+            var originalHipsPosition = enemyStateMachine.HipsBone.position;
+
+            enemyStateMachine.SelfTransform.position = enemyStateMachine.RagdollPivot.position;
+            var ragdollPivot = GetStandUpRagdollPivot();
+            var positionOffset = ragdollPivot.Position;
+            positionOffset.y = 0;
+            positionOffset = enemyStateMachine.SelfTransform.rotation * positionOffset;
+            enemyStateMachine.SelfTransform.position -= positionOffset;
 
             //if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycastHit))
             //{
@@ -98,6 +143,18 @@ namespace SoftBit.States
             //}
 
             enemyStateMachine.HipsBone.position = originalHipsPosition;
+        }
+
+        private BoneTransform GetStandUpRagdollPivot()
+        {
+            if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
+            {
+                return enemyStateMachine.StandUpFromBackFirstFrameAllBoneTransforms.Find(bt => bt.Tag == Tags.RagdollPivot.ToString());
+            }
+            else
+            {
+                return enemyStateMachine.StandUpFromFrontFirstFrameAllBoneTransforms.Find(bt => bt.Tag == Tags.RagdollPivot.ToString());
+            }
         }
     }
 }

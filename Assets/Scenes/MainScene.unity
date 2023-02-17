@@ -10250,7 +10250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612286581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.041, y: 0, z: 1.199}
+  m_LocalPosition: {x: -1.333, y: 0.135, z: 0.933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10303,10 +10303,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 978722646015410773}
   Ragdoll: {fileID: 927434158}
+  RagdollPivot: {fileID: 1522475875}
   DistanceToPlayer: 0
   Animator: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   SelfTransform: {fileID: 0}
+  EnemyMovement: {fileID: 0}
+  AllBoneTransforms: []
+  HipsBone: {fileID: 0}
 --- !u!1 &613675551
 GameObject:
   m_ObjectHideFlags: 0
@@ -25579,6 +25583,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4082468324179482, guid: f6a0cd899fb3b8c449a40e5fb69e258d, type: 3}
   m_PrefabInstance: {fileID: 1521160662}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1522475874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522475875}
+  m_Layer: 0
+  m_Name: RagdollPivot
+  m_TagString: RagdollPivot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1522475875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522475874}
+  m_LocalRotation: {x: 0.052973993, y: -0.70511967, z: 0.052973993, w: 0.70511967}
+  m_LocalPosition: {x: 0.13092613, y: -0.86643994, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8876569407388097226}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1529650376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67466,6 +67501,7 @@ Transform:
   - {fileID: 3932915106183016074}
   - {fileID: 8128173469767843027}
   - {fileID: 4303777074637349804}
+  - {fileID: 1522475875}
   m_Father: {fileID: 8435812232108512598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -1,10 +1,10 @@
 using SoftBit.DataModels;
 using SoftBit.Mechanics;
 using SoftBit.States.Abstract;
-using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static SoftBit.Utils.Constants;
 
 namespace SoftBit.States
 {
@@ -21,6 +21,7 @@ namespace SoftBit.States
 
         public Transform Player;
         public Ragdoll Ragdoll;
+        public Transform RagdollPivot;
 
         [HideInInspector] public float DistanceToPlayer;
         [HideInInspector] public Animator Animator;
@@ -30,7 +31,10 @@ namespace SoftBit.States
         [HideInInspector] public EnemyMovement EnemyMovement;
         [HideInInspector] public Transform[] AllBoneTransforms;
         [HideInInspector] public Transform HipsBone;
-        [HideInInspector] public List<BoneTransform> StandUpFirstFrameAllBoneTransforms = new();
+        [HideInInspector] public RagdollFacingOrientation LastRagdollOrientation;
+
+        [HideInInspector] public List<BoneTransform> StandUpFromBackFirstFrameAllBoneTransforms = new();
+        [HideInInspector] public List<BoneTransform> StandUpFromFrontFirstFrameAllBoneTransforms = new();
 
         private IState currentState;
 
@@ -42,8 +46,7 @@ namespace SoftBit.States
             SelfTransform = transform;
             HipsBone = Animator.GetBoneTransform(HumanBodyBones.Hips);
             AllBoneTransforms = HipsBone.GetComponentsInChildren<Transform>(true);
-            print($"Bones: {AllBoneTransforms.Length}");
-            SampleBonesFromFirstFrameOfStandUpAnimation();
+            SampleBonesFromFirstFrameOfStandUpAnimations();
 
             NavMeshAgent.isStopped = false;
             NavMeshTriangulation = NavMesh.CalculateTriangulation();
@@ -70,7 +73,8 @@ namespace SoftBit.States
                 boneTransforms.Add(new BoneTransform
                 {
                     Position = AllBoneTransforms[i].localPosition,
-                    Rotation = AllBoneTransforms[i].localRotation
+                    Rotation = AllBoneTransforms[i].localRotation,
+                    Tag = AllBoneTransforms[i].tag
                 });
             }
         }
@@ -78,29 +82,37 @@ namespace SoftBit.States
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, Constants.ChaseRange);
+            Gizmos.DrawWireSphere(transform.position, ChaseRange);
 
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, Constants.AttackRange);
+            Gizmos.DrawWireSphere(transform.position, AttackRange);
         }
 
-        private void SampleBonesFromFirstFrameOfStandUpAnimation()
+        private void SampleBonesFromFirstFrameOfStandUpAnimations()
         {
             var positionBeforeSampling = SelfTransform.position;
             var rotationBeforeSampling = SelfTransform.rotation;
 
             foreach (var animationClip in Animator.runtimeAnimatorController.animationClips)
             {
-                if (animationClip.name == Constants.EnemyAnimationClipNames.StandUpFromBack.ToString())
+                if (animationClip.name == EnemyAnimationClipNames.StandUpFromBack.ToString())
                 {
-                    animationClip.SampleAnimation(gameObject, 0);
-                    PopulateBoneTransforms(StandUpFirstFrameAllBoneTransforms);
-                    break;
+                    PopulateStandUpBoneTransforms(animationClip, StandUpFromBackFirstFrameAllBoneTransforms);
+                }
+                if (animationClip.name == EnemyAnimationClipNames.StandUpFromFront.ToString())
+                {
+                    PopulateStandUpBoneTransforms(animationClip, StandUpFromFrontFirstFrameAllBoneTransforms);
                 }
             }
 
             SelfTransform.position = positionBeforeSampling;
             SelfTransform.rotation = rotationBeforeSampling;
+        }
+
+        private void PopulateStandUpBoneTransforms(AnimationClip animationClip, List<BoneTransform> boneTransforms)
+        {
+            animationClip.SampleAnimation(gameObject, 0);
+            PopulateBoneTransforms(boneTransforms);
         }
     }
 }
