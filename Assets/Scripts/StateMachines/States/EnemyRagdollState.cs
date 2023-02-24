@@ -112,18 +112,18 @@ namespace SoftBit.States
 
         private void AlignRotationToHips()
         {
-            //var originalHipsPosition = enemyStateMachine.HipsBone.position;
-            //var originalHipsRotation = enemyStateMachine.HipsBone.rotation;
+            var originalHipsPosition = enemyStateMachine.HipsBone.position;
+            var originalHipsRotation = enemyStateMachine.HipsBone.rotation;
 
-            //var desiredDirection = enemyStateMachine.RagdollPivot.up * -1;
-            //desiredDirection.y = 0;
-            //desiredDirection.Normalize();
+            var desiredDirection = enemyStateMachine.HipsBone.up * (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Down ? 1 : -1);
+            desiredDirection.y = 0;
+            desiredDirection.Normalize();
 
-            //var fromToRotation = Quaternion.FromToRotation(enemyStateMachine.SelfTransform.forward, desiredDirection);
-            //enemyStateMachine.SelfTransform.rotation *= fromToRotation;
+            var fromToRotation = Quaternion.FromToRotation(enemyStateMachine.SelfTransform.forward, desiredDirection);
+            enemyStateMachine.SelfTransform.rotation *= fromToRotation;
 
-            //enemyStateMachine.HipsBone.position = originalHipsPosition;
-            //enemyStateMachine.HipsBone.rotation = originalHipsRotation;
+            enemyStateMachine.HipsBone.position = originalHipsPosition;
+            enemyStateMachine.HipsBone.rotation = originalHipsRotation;
         }
 
         private void AlignPositionToHips()
@@ -132,7 +132,7 @@ namespace SoftBit.States
 
             if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
             {
-                enemyStateMachine.SelfTransform.position = enemyStateMachine.RagdollPivot.position;
+                enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
             }
             else
             {

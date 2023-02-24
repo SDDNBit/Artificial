@@ -21,7 +21,6 @@ namespace SoftBit.States
 
         public Transform Player;
         public Ragdoll Ragdoll;
-        public Transform RagdollPivot;
 
         [HideInInspector] public float DistanceToPlayer;
         [HideInInspector] public Animator Animator;
