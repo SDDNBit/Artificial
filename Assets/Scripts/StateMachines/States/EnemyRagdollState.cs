@@ -3,14 +3,17 @@ using SoftBit.States.Abstract;
 using SoftBit.Utils;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static SoftBit.Utils.Constants;
 
 namespace SoftBit.States
 {
     public class EnemyRagdollState : IState
     {
+        private const float RaycastLength = 1.5f;
         private const float TimeUntilGetUp = 5f;
         private const float TimeToResetBones = 0.5f;
+        private const float NavmeshReachDistance = 0.1f;
 
         private EnemyStateMachine enemyStateMachine;
         private float enteredStateTime;
@@ -19,9 +22,11 @@ namespace SoftBit.States
         private bool isResettingBones;
         private float elapsedTimeSinceResetBones;
         private float elapsedPercentage;
+        private int layerMaskForRaycast;
 
         public void Enter(IStateMachine stateMachine)
         {
+            layerMaskForRaycast = ~LayerMask.GetMask(Layers.EnemyColliders.ToString());
             elapsedTimeSinceResetBones = 0;
             isResettingBones = false;
             enteredStateTime = Time.time;
@@ -126,41 +131,42 @@ namespace SoftBit.States
             enemyStateMachine.HipsBone.rotation = originalHipsRotation;
         }
 
+        /// <summary>
+        /// In case there is still a small issue when position is aligned, the commented code might be needed
+        /// </summary>
         private void AlignPositionToHips()
         {
             var originalHipsPosition = enemyStateMachine.HipsBone.position;
-
-            if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
-            {
-                enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
-            }
-            else
-            {
-                enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
-            }
-            //var ragdollPivot = GetRagdollPivotFromStandUpAnim();
-            //var positionOffset = ragdollPivot.Position;
+            enemyStateMachine.SelfTransform.position = enemyStateMachine.HipsBone.position;
+            //var positionOffset = GetHipsPositionFromStandUpAnim();
             //positionOffset.y = 0;
             //positionOffset = enemyStateMachine.SelfTransform.rotation * positionOffset;
             //enemyStateMachine.SelfTransform.position -= positionOffset;
 
-            //if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycastHit))
-            //{
-            //    transform.position = new Vector3(transform.position.x, raycastHit.point.y, transform.position.z);
-            //}
+            if (Physics.Raycast(enemyStateMachine.SelfTransform.position, Vector3.down, out RaycastHit raycastHit, RaycastLength, layerMaskForRaycast))
+            {
+                if (NavMesh.SamplePosition(raycastHit.point, out NavMeshHit navMeshHit, NavmeshReachDistance, NavMesh.AllAreas))
+                {
+                    enemyStateMachine.SelfTransform.position = navMeshHit.position;
+                }
+                else
+                {
+                    enemyStateMachine.SelfTransform.position = new Vector3(enemyStateMachine.SelfTransform.position.x, raycastHit.point.y, enemyStateMachine.SelfTransform.position.z);
+                }
+            }
 
             enemyStateMachine.HipsBone.position = originalHipsPosition;
         }
 
-        private BoneTransform GetRagdollPivotFromStandUpAnim()
+        private Vector3 GetHipsPositionFromStandUpAnim()
         {
             if (enemyStateMachine.LastRagdollOrientation == RagdollFacingOrientation.Up)
             {
-                return enemyStateMachine.StandUpFromBackFirstFrameAllBoneTransforms.Find(bt => bt.Tag == Tags.RagdollPivot.ToString());
+                return enemyStateMachine.StandUpFromBackFirstFrameAllBoneTransforms[0].Position;
             }
             else
             {
-                return enemyStateMachine.StandUpFromFrontFirstFrameAllBoneTransforms.Find(bt => bt.Tag == Tags.RagdollPivot.ToString());
+                return enemyStateMachine.StandUpFromFrontFirstFrameAllBoneTransforms[0].Position;
             }
         }
     }

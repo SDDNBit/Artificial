@@ -17,7 +17,7 @@ namespace SoftBit.States
             enemyStateMachine = (EnemyStateMachine)stateMachine;
 
             enemyStateMachine.Animator.enabled = true;
-            enemyStateMachine.NavMeshAgent.enabled = true;
+            enemyStateMachine.NavMeshAgent.enabled = false;
             enemyStateMachine.NavMeshAgent.updateRotation = false;
             enemyStateMachine.Animator.SetBool(EnemyAnimatorParams.IsAttacking.ToString(), false);
             enemyStateMachine.Animator.SetBool(EnemyAnimatorParams.Move.ToString(), false);

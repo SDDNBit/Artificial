@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 36332540}
   - component: {fileID: 36332539}
   - component: {fileID: 36332541}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperLeg_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4398,7 +4398,7 @@ GameObject:
   - component: {fileID: 235156358}
   - component: {fileID: 235156355}
   - component: {fileID: 235156357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperBody_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4460,7 +4460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237641819}
   - component: {fileID: 237641820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Foot_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4564,7 +4564,7 @@ GameObject:
   - component: {fileID: 254914244}
   - component: {fileID: 254914243}
   - component: {fileID: 254914245}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5340,7 +5340,7 @@ GameObject:
   - component: {fileID: 281658890}
   - component: {fileID: 281658889}
   - component: {fileID: 281658891}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stomach_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5786,7 +5786,7 @@ GameObject:
   - component: {fileID: 311180605}
   - component: {fileID: 311180602}
   - component: {fileID: 311180604}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperBody_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6820,7 +6820,7 @@ GameObject:
   - component: {fileID: 385394702}
   - component: {fileID: 385394701}
   - component: {fileID: 385394703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerArm_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7936,7 +7936,7 @@ GameObject:
   - component: {fileID: 468126512}
   - component: {fileID: 468126511}
   - component: {fileID: 468126513}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerArm_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9152,7 +9152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 545026810}
   - component: {fileID: 545026811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Foot_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10145,7 +10145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 611327849}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_L_ShieldPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10193,7 +10193,7 @@ GameObject:
   - component: {fileID: 612286588}
   - component: {fileID: 612286589}
   - component: {fileID: 612286591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10270,7 +10270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b159ddec576af44b17b7c9e0082b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAt: {fileID: 612286589}
 --- !u!114 &612286589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13160,7 +13159,7 @@ GameObject:
   - component: {fileID: 798745274}
   - component: {fileID: 798745273}
   - component: {fileID: 798745275}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerBody_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14022,7 +14021,7 @@ GameObject:
   - component: {fileID: 861143388}
   - component: {fileID: 861143387}
   - component: {fileID: 861143389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerBody_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14341,7 +14340,7 @@ GameObject:
   - component: {fileID: 886092789}
   - component: {fileID: 886092788}
   - component: {fileID: 886092790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperArm_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14697,7 +14696,7 @@ GameObject:
   - component: {fileID: 927434156}
   - component: {fileID: 927434155}
   - component: {fileID: 927434158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyWithBreakApartLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16412,7 +16411,7 @@ GameObject:
   - component: {fileID: 1022695168}
   - component: {fileID: 1022695167}
   - component: {fileID: 1022695169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20084,7 +20083,7 @@ GameObject:
   - component: {fileID: 1225746821}
   - component: {fileID: 1225746820}
   - component: {fileID: 1225746822}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22640,7 +22639,7 @@ GameObject:
   - component: {fileID: 1354595140}
   - component: {fileID: 1354595142}
   - component: {fileID: 1354595143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperLeg_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24054,7 +24053,7 @@ GameObject:
   - component: {fileID: 1431370650}
   - component: {fileID: 1431370649}
   - component: {fileID: 1431370651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperArm_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26278,7 +26277,7 @@ GameObject:
   - component: {fileID: 1567580852}
   - component: {fileID: 1567580851}
   - component: {fileID: 1567580853}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stomach_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31514,7 +31513,7 @@ GameObject:
   - component: {fileID: 1908204405}
   - component: {fileID: 1908204404}
   - component: {fileID: 1908204406}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerLeg_R_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31790,7 +31789,7 @@ GameObject:
   - component: {fileID: 1918071788}
   - component: {fileID: 1918071790}
   - component: {fileID: 1918071791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerLeg_L_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33222,7 +33221,7 @@ GameObject:
   - component: {fileID: 1960204145}
   - component: {fileID: 1960204147}
   - component: {fileID: 1960204146}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35484,7 +35483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2100591207}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_R_WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36304,7 +36303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080192598070346409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_02_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36612,7 +36611,7 @@ GameObject:
   - component: {fileID: 8817178085538724563}
   - component: {fileID: 6308732882449715205}
   - component: {fileID: 7030240845574098829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36757,7 +36756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5706820769157609587}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36811,7 +36810,7 @@ GameObject:
   - component: {fileID: 6545585360563659798}
   - component: {fileID: 2088079192761271367}
   - component: {fileID: 1044344804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_L_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36827,7 +36826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2461087217266093601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37156,7 +37155,7 @@ GameObject:
   - component: {fileID: 9168692329521372390}
   - component: {fileID: 6549726651758848284}
   - component: {fileID: 1591759024}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37174,7 +37173,7 @@ GameObject:
   - component: {fileID: 46561823591209006}
   - component: {fileID: 6610990825170995739}
   - component: {fileID: 877489759}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37218,7 +37217,7 @@ GameObject:
   - component: {fileID: 3339212262492819254}
   - component: {fileID: 2555298930166072064}
   - component: {fileID: 971372483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_L_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37361,7 +37360,7 @@ GameObject:
   - component: {fileID: 9052743192210551455}
   - component: {fileID: 1277648191385070304}
   - component: {fileID: 1633268712}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37601,7 +37600,7 @@ GameObject:
   - component: {fileID: 5479317629273743721}
   - component: {fileID: 5628017973831108269}
   - component: {fileID: 1075083874}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37619,7 +37618,7 @@ GameObject:
   - component: {fileID: 6084865453819611444}
   - component: {fileID: 2517548761143921677}
   - component: {fileID: 2064411992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37653,7 +37652,7 @@ GameObject:
   - component: {fileID: 7239721104172488497}
   - component: {fileID: 7056133493400529232}
   - component: {fileID: 1085373498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_L_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37808,7 +37807,7 @@ GameObject:
   - component: {fileID: 8128173469767843027}
   - component: {fileID: 1588582776}
   - component: {fileID: 1588582777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37861,7 +37860,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6851087174787110165}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clavicle_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37879,7 +37878,7 @@ GameObject:
   - component: {fileID: 2043043635637586779}
   - component: {fileID: 1539488760520804883}
   - component: {fileID: 88386092}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37980,7 +37979,7 @@ GameObject:
   - component: {fileID: 1936299552067319944}
   - component: {fileID: 144323815186193426}
   - component: {fileID: 148793867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38027,7 +38026,7 @@ GameObject:
   - component: {fileID: 5823667627675506649}
   - component: {fileID: 8750022185618334715}
   - component: {fileID: 283936045}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38243,7 +38242,7 @@ GameObject:
   - component: {fileID: 7721978498163688221}
   - component: {fileID: 2604822326223145220}
   - component: {fileID: 346280467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38275,7 +38274,7 @@ GameObject:
   - component: {fileID: 4810297506327241255}
   - component: {fileID: 2357824029487022676}
   - component: {fileID: 1958260339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38409,7 +38408,7 @@ GameObject:
   - component: {fileID: 7612111495073411028}
   - component: {fileID: 2961322313818034025}
   - component: {fileID: 1149592811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38610,7 +38609,7 @@ GameObject:
   - component: {fileID: 3932915106183016074}
   - component: {fileID: 954389490}
   - component: {fileID: 954389488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38646,7 +38645,7 @@ GameObject:
   - component: {fileID: 187582359105007007}
   - component: {fileID: 4345383877044888194}
   - component: {fileID: 2063804577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38798,7 +38797,7 @@ GameObject:
   - component: {fileID: 3691769795478615610}
   - component: {fileID: 1462214892}
   - component: {fileID: 1462214893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39266,7 +39265,7 @@ GameObject:
   - component: {fileID: 38146157538334855}
   - component: {fileID: 834592860746195338}
   - component: {fileID: 1724900108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39695,7 +39694,7 @@ GameObject:
   - component: {fileID: 992563704562844011}
   - component: {fileID: 2897658278869418008}
   - component: {fileID: 2128775582}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40100,7 +40099,7 @@ GameObject:
   - component: {fileID: 969621252363380372}
   - component: {fileID: 569198310977773056}
   - component: {fileID: 1603348071}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_L_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40277,7 +40276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8105582793252451776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40465,7 +40464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8172100465516841810}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40732,7 +40731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4126529281923304657}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_03_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41180,7 +41179,7 @@ GameObject:
   - component: {fileID: 10322029419414125}
   - component: {fileID: 1460056712}
   - component: {fileID: 1460056711}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41196,7 +41195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7687162258605804138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toes_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41214,7 +41213,7 @@ GameObject:
   - component: {fileID: 1739399793173540072}
   - component: {fileID: 1868785348917870240}
   - component: {fileID: 868071430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41552,7 +41551,7 @@ GameObject:
   - component: {fileID: 3272441869653309068}
   - component: {fileID: 6517433659775402618}
   - component: {fileID: 549889530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41875,7 +41874,7 @@ GameObject:
   - component: {fileID: 2588826053108649253}
   - component: {fileID: 4200836476547209159}
   - component: {fileID: 1418718473}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_L_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42298,7 +42297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433065527929857132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GolemVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42316,7 +42315,7 @@ GameObject:
   - component: {fileID: 4934214390030936210}
   - component: {fileID: 5376261975834020229}
   - component: {fileID: 1194272218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42426,7 +42425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5594290482755176152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyebrows_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42704,7 +42703,7 @@ GameObject:
   - component: {fileID: 5216027919417024734}
   - component: {fileID: 8203869966403841368}
   - component: {fileID: 433410918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42722,7 +42721,7 @@ GameObject:
   - component: {fileID: 1788322612697321517}
   - component: {fileID: 8570699497826196762}
   - component: {fileID: 1072480877}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42966,7 +42965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7218928151370910588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42998,7 +42997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4690098723250633607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_04_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43078,7 +43077,7 @@ GameObject:
   - component: {fileID: 5832684692477492508}
   - component: {fileID: 8149074923374649377}
   - component: {fileID: 669688947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43255,7 +43254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572139643246711755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43820,7 +43819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3735393258759336772}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_04_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44429,7 +44428,7 @@ GameObject:
   - component: {fileID: 748999323210890799}
   - component: {fileID: 7818323242262618806}
   - component: {fileID: 73589262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44460,7 +44459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8798348653555400985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44595,7 +44594,7 @@ GameObject:
   - component: {fileID: 2921203389687758897}
   - component: {fileID: 3638923884628328205}
   - component: {fileID: 782936685}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44643,7 +44642,7 @@ GameObject:
   - component: {fileID: 3706892984697478352}
   - component: {fileID: 8458778787540674801}
   - component: {fileID: 1424177686}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44777,7 +44776,7 @@ GameObject:
   - component: {fileID: 8530616462235010}
   - component: {fileID: 1291762643512793998}
   - component: {fileID: 32484881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44998,7 +44997,7 @@ GameObject:
   - component: {fileID: 2310847033909037158}
   - component: {fileID: 2075239585}
   - component: {fileID: 2075239584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45016,7 +45015,7 @@ GameObject:
   - component: {fileID: 1125711047117102112}
   - component: {fileID: 8148221428779998250}
   - component: {fileID: 1073839061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45357,7 +45356,7 @@ GameObject:
   - component: {fileID: 5786666330872421692}
   - component: {fileID: 4731103040494987062}
   - component: {fileID: 1658089993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45407,7 +45406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6023117198566340392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_04_1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45640,7 +45639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 967945255778278197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45688,7 +45687,7 @@ GameObject:
   - component: {fileID: 2925167031852939349}
   - component: {fileID: 6438019183878532040}
   - component: {fileID: 456715465}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46324,7 +46323,7 @@ GameObject:
   - component: {fileID: 5812515120335236921}
   - component: {fileID: 6687382464099177890}
   - component: {fileID: 500258657}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46374,7 +46373,7 @@ GameObject:
   - component: {fileID: 1143280970920914506}
   - component: {fileID: 1937222653439582528}
   - component: {fileID: 167500872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46392,7 +46391,7 @@ GameObject:
   - component: {fileID: 9077754536560102685}
   - component: {fileID: 1089918816827219917}
   - component: {fileID: 1833239712}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46497,7 +46496,7 @@ GameObject:
   - component: {fileID: 6295031656919694026}
   - component: {fileID: 1627788884741470390}
   - component: {fileID: 1927871726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46513,7 +46512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 647103018523110336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_04_1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46951,7 +46950,7 @@ GameObject:
   - component: {fileID: 2803229028409158928}
   - component: {fileID: 8504113890027814118}
   - component: {fileID: 22926242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46967,7 +46966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4324678812780217529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47194,7 +47193,7 @@ GameObject:
   - component: {fileID: 4062983492845312159}
   - component: {fileID: 479872706689734061}
   - component: {fileID: 1946897799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47489,7 +47488,7 @@ GameObject:
   - component: {fileID: 1109424917874027956}
   - component: {fileID: 347474640753392577}
   - component: {fileID: 1380601754}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_R.001_cell_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47560,7 +47559,7 @@ GameObject:
   - component: {fileID: 3755580274471622195}
   - component: {fileID: 8158548019034664581}
   - component: {fileID: 302177145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47604,7 +47603,7 @@ GameObject:
   - component: {fileID: 4156099746767291163}
   - component: {fileID: 2866753234662194151}
   - component: {fileID: 884429961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47659,7 +47658,7 @@ GameObject:
   - component: {fileID: 7215731301334004098}
   - component: {fileID: 8079775439501679974}
   - component: {fileID: 2968608263918469448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47692,7 +47691,7 @@ GameObject:
   - component: {fileID: 3111418968133239663}
   - component: {fileID: 3689704843225693794}
   - component: {fileID: 95571856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47725,7 +47724,7 @@ GameObject:
   - component: {fileID: 7860989851818144006}
   - component: {fileID: 1762331871243864483}
   - component: {fileID: 715963164}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47785,7 +47784,7 @@ GameObject:
   - component: {fileID: 1316302011150190101}
   - component: {fileID: 7057187963184097672}
   - component: {fileID: 1360448058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47801,7 +47800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7469517699128812482}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47834,7 +47833,7 @@ GameObject:
   - component: {fileID: 6269624260592428032}
   - component: {fileID: 1024019376346208756}
   - component: {fileID: 62085999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47883,7 +47882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4894327302396949314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47899,7 +47898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4708655886225245339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47917,7 +47916,7 @@ GameObject:
   - component: {fileID: 75113555964596805}
   - component: {fileID: 5033252696066271013}
   - component: {fileID: 919179819}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47935,7 +47934,7 @@ GameObject:
   - component: {fileID: 513685145950366596}
   - component: {fileID: 8037130274640549653}
   - component: {fileID: 194830910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_L_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48006,7 +48005,7 @@ GameObject:
   - component: {fileID: 4552067148443005920}
   - component: {fileID: 2999127526236243828}
   - component: {fileID: 1031522468}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48263,7 +48262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3044496570364193878}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48281,7 +48280,7 @@ GameObject:
   - component: {fileID: 6468093263115563186}
   - component: {fileID: 5996732461601393852}
   - component: {fileID: 902564442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48448,7 +48447,7 @@ GameObject:
   - component: {fileID: 5049475123770102911}
   - component: {fileID: 5978052878479223415}
   - component: {fileID: 1501369443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48512,7 +48511,7 @@ GameObject:
   - component: {fileID: 2798828404056950729}
   - component: {fileID: 1179185343324146793}
   - component: {fileID: 397044908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48734,7 +48733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5330481862814979195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_03_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49081,7 +49080,7 @@ GameObject:
   - component: {fileID: 3273959858677164703}
   - component: {fileID: 7896770641248798019}
   - component: {fileID: 721116089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49170,7 +49169,7 @@ GameObject:
   - component: {fileID: 3838820606477982609}
   - component: {fileID: 3921544620531294902}
   - component: {fileID: 3921544620531294901}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ankle_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49283,7 +49282,7 @@ GameObject:
   - component: {fileID: 2774047938976832632}
   - component: {fileID: 6610726121769563938}
   - component: {fileID: 1394679758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49301,7 +49300,7 @@ GameObject:
   - component: {fileID: 4192993924682379373}
   - component: {fileID: 7349836026439264865}
   - component: {fileID: 1003893144}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49319,7 +49318,7 @@ GameObject:
   - component: {fileID: 7813969417496433671}
   - component: {fileID: 3853460047998077084}
   - component: {fileID: 747000270791467970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49613,7 +49612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2264947791543059466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toes_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49689,7 +49688,7 @@ GameObject:
   - component: {fileID: 2310242984889187929}
   - component: {fileID: 9118353960423683725}
   - component: {fileID: 1863990108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49738,7 +49737,7 @@ GameObject:
   - component: {fileID: 5900211987044719616}
   - component: {fileID: 8265665955004199440}
   - component: {fileID: 611514136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49933,7 +49932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072554617109321141}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_03_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49951,7 +49950,7 @@ GameObject:
   - component: {fileID: 5097232876475425515}
   - component: {fileID: 1211254386917166448}
   - component: {fileID: 8231127764436390415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50469,7 +50468,7 @@ GameObject:
   - component: {fileID: 2529075075400159129}
   - component: {fileID: 5845258066883437256}
   - component: {fileID: 1848346666332524453}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50899,7 +50898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3944561735517150727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toes_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50917,7 +50916,7 @@ GameObject:
   - component: {fileID: 320873607771844959}
   - component: {fileID: 8476351892582696117}
   - component: {fileID: 2120572856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51072,7 +51071,7 @@ GameObject:
   - component: {fileID: 8709990340816199214}
   - component: {fileID: 4263165098713775782}
   - component: {fileID: 1212529153}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_R.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51199,7 +51198,7 @@ GameObject:
   - component: {fileID: 1882151702985370372}
   - component: {fileID: 2950189291441464604}
   - component: {fileID: 1262161567}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_R.001_cell_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51332,7 +51331,7 @@ GameObject:
   - component: {fileID: 8812840369532746755}
   - component: {fileID: 7612980560476548143}
   - component: {fileID: 505625101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_L.001_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51350,7 +51349,7 @@ GameObject:
   - component: {fileID: 8334386355720814885}
   - component: {fileID: 8984150993674406593}
   - component: {fileID: 342509757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51440,7 +51439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782242449028813873}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51786,7 +51785,7 @@ GameObject:
   - component: {fileID: 1287394810368928009}
   - component: {fileID: 2080412815}
   - component: {fileID: 2080412814}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51820,7 +51819,7 @@ GameObject:
   - component: {fileID: 6737893162946326067}
   - component: {fileID: 5860163431847746292}
   - component: {fileID: 396918333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51836,7 +51835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4851984660208332789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51852,7 +51851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546789408609097195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_01_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51928,7 +51927,7 @@ GameObject:
   - component: {fileID: 6160770960047560390}
   - component: {fileID: 6152094548735489488}
   - component: {fileID: 709364133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51944,7 +51943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8979913084701364041}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_02_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51976,7 +51975,7 @@ GameObject:
   - component: {fileID: 6521094708709800658}
   - component: {fileID: 6490685585004907224}
   - component: {fileID: 1123867216}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_R.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52180,7 +52179,7 @@ GameObject:
   - component: {fileID: 7491788267081505205}
   - component: {fileID: 8137722322932155822}
   - component: {fileID: 1866417180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52213,7 +52212,7 @@ GameObject:
   - component: {fileID: 1720704711945879137}
   - component: {fileID: 6629638734047046693}
   - component: {fileID: 1329615159}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52548,7 +52547,7 @@ GameObject:
   - component: {fileID: 8907734229389393434}
   - component: {fileID: 7894348904090718447}
   - component: {fileID: 607519638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_L.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52592,7 +52591,7 @@ GameObject:
   - component: {fileID: 3850630481963608711}
   - component: {fileID: 6618134033142465348}
   - component: {fileID: 1969442660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52649,7 +52648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232015828225983884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_01_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52667,7 +52666,7 @@ GameObject:
   - component: {fileID: 9197730862903887427}
   - component: {fileID: 5895917234322955091}
   - component: {fileID: 1020684508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52715,7 +52714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2453715820402291076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toes_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53145,7 +53144,7 @@ GameObject:
   - component: {fileID: 4421747783811710881}
   - component: {fileID: 8430091926691226322}
   - component: {fileID: 2078407480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53241,7 +53240,7 @@ GameObject:
   - component: {fileID: 773582991821505006}
   - component: {fileID: 1467173443}
   - component: {fileID: 1467173442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53288,7 +53287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8876569407388097226}
   - component: {fileID: 1043406542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53338,7 +53337,7 @@ GameObject:
   - component: {fileID: 922891051158475939}
   - component: {fileID: 8280086075340694097}
   - component: {fileID: 535111007}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53356,7 +53355,7 @@ GameObject:
   - component: {fileID: 4425807144173766957}
   - component: {fileID: 6954195821096123164}
   - component: {fileID: 201190181}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53374,7 +53373,7 @@ GameObject:
   - component: {fileID: 3630010987119517079}
   - component: {fileID: 2895399922471566395}
   - component: {fileID: 652124871}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_R_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53446,7 +53445,7 @@ GameObject:
   - component: {fileID: 4303777074637349804}
   - component: {fileID: 675126779}
   - component: {fileID: 675126780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpperLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53464,7 +53463,7 @@ GameObject:
   - component: {fileID: 8820283838467998939}
   - component: {fileID: 4019776536746410151}
   - component: {fileID: 2043631561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_L_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53712,7 +53711,7 @@ GameObject:
   - component: {fileID: 252018155534972825}
   - component: {fileID: 1441788468957910710}
   - component: {fileID: 165998819}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53730,7 +53729,7 @@ GameObject:
   - component: {fileID: 3753307284766509950}
   - component: {fileID: 3882351640039831278}
   - component: {fileID: 1223774012}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53970,7 +53969,7 @@ GameObject:
   - component: {fileID: 6939042744286145513}
   - component: {fileID: 5627258377208010147}
   - component: {fileID: 2022085805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54019,7 +54018,7 @@ GameObject:
   - component: {fileID: 3021096753516662984}
   - component: {fileID: 1670293011}
   - component: {fileID: 1670293010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowerLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54212,7 +54211,7 @@ GameObject:
   - component: {fileID: 2631109582364844333}
   - component: {fileID: 4871381523345176981}
   - component: {fileID: 2061137377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55099,7 +55098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8130802906694315545}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_02_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55450,7 +55449,7 @@ GameObject:
   - component: {fileID: 8927702763171712131}
   - component: {fileID: 6504270532316969947}
   - component: {fileID: 1834996285}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55706,7 +55705,7 @@ GameObject:
   - component: {fileID: 6115583828084528725}
   - component: {fileID: 5733318354343285728}
   - component: {fileID: 1832053021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56296,7 +56295,7 @@ GameObject:
   - component: {fileID: 3026387558088383489}
   - component: {fileID: 8317095750945505202}
   - component: {fileID: 1644731905}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56475,7 +56474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 623219642916488019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndexFinger_04_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56956,7 +56955,7 @@ GameObject:
   - component: {fileID: 7366095610730468028}
   - component: {fileID: 1909940502298391632}
   - component: {fileID: 977970029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57075,7 +57074,7 @@ GameObject:
   - component: {fileID: 3210544253309950252}
   - component: {fileID: 5107069633654355143}
   - component: {fileID: 1120566026}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57209,7 +57208,7 @@ GameObject:
   - component: {fileID: 3005607582007034523}
   - component: {fileID: 1665603074163326368}
   - component: {fileID: 1906734129}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57227,7 +57226,7 @@ GameObject:
   - component: {fileID: 1384218100673250195}
   - component: {fileID: 1280076455}
   - component: {fileID: 1280076454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Elbow_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57940,7 +57939,7 @@ GameObject:
   - component: {fileID: 1102241616883067075}
   - component: {fileID: 2302238363817570159}
   - component: {fileID: 381132199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57988,7 +57987,7 @@ GameObject:
   - component: {fileID: 1599104725042354406}
   - component: {fileID: 8193909917910736685}
   - component: {fileID: 287752115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58139,7 +58138,7 @@ GameObject:
   - component: {fileID: 4875988084343708054}
   - component: {fileID: 6797693616275331629}
   - component: {fileID: 278978838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58224,7 +58223,7 @@ GameObject:
   - component: {fileID: 48210120797507951}
   - component: {fileID: 3818160119777577887}
   - component: {fileID: 1696041937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58360,7 +58359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8435812232108512598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58540,7 +58539,7 @@ GameObject:
   - component: {fileID: 2414179936155111978}
   - component: {fileID: 7042625974979981842}
   - component: {fileID: 756746708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58741,7 +58740,7 @@ GameObject:
   - component: {fileID: 5572624200262822992}
   - component: {fileID: 2185184142624284290}
   - component: {fileID: 1538584324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58876,7 +58875,7 @@ GameObject:
   - component: {fileID: 3526846493564086498}
   - component: {fileID: 4288467327680397782}
   - component: {fileID: 1279366523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_L_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59051,7 +59050,7 @@ GameObject:
   - component: {fileID: 2146030676086263652}
   - component: {fileID: 6001742695621971805}
   - component: {fileID: 265096413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59300,7 +59299,7 @@ GameObject:
   - component: {fileID: 2984533669675454508}
   - component: {fileID: 8310488935028704320}
   - component: {fileID: 1168109507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59488,7 +59487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6939338597533574465}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59504,7 +59503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1141814407900111549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clavicle_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59582,7 +59581,7 @@ GameObject:
   - component: {fileID: 4418474461557098945}
   - component: {fileID: 4264655826388335856}
   - component: {fileID: 868950574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_L.001_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59632,7 +59631,7 @@ GameObject:
   - component: {fileID: 3219021649917187864}
   - component: {fileID: 6338517110965413767}
   - component: {fileID: 1860392152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60235,7 +60234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2330380177847205442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61018,7 +61017,7 @@ GameObject:
   - component: {fileID: 2994117526594795095}
   - component: {fileID: 6582512338768213826}
   - component: {fileID: 884966664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61137,7 +61136,7 @@ GameObject:
   - component: {fileID: 2693650339326055981}
   - component: {fileID: 6480837698808558607}
   - component: {fileID: 956299780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61423,7 +61422,7 @@ GameObject:
   - component: {fileID: 6169665257283866475}
   - component: {fileID: 1371936820104480332}
   - component: {fileID: 676543703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61469,7 +61468,7 @@ GameObject:
   - component: {fileID: 6091352315287786192}
   - component: {fileID: 181987786934221981}
   - component: {fileID: 1994406638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62445,7 +62444,7 @@ GameObject:
   - component: {fileID: 7505423640821626490}
   - component: {fileID: 8877414079834414843}
   - component: {fileID: 462925408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62479,7 +62478,7 @@ GameObject:
   - component: {fileID: 3631784818353243281}
   - component: {fileID: 3894949265122641563}
   - component: {fileID: 418837494}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62623,7 +62622,7 @@ GameObject:
   - component: {fileID: 2929224779983136633}
   - component: {fileID: 3182303191267370258}
   - component: {fileID: 740910798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62641,7 +62640,7 @@ GameObject:
   - component: {fileID: 5003426196419613369}
   - component: {fileID: 4826135812238292971}
   - component: {fileID: 1203275961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperArm_R_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62957,7 +62956,7 @@ GameObject:
   - component: {fileID: 7799612331665544847}
   - component: {fileID: 1364960740}
   - component: {fileID: 1364960739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Elbow_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63240,7 +63239,7 @@ GameObject:
   - component: {fileID: 8188404011899378599}
   - component: {fileID: 7390706788168424474}
   - component: {fileID: 954389486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63256,7 +63255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474513134423484564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63320,7 +63319,7 @@ GameObject:
   - component: {fileID: 9013873979788501220}
   - component: {fileID: 1442024575728242169}
   - component: {fileID: 9063613471244301863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63338,7 +63337,7 @@ GameObject:
   - component: {fileID: 4197293245257365432}
   - component: {fileID: 2184934922659654054}
   - component: {fileID: 1395818714}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_R.001_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63457,7 +63456,7 @@ GameObject:
   - component: {fileID: 2892141244419677729}
   - component: {fileID: 8038031441369527889}
   - component: {fileID: 8038031441369527888}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ankle_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63697,7 +63696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714663415858015535}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_01_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63764,7 +63763,7 @@ GameObject:
   - component: {fileID: 136604772388973909}
   - component: {fileID: 743273895176625427}
   - component: {fileID: 83023058998172018}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63782,7 +63781,7 @@ GameObject:
   - component: {fileID: 4091611026917808158}
   - component: {fileID: 7864744936289588897}
   - component: {fileID: 1213699504}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerArm_L.001_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63800,7 +63799,7 @@ GameObject:
   - component: {fileID: 6377291568247842701}
   - component: {fileID: 3168037480740545093}
   - component: {fileID: 1801939745}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64511,7 +64510,7 @@ GameObject:
   - component: {fileID: 5298666902941272768}
   - component: {fileID: 7302554418433762607}
   - component: {fileID: 879163307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Palm_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65341,7 +65340,7 @@ GameObject:
   - component: {fileID: 270679805825029341}
   - component: {fileID: 5862347118294630888}
   - component: {fileID: 789029299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65389,7 +65388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2484300461377334612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_03_1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65407,7 +65406,7 @@ GameObject:
   - component: {fileID: 4096326394783443430}
   - component: {fileID: 7172727303201456614}
   - component: {fileID: 1330600985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Stomach_L_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65423,7 +65422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7113638442792704378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thumb_03_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65754,7 +65753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4639435514448533722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Finger_04_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65888,7 +65887,7 @@ GameObject:
   - component: {fileID: 8441164537283050975}
   - component: {fileID: 717795701968500109}
   - component: {fileID: 878164913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66251,7 +66250,7 @@ GameObject:
   - component: {fileID: 1780983640939550703}
   - component: {fileID: 7590826464254787123}
   - component: {fileID: 1864786632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_R_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66269,7 +66268,7 @@ GameObject:
   - component: {fileID: 6699047338477874089}
   - component: {fileID: 2106616830}
   - component: {fileID: 2106616829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66526,7 +66525,7 @@ GameObject:
   - component: {fileID: 4091796037476285511}
   - component: {fileID: 4970833611084984225}
   - component: {fileID: 4036717506059434919}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_Head.001_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66559,7 +66558,7 @@ GameObject:
   - component: {fileID: 8290692859235921903}
   - component: {fileID: 6882645721176312509}
   - component: {fileID: 1752127840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66577,7 +66576,7 @@ GameObject:
   - component: {fileID: 8417848864195849914}
   - component: {fileID: 7477560594369443876}
   - component: {fileID: 474407107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66870,7 +66869,7 @@ GameObject:
   - component: {fileID: 5106522446790727986}
   - component: {fileID: 5727586029222558431}
   - component: {fileID: 1582336916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerBody_L_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66999,7 +66998,7 @@ GameObject:
   - component: {fileID: 3471634828200317587}
   - component: {fileID: 192130804635885012}
   - component: {fileID: 27505066}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_LowerLeg_L.001_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67331,7 +67330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3109236986663109515}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67697,7 +67696,7 @@ GameObject:
   - component: {fileID: 5076130452050930587}
   - component: {fileID: 8407368045899665635}
   - component: {fileID: 1722270653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperLeg_L.001_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68050,7 +68049,7 @@ GameObject:
   - component: {fileID: 1753929826355668837}
   - component: {fileID: 4588477136499789515}
   - component: {fileID: 2026447239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68301,7 +68300,7 @@ GameObject:
   - component: {fileID: 2067507922925081106}
   - component: {fileID: 7577327276101552543}
   - component: {fileID: 386179145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character_Rock_Golem_UpperBody_R_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

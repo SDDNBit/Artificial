@@ -35,7 +35,7 @@ namespace SoftBit.Utils
         public const float FlyToObjectMultiplier = 2f;
 
         /// <summary>
-        /// Layers names
+        /// Layers names - todo: to be replaced with the enum
         /// </summary>
         public const string DefaultLayer = "Default";
         public const string AttractableObjectLayer = "AttractableObject";
@@ -82,6 +82,16 @@ namespace SoftBit.Utils
         public const float ChaseRange = 4f;
         public const float AttackRange = 1.5f;
         public const float RangeMargin = 0.5f;
+
+        /// <summary>
+        /// Layers
+        /// </summary>
+        public enum Layers
+        {
+            Default = 0,
+            AttractableObject = 1,
+            EnemyColliders = 2
+        }
 
         /// <summary>
         /// Tags used in game

@@ -6,15 +6,13 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private LookAt lookAt;
+    //[SerializeField] private LookAt lookAt;
 
     private NavMeshAgent agent;
     private Animator animator;
     private Vector3 rootPosition;
     private Vector3 worldDeltaPosition;
     private Vector2 deltaPosition;
-
-    //private Transform hipsBone;
 
     private void Awake()
     {
@@ -23,8 +21,6 @@ public class EnemyMovement : MonoBehaviour
         animator.applyRootMotion = true;
         agent.updatePosition = false;
         //agent.updateRotation = false;
-
-        //hipsBone = animator.GetBoneTransform(HumanBodyBones.Hips);
     }
 
     private void Update()
@@ -52,13 +48,12 @@ public class EnemyMovement : MonoBehaviour
         deltaPosition = new Vector2(Vector3.Dot(transform.right, worldDeltaPosition), Vector3.Dot(transform.forward, worldDeltaPosition));
         deltaPosition = deltaPosition.normalized;
 
-        //animator.SetBool("Move", !agent.isStopped);
         animator.SetFloat("Turn", deltaPosition.x);
         animator.SetFloat("Forward", deltaPosition.y);
 
-        if (lookAt != null)
-        {
-            lookAt.lookAtTargetPosition = agent.destination;
-        }
+        //if (lookAt != null)
+        //{
+        //    lookAt.lookAtTargetPosition = agent.destination;
+        //}
     }
 }

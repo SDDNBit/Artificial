@@ -18,6 +18,7 @@ namespace SoftBit.States
 
             enemyStateMachine.Animator.SetBool(Constants.EnemyAnimatorParams.IsAttacking.ToString(), false);
             enemyStateMachine.Animator.SetBool(Constants.EnemyAnimatorParams.Move.ToString(), true);
+            enemyStateMachine.NavMeshAgent.enabled = true;
             enemyStateMachine.NavMeshAgent.updateRotation = true;
             previousPosition = GetPosition();
         }
