@@ -16,7 +16,7 @@ namespace SoftBit.Mechanics
         /// <summary>
         /// To be removed, only needed for testing, also awake
         /// </summary>
-        [SerializeField] private EnemyStateMachine enemyStateMachine;
+        [HideInInspector] private EnemyStateMachine enemyStateMachine;
         private void Awake()
         {
             enemyStateMachine = GetComponentInParent<EnemyStateMachine>();

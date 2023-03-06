@@ -14,10 +14,11 @@ namespace SoftBit.Mechanics
         private List<ConnectionPart> partsToActivate;
         private int parentsActive;
         private int granpasActive;
-        private GameObject scrap;
+        private GameObject prefabClone;
         private BreakApart scrapBreakApart;
         private Transform selfTransform;
         private Ragdoll ragdoll;
+        private bool partFound;
 
         private void Awake()
         {
@@ -48,16 +49,16 @@ namespace SoftBit.Mechanics
                 cell.BakeMesh(explosionForce, collision != null ? collision.GetContact(0).point : cell.transform.position);
             }
             DeactivatePart(connectionPart);
-            partsToActivate.RemoveAt(0);
-            if (partsToActivate.Count > 0)
+            //partsToActivate.RemoveAt(0);
+            if (partsToActivate.Count > 1)
             {
-                scrap = Instantiate(prefab); // this will clone this object at this moment
-                SetRigidbodyOnScrap(scrap);
-                SetGrabbableOnScrap(scrap);
-                scrapBreakApart = scrap.GetComponent<BreakApart>();
-                scrapBreakApart.SetupScrap(partsToActivate);
+                prefabClone = Instantiate(prefab); // this will clone this object at this moment
+                SetRigidbodyOnPrefabClone(prefabClone);
+                SetGrabbableOnPrefabClone(prefabClone);
+                scrapBreakApart = prefabClone.GetComponent<BreakApart>();
+                scrapBreakApart.SetupPrefabClone(partsToActivate);
                 //scrapBreakApart.Cleanup();
-                scrap.transform.SetPositionAndRotation(transform.position, transform.rotation);
+                prefabClone.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
             DestroyIfGarbage();
         }
@@ -83,21 +84,34 @@ namespace SoftBit.Mechanics
         //    }
         //}
 
-        private void SetupScrap(List<ConnectionPart> partsToActivate)
+        private void SetupPrefabClone(List<ConnectionPart> partsToActivateFromPrefab)
         {
-            foreach (var activePart in partsToActivate)
+            foreach (var part in partsToActivateFromPrefab)
             {
-                foreach (var connectionPart in connectionParts)
+                partsToActivate.Add(connectionParts.Find(connectionPart => connectionPart.guid == part.guid));
+            }
+            AdjustRagdollToWorkProperly(partsToActivate);
+            RemovePartThatJustGotDestroyed(partsToActivate);
+
+            for (var i = 0; i < connectionParts.Count; ++i)
+            {
+                partFound = false;
+                foreach (var activePart in partsToActivate)
                 {
-                    if (activePart.guid.Equals(connectionPart.guid))
+                    if (activePart.guid.Equals(connectionParts[i].guid))
                     {
-                        connectionPart.gameObject.SetActive(true);
+                        partFound = true;
+                        connectionParts[i].gameObject.SetActive(true);
                         break;
                     }
                 }
+                if (!partFound)
+                {
+                    RemoveColliders(connectionParts[i]);
+                    DestroyConnectionPart(connectionParts[i]);
+                    i = -1;
+                }
             }
-
-            ragdoll.SetRagdollForScrap(partsToActivate);
 
             //foreach (var connectionPart in connectionParts)
             //{
@@ -163,7 +177,20 @@ namespace SoftBit.Mechanics
             //connectionParts.RemoveAll(connectionPart => connectionPart == null);
         }
 
-        private void SetGrabbableOnScrap(GameObject scrap)
+        private void AdjustRagdollToWorkProperly(List<ConnectionPart> partsToActivate)
+        {
+            if (partsToActivate.Count > 2)
+            {
+                ragdoll.SetRagdollForScrap(partsToActivate);
+            }
+        }
+
+        private void RemovePartThatJustGotDestroyed(List<ConnectionPart> partsToActivate)
+        {
+            partsToActivate.RemoveAt(0);
+        }
+
+        private void SetGrabbableOnPrefabClone(GameObject scrap)
         {
             Grabbable grabbable;
             if (!scrap.CanGetComponent(out grabbable))
@@ -172,7 +199,7 @@ namespace SoftBit.Mechanics
             }
         }
 
-        private void SetRigidbodyOnScrap(GameObject scrap)
+        private void SetRigidbodyOnPrefabClone(GameObject scrap)
         {
             Rigidbody scrapRigidbody;
             if (!scrap.CanGetComponent(out scrapRigidbody))

@@ -58,17 +58,20 @@ namespace SoftBit.States
 
             for (int i = 0; i < enemyStateMachine.AllBoneTransforms.Length; ++i)
             {
-                enemyStateMachine.AllBoneTransforms[i].localPosition
-                    = Vector3.Lerp(
-                        ragdollLastFrameAllBoneTransforms[i].Position,
-                        GetBoneTransformBasedOnOrientation(i).Position,
-                        elapsedPercentage);
+                if (enemyStateMachine.AllBoneTransforms[i] != null)
+                {
+                    enemyStateMachine.AllBoneTransforms[i].localPosition
+                        = Vector3.Lerp(
+                            ragdollLastFrameAllBoneTransforms[i].Position,
+                            GetBoneTransformBasedOnOrientation(i).Position,
+                            elapsedPercentage);
 
-                enemyStateMachine.AllBoneTransforms[i].localRotation
-                    = Quaternion.Lerp(
-                        ragdollLastFrameAllBoneTransforms[i].Rotation,
-                        GetBoneTransformBasedOnOrientation(i).Rotation,
-                        elapsedPercentage);
+                    enemyStateMachine.AllBoneTransforms[i].localRotation
+                        = Quaternion.Lerp(
+                            ragdollLastFrameAllBoneTransforms[i].Rotation,
+                            GetBoneTransformBasedOnOrientation(i).Rotation,
+                            elapsedPercentage);
+                }
             }
 
             if (elapsedPercentage >= 1)

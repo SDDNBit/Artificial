@@ -69,12 +69,14 @@ namespace SoftBit.States
         {
             for (int i = 0; i < AllBoneTransforms.Length; ++i)
             {
-                boneTransforms.Add(new BoneTransform
+                if (AllBoneTransforms[i] != null)
                 {
-                    Position = AllBoneTransforms[i].localPosition,
-                    Rotation = AllBoneTransforms[i].localRotation,
-                    Tag = AllBoneTransforms[i].tag
-                });
+                    boneTransforms.Add(new BoneTransform
+                    {
+                        Position = AllBoneTransforms[i].localPosition,
+                        Rotation = AllBoneTransforms[i].localRotation
+                    });
+                }
             }
         }
 
