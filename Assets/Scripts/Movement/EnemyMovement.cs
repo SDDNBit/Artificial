@@ -6,13 +6,12 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class EnemyMovement : MonoBehaviour
 {
-    //[SerializeField] private LookAt lookAt;
-
     private NavMeshAgent agent;
     private Animator animator;
     private Vector3 rootPosition;
-    private Vector3 worldDeltaPosition;
+    private Vector3 worldDeltaDirection;
     private Vector2 deltaPosition;
+    private Vector2 smoothDeltaPosition;
 
     private void Awake()
     {
@@ -20,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.applyRootMotion = true;
         agent.updatePosition = false;
-        //agent.updateRotation = false;
+        smoothDeltaPosition = Vector2.zero;
     }
 
     private void Update()
@@ -42,14 +41,15 @@ public class EnemyMovement : MonoBehaviour
 
     private void SynchronizeAnimatorAndAgent()
     {
-        worldDeltaPosition = agent.nextPosition - transform.position;
-        worldDeltaPosition.y = 0;
-        // Map 'worldDeltaPosition' to local space
-        deltaPosition = new Vector2(Vector3.Dot(transform.right, worldDeltaPosition), Vector3.Dot(transform.forward, worldDeltaPosition));
+        worldDeltaDirection = agent.nextPosition - transform.position;
+        worldDeltaDirection.y = 0;
+        // Map 'worldDeltaDirection' to local space
+        deltaPosition = new Vector2(Vector3.Dot(transform.right, worldDeltaDirection), Vector3.Dot(transform.forward, worldDeltaDirection));
         deltaPosition = deltaPosition.normalized;
+        smoothDeltaPosition = Vector2.Lerp(smoothDeltaPosition, deltaPosition, Mathf.Min(1, Time.deltaTime / 0.1f));
 
-        animator.SetFloat("Turn", deltaPosition.x);
-        animator.SetFloat("Forward", deltaPosition.y);
+        animator.SetFloat("Turn", smoothDeltaPosition.x);
+        animator.SetFloat("Forward", smoothDeltaPosition.y);
 
         //if (lookAt != null)
         //{
