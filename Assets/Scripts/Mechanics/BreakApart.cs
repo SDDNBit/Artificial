@@ -283,7 +283,13 @@ namespace SoftBit.Mechanics
                 {
                     if (collider != null)
                     {
-                        Destroy(collider.gameObject);
+                        // Destroy the collider and not the gameObject, the GO is still used as a bone transform
+                        Destroy(collider);
+                        var enemyColliderComponent = collider.GetComponent<EnemyCollider>();
+                        if(enemyColliderComponent != null)
+                        {
+                            Destroy(enemyColliderComponent);
+                        }
                     }
                 }
             }

@@ -21,7 +21,7 @@ namespace SoftBit.Mechanics
         [HideInInspector] public Rigidbody RigidbodyComponent;
 
         [Tooltip("Called when the object is or not targeted")]
-        [HideInInspector] public UnityEvent<Grabbable, bool> ObjectTargeted = new();
+        [HideInInspector] public UnityEvent<Grabbable, bool> ObjectTargeted = new UnityEvent<Grabbable, bool>();
 
         private HandObjectsAttraction handObjectsAttraction;
         private Grabbable grabbable;

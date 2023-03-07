@@ -11,12 +11,12 @@ namespace SoftBit.States
     public class EnemyStateMachine : MonoBehaviour, IStateMachine
     {
         #region States
-        public EnemyIdleState EnemyIdleState = new();
-        public EnemyAttackState EnemyAttackState = new();
-        public EnemyPatrolState EnemyPatrolState = new();
-        public EnemyChaseState EnemyChaseState = new();
-        public EnemyRagdollState EnemyRagdollState = new();
-        public EnemyStandUpState EnemyStandUpState = new();
+        public EnemyIdleState EnemyIdleState = new EnemyIdleState();
+        public EnemyAttackState EnemyAttackState = new EnemyAttackState();
+        public EnemyPatrolState EnemyPatrolState = new EnemyPatrolState();
+        public EnemyChaseState EnemyChaseState = new EnemyChaseState();
+        public EnemyRagdollState EnemyRagdollState = new EnemyRagdollState();
+        public EnemyStandUpState EnemyStandUpState = new EnemyStandUpState();
         #endregion
 
         public Transform Player;
@@ -32,8 +32,8 @@ namespace SoftBit.States
         [HideInInspector] public Transform HipsBone;
         [HideInInspector] public RagdollFacingOrientation LastRagdollOrientation;
 
-        [HideInInspector] public List<BoneTransform> StandUpFromBackFirstFrameAllBoneTransforms = new();
-        [HideInInspector] public List<BoneTransform> StandUpFromFrontFirstFrameAllBoneTransforms = new();
+        [HideInInspector] public List<BoneTransform> StandUpFromBackFirstFrameAllBoneTransforms = new List<BoneTransform>();
+        [HideInInspector] public List<BoneTransform> StandUpFromFrontFirstFrameAllBoneTransforms = new List<BoneTransform>();
 
         private IState currentState;
 

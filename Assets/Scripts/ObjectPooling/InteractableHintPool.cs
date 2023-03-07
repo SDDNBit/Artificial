@@ -9,7 +9,7 @@ namespace SoftBit.ObjectPooling
     public class InteractableHintPool : Singleton<InteractableHintPool>
     {
         [SerializeField] private InteractableHint interactableHintPrefab;
-        private Queue<InteractableHint> interactableHints = new();
+        private Queue<InteractableHint> interactableHints = new Queue<InteractableHint>();
 
 
         protected override void Awake()

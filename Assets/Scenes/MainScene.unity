@@ -843,7 +843,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1588582776}
   connectionPart: {fileID: 709364133}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &36332540
 Transform:
   m_ObjectHideFlags: 0
@@ -1176,7 +1175,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1533623468}
   connectionPart: {fileID: 656406640}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &60679577
 Transform:
   m_ObjectHideFlags: 0
@@ -3831,7 +3829,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 1633268712}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &235156358
 Transform:
   m_ObjectHideFlags: 0
@@ -3984,7 +3981,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 2075239585}
   connectionPart: {fileID: 884966664}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &254914244
 Transform:
   m_ObjectHideFlags: 0
@@ -4760,7 +4756,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 549889530}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &281658890
 Transform:
   m_ObjectHideFlags: 0
@@ -5188,7 +5183,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 1724900108}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &311180605
 Transform:
   m_ObjectHideFlags: 0
@@ -6028,7 +6022,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1280076455}
   connectionPart: {fileID: 346280467}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &385394702
 Transform:
   m_ObjectHideFlags: 0
@@ -6875,7 +6868,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1364960740}
   connectionPart: {fileID: 500258657}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &468126512
 Transform:
   m_ObjectHideFlags: 0
@@ -6982,7 +6974,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 42106506}
   connectionPart: {fileID: 1251097204}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!136 &470474856
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11487,7 +11478,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 1860392152}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &798745274
 Transform:
   m_ObjectHideFlags: 0
@@ -12254,7 +12244,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 1591759024}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &861143388
 Transform:
   m_ObjectHideFlags: 0
@@ -12573,7 +12562,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1460056712}
   connectionPart: {fileID: 396918333}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &886092789
 Transform:
   m_ObjectHideFlags: 0
@@ -14508,7 +14496,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 2106616830}
   connectionPart: {fileID: 32484881}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &1022695168
 Transform:
   m_ObjectHideFlags: 0
@@ -17737,7 +17724,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1467173443}
   connectionPart: {fileID: 1120566026}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &1225746821
 Transform:
   m_ObjectHideFlags: 0
@@ -20226,7 +20212,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 675126779}
   connectionPart: {fileID: 954389486}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!136 &1354595143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21593,7 +21578,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1462214892}
   connectionPart: {fileID: 397044908}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &1431370650
 Transform:
   m_ObjectHideFlags: 0
@@ -23721,7 +23705,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
   connectionPart: {fileID: 1073839061}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &1567580852
 Transform:
   m_ObjectHideFlags: 0
@@ -28315,7 +28298,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 2080412815}
   connectionPart: {fileID: 715963164}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!4 &1908204405
 Transform:
   m_ObjectHideFlags: 0
@@ -28574,7 +28556,6 @@ MonoBehaviour:
   RagdollRigidbodyToApplyForceTo: {fileID: 1670293011}
   connectionPart: {fileID: 1832053021}
   IsDestroyed: 0
-  enemyStateMachine: {fileID: 0}
 --- !u!136 &1918071791
 CapsuleCollider:
   m_ObjectHideFlags: 0

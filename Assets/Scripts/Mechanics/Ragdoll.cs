@@ -36,7 +36,11 @@ namespace SoftBit.Mechanics
                 Debug.LogError("You should use the collider with EnemyCollider script as the first collider in the ConnectionPart Colliders list. Not the ones that doesn't have the EnemyCollider script attached on them.");
             }
             var characterJoint = firstEnemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
-            characterJoint.connectedBody = secondEnemyCollider.RagdollRigidbodyToApplyForceTo;
+            var secondCharacterJoint = secondEnemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
+            if (characterJoint.connectedBody != secondCharacterJoint.connectedBody)
+            {
+                characterJoint.connectedBody = secondEnemyCollider.RagdollRigidbodyToApplyForceTo;
+            }
             EnableRagdoll();
         }
 

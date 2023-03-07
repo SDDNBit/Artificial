@@ -21,8 +21,8 @@ namespace SoftBit.Mechanics
 
         private bool isAttracting;
 
-        private List<Transform> availableOrbitingPoints = new();
-        private Dictionary<AttractableObject, Transform> objectsAttractedWithOrbitingPoint = new();
+        private List<Transform> availableOrbitingPoints = new List<Transform>();
+        private Dictionary<AttractableObject, Transform> objectsAttractedWithOrbitingPoint = new Dictionary<AttractableObject, Transform>();
         private Transform myTransform;
 
         private void Start()

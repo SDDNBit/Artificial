@@ -100,7 +100,7 @@ namespace SoftBit.States
             AlignRotationToHips();
             AlignPositionToHips();
 
-            ragdollLastFrameAllBoneTransforms = new();
+            ragdollLastFrameAllBoneTransforms = new List<BoneTransform>();
             enemyStateMachine.PopulateBoneTransforms(ragdollLastFrameAllBoneTransforms);
 
             enemyStateMachine.Ragdoll.DisableRagdoll();
