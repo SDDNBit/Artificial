@@ -12,7 +12,7 @@ namespace SoftBit.Mechanics
         [ContextMenu("DisableRagdoll")]
         public void DisableRagdoll()
         {
-            ragdollRigidbodies.Clear();
+            ragdollRigidbodies.RemoveAll(item => item == null);
             foreach (var rigidbody in ragdollRigidbodies)
             {
                 rigidbody.isKinematic = true;

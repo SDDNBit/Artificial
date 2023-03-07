@@ -218,6 +218,7 @@ namespace SoftBit.Mechanics
         {
             if (connectionPart.EnemyColliders != null && connectionPart.EnemyColliders.Count > 0)
             {
+                connectionPartsEnemyColliders.RemoveAll(enemyCollider => enemyCollider == null);
                 CharacterJoint currentCharacterJoint;
 
                 foreach (var enemyCollider in connectionPart.EnemyColliders)
