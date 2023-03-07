@@ -731,8 +731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1022695169}
+  EnemyColliders:
+  - {fileID: 1022695167}
   guid: 1f1adcb6-2299-4183-a2bc-fd32d68b43ff
   parentParts:
   - {fileID: 1724900108}
@@ -3853,6 +3853,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 237641819}
+  - component: {fileID: 237641821}
   - component: {fileID: 237641820}
   m_Layer: 7
   m_Name: Foot_R_Collider
@@ -3889,6 +3890,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.047591887, y: 0.20107849, z: 0.09430298}
   m_Center: {x: -0.02355298, y: -0.027775321, z: -0.0067362254}
+--- !u!114 &237641821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237641818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f118c4013df0da409cc8309d251730f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttachedObject: {fileID: 0}
+  RagdollRigidbodyToApplyForceTo: {fileID: 8038031441369527889}
+  connectionPart: {fileID: 715963164}
+  IsDestroyed: 0
 --- !u!1001 &243249020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5670,8 +5687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 385394703}
+  EnemyColliders:
+  - {fileID: 385394701}
   guid: 04d5d653-93f1-4c94-9fb6-6c997b35b57e
   parentParts:
   - {fileID: 397044908}
@@ -6254,8 +6271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 886092790}
+  EnemyColliders:
+  - {fileID: 886092788}
   guid: 86f648fd-cdda-4c9c-b591-571d5eb74ce1
   parentParts:
   - {fileID: 1724900108}
@@ -6279,8 +6296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1431370651}
+  EnemyColliders:
+  - {fileID: 1431370649}
   guid: 6a506e6a-8b06-4c24-97ca-e43536b8e3ac
   parentParts:
   - {fileID: 1633268712}
@@ -7307,8 +7324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 468126513}
+  EnemyColliders:
+  - {fileID: 468126511}
   guid: 9a29e80e-17cc-4540-8c45-1f17a33a4e9d
   parentParts:
   - {fileID: 396918333}
@@ -7948,6 +7965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 545026810}
+  - component: {fileID: 545026812}
   - component: {fileID: 545026811}
   m_Layer: 7
   m_Name: Foot_L_Collider
@@ -7984,6 +8002,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.047591887, y: 0.235735, z: 0.09430298}
   m_Center: {x: 0.023553142, y: -0.034574524, z: -0.006736212}
+--- !u!114 &545026812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545026809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f118c4013df0da409cc8309d251730f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttachedObject: {fileID: 0}
+  RagdollRigidbodyToApplyForceTo: {fileID: 3921544620531294902}
+  connectionPart: {fileID: 1832053021}
+  IsDestroyed: 0
 --- !u!114 &549889530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7996,8 +8030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 281658891}
+  EnemyColliders:
+  - {fileID: 281658889}
   guid: 715cca89-2caf-4a1a-a7a7-64a1873cdf8e
   parentParts:
   - {fileID: 1724900108}
@@ -9441,8 +9475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 60679574}
+  EnemyColliders: []
   guid: b7e2b24a-75f1-46a8-afb6-11167de02fae
   parentParts:
   - {fileID: 1251097204}
@@ -10293,8 +10326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 36332541}
+  EnemyColliders:
+  - {fileID: 36332539}
   guid: 74fef73e-ed3f-4b88-b845-a3e5cca7eb5f
   parentParts:
   - {fileID: 1591759024}
@@ -10388,9 +10421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1908204406}
-  - {fileID: 237641820}
+  EnemyColliders:
+  - {fileID: 1908204404}
+  - {fileID: 237641821}
   guid: e000476a-af5e-4bf9-b089-d6cc3482ad49
   parentParts:
   - {fileID: 954389486}
@@ -12485,8 +12518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 254914245}
+  EnemyColliders:
+  - {fileID: 254914243}
   guid: 80da65b0-0665-49c6-99e6-24688fe92fdf
   parentParts:
   - {fileID: 500258657}
@@ -13470,8 +13503,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1354595143}
+  EnemyColliders:
+  - {fileID: 1354595142}
   guid: 98ce9959-cfc8-42cb-99d1-70c08d277ac9
   parentParts:
   - {fileID: 1860392152}
@@ -15230,8 +15263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1567580853}
+  EnemyColliders:
+  - {fileID: 1567580851}
   guid: b668f781-80ca-4c52-a67d-a57b1046c371
   parentParts:
   - {fileID: 549889530}
@@ -15940,8 +15973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1225746822}
+  EnemyColliders:
+  - {fileID: 1225746820}
   guid: b7e2b24a-75f1-46a8-afb6-11167de02fae
   parentParts:
   - {fileID: 346280467}
@@ -18147,8 +18180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 469576200}
+  EnemyColliders: []
   guid: 04d5d653-93f1-4c94-9fb6-6c997b35b57e
   parentParts:
   - {fileID: 0}
@@ -23914,8 +23946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 861143389}
+  EnemyColliders:
+  - {fileID: 861143387}
   guid: 7d279238-51de-4d7d-91c2-7de817bad999
   parentParts:
   - {fileID: 1860392152}
@@ -24503,8 +24535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 235156355}
+  EnemyColliders:
+  - {fileID: 235156357}
   guid: 72b5835f-cd42-4d90-b0b5-fb03e2aa37c5
   parentParts: []
   childParts:
@@ -25560,8 +25592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 311180602}
+  EnemyColliders:
+  - {fileID: 311180604}
   guid: 1ef5affb-4d79-4bdd-b747-220bec03fb35
   parentParts: []
   childParts:
@@ -26462,9 +26494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1918071791}
-  - {fileID: 545026811}
+  EnemyColliders:
+  - {fileID: 1918071790}
+  - {fileID: 545026812}
   guid: 47b18141-c5d5-4af6-8abd-af8f06cdf3d7
   parentParts:
   - {fileID: 709364133}
@@ -27223,8 +27255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad8913543f4694abc0f4317775b45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 798745275}
+  EnemyColliders:
+  - {fileID: 798745273}
   guid: 84040afb-dfc4-47f1-be63-fcce6e821572
   parentParts:
   - {fileID: 1073839061}

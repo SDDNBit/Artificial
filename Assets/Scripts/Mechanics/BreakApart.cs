@@ -19,12 +19,14 @@ namespace SoftBit.Mechanics
         private Transform selfTransform;
         private Ragdoll ragdoll;
         private bool partFound;
+        private List<EnemyCollider> connectionPartsEnemyColliders;
 
         private void Awake()
         {
             ragdoll = GetComponent<Ragdoll>();
             selfTransform = transform;
             partsToActivate = new List<ConnectionPart>();
+            connectionPartsEnemyColliders = new List<EnemyCollider>();
         }
 
         private void Start()
@@ -33,6 +35,7 @@ namespace SoftBit.Mechanics
             foreach (var connectionPart in connectionParts)
             {
                 connectionPart.breakApart = this;
+                connectionPartsEnemyColliders.AddRange(connectionPart.EnemyColliders);
             }
         }
 
@@ -49,7 +52,6 @@ namespace SoftBit.Mechanics
                 cell.BakeMesh(explosionForce, collision != null ? collision.GetContact(0).point : cell.transform.position);
             }
             DeactivatePart(connectionPart);
-            //partsToActivate.RemoveAt(0);
             if (partsToActivate.Count > 1)
             {
                 prefabClone = Instantiate(prefab); // this will clone this object at this moment
@@ -112,69 +114,6 @@ namespace SoftBit.Mechanics
                     i = -1;
                 }
             }
-
-            //foreach (var connectionPart in connectionParts)
-            //{
-            //    var found = false;
-            //    foreach (var activePart in partsToActivate)
-            //    {
-            //        if (activePart.guid.Equals(connectionPart.guid))
-            //        {
-            //            connectionPart.gameObject.SetActive(true);
-            //            found = true;
-            //            break;
-            //        }
-            //    }
-            //    //if (!found)
-            //    //{
-            //    //    //connectionPart.gameObject.SetActive(false);
-            //    //    //RemoveColliders(connectionPart);
-            //    //    //DestroyConnectionPart(connectionPart);
-            //    //}
-            //    if (found)
-            //    {
-            //        //if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
-            //        //{
-            //        //    foreach (var collider in connectionPart.colliders)
-            //        //    {
-            //        //        if (collider != null)
-            //        //        {
-            //        //            var enemyCollider = collider.GetComponent<EnemyCollider>();
-            //        //            if (enemyCollider)
-            //        //            {
-            //        //                if (enemyCollider.RagdollRigidbodyToApplyForceTo != null)
-            //        //                {
-            //        //                    enemyCollider.RagdollRigidbodyToApplyForceTo.isKinematic = false;
-            //        //                }
-            //        //                enemyCollider.AttachedObject = null;
-            //        //            }
-            //        //        }
-            //        //    }
-            //        //}
-            //    }
-            //    else
-            //    {
-            //        //if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
-            //        //{
-            //        //    foreach (var collider in connectionPart.colliders)
-            //        //    {
-            //        //        if (collider != null)
-            //        //        {
-            //        //            var enemyCollider = collider.GetComponent<EnemyCollider>();
-            //        //            if (enemyCollider)
-            //        //            {
-            //        //                enemyCollider.RemoveJointAndRigidbody();
-            //        //            }
-            //        //            Destroy(collider.gameObject);
-            //        //        }
-            //        //    }
-            //        //}
-
-            //    }
-            //}
-            //DestroyConnectionPart(connectionPart);
-
-            //connectionParts.RemoveAll(connectionPart => connectionPart == null);
         }
 
         private void AdjustRagdollToWorkProperly(List<ConnectionPart> partsToActivate)
@@ -277,19 +216,27 @@ namespace SoftBit.Mechanics
 
         private void RemoveColliders(ConnectionPart connectionPart)
         {
-            if (connectionPart.colliders != null && connectionPart.colliders.Count > 0)
+            if (connectionPart.EnemyColliders != null && connectionPart.EnemyColliders.Count > 0)
             {
-                foreach (var collider in connectionPart.colliders)
+                CharacterJoint currentCharacterJoint;
+
+                foreach (var enemyCollider in connectionPart.EnemyColliders)
                 {
-                    if (collider != null)
+                    if (enemyCollider != null)
                     {
                         // Destroy the collider and not the gameObject, the GO is still used as a bone transform
-                        Destroy(collider);
-                        var enemyColliderComponent = collider.GetComponent<EnemyCollider>();
-                        if(enemyColliderComponent != null)
+                        var enemyCollidersThatUseSameRB = connectionPartsEnemyColliders.FindAll(ec => ec.RagdollRigidbodyToApplyForceTo == enemyCollider.RagdollRigidbodyToApplyForceTo);
+                        if (enemyCollidersThatUseSameRB.Count < 2)
                         {
-                            Destroy(enemyColliderComponent);
+                            currentCharacterJoint = enemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
+                            if (currentCharacterJoint != null)
+                            {
+                                Destroy(currentCharacterJoint);
+                            }
+                            Destroy(enemyCollider.RagdollRigidbodyToApplyForceTo);
                         }
+
+                        Destroy(enemyCollider);
                     }
                 }
             }

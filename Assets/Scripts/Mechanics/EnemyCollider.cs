@@ -13,6 +13,8 @@ namespace SoftBit.Mechanics
 
         [HideInInspector] public bool IsDestroyed = false;
 
+        private Collider selfCollider;
+
         /// <summary>
         /// To be removed, only needed for testing, also awake
         /// </summary>
@@ -20,6 +22,12 @@ namespace SoftBit.Mechanics
         private void Awake()
         {
             enemyStateMachine = GetComponentInParent<EnemyStateMachine>();
+            selfCollider = GetComponent<Collider>();
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(selfCollider);
         }
 
         public void DestroyPart(Collision collision)

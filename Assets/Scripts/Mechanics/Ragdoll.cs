@@ -12,6 +12,7 @@ namespace SoftBit.Mechanics
         [ContextMenu("DisableRagdoll")]
         public void DisableRagdoll()
         {
+            ragdollRigidbodies.Clear();
             foreach (var rigidbody in ragdollRigidbodies)
             {
                 rigidbody.isKinematic = true;
@@ -29,8 +30,10 @@ namespace SoftBit.Mechanics
 
         public void SetRagdollForScrap(List<ConnectionPart> partsToActivate)
         {
-            var firstEnemyCollider = partsToActivate[0].colliders[0].GetComponent<EnemyCollider>();
-            var secondEnemyCollider = partsToActivate[1].colliders[0].GetComponent<EnemyCollider>();
+            DestroyUnusedRigidbodies(partsToActivate);
+
+            var firstEnemyCollider = partsToActivate[0].EnemyColliders[0];
+            var secondEnemyCollider = partsToActivate[1].EnemyColliders[0];
             if (firstEnemyCollider == null || secondEnemyCollider == null)
             {
                 Debug.LogError("You should use the collider with EnemyCollider script as the first collider in the ConnectionPart Colliders list. Not the ones that doesn't have the EnemyCollider script attached on them.");
@@ -42,6 +45,53 @@ namespace SoftBit.Mechanics
                 characterJoint.connectedBody = secondEnemyCollider.RagdollRigidbodyToApplyForceTo;
             }
             EnableRagdoll();
+        }
+
+        private void DestroyUnusedRigidbodies(List<ConnectionPart> partsToActivate)
+        {
+            var rigidbodiesInUse = GetRigidbodiesInUse(partsToActivate);
+            CharacterJoint currentCharacterJoint;
+
+            foreach (var ragdollRigidbody in ragdollRigidbodies)
+            {
+                if (!rigidbodiesInUse.Contains(ragdollRigidbody))
+                {
+                    currentCharacterJoint = ragdollRigidbody.GetComponent<CharacterJoint>();
+                    if(currentCharacterJoint != null)
+                    {
+                        Destroy(currentCharacterJoint);
+                    }
+                    Destroy(ragdollRigidbody);
+                }
+            }
+        }
+
+        private List<Rigidbody> GetRigidbodiesInUse(List<ConnectionPart> partsToActivate)
+        {
+            var rigidbodiesInUse = new List<Rigidbody>();
+            CharacterJoint currentCharacterJoint;
+            foreach (var part in partsToActivate)
+            {
+                foreach (var enemyCollider in part.EnemyColliders)
+                {
+                    if (enemyCollider != null)
+                    {
+                        if (!rigidbodiesInUse.Contains(enemyCollider.RagdollRigidbodyToApplyForceTo))
+                        {
+                            rigidbodiesInUse.Add(enemyCollider.RagdollRigidbodyToApplyForceTo);
+                            currentCharacterJoint = enemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
+                            if (currentCharacterJoint != null)
+                            {
+                                if (!rigidbodiesInUse.Contains(currentCharacterJoint.connectedBody))
+                                {
+                                    rigidbodiesInUse.Add(currentCharacterJoint.connectedBody);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return rigidbodiesInUse;
         }
 
         #region BakeMethods
