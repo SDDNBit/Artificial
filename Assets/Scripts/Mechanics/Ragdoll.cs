@@ -30,20 +30,9 @@ namespace SoftBit.Mechanics
 
         public void SetRagdollForScrap(List<ConnectionPart> partsToActivate)
         {
+            partsToActivate[0].EnemyColliders[0].CharacterJoint.connectedBody = partsToActivate[1].EnemyColliders[0].RagdollRigidbodyToApplyForceTo;
             DestroyUnusedRigidbodies(partsToActivate);
 
-            var firstEnemyCollider = partsToActivate[0].EnemyColliders[0];
-            var secondEnemyCollider = partsToActivate[1].EnemyColliders[0];
-            if (firstEnemyCollider == null || secondEnemyCollider == null)
-            {
-                Debug.LogError("You should use the collider with EnemyCollider script as the first collider in the ConnectionPart Colliders list. Not the ones that doesn't have the EnemyCollider script attached on them.");
-            }
-            var characterJoint = firstEnemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
-            var secondCharacterJoint = secondEnemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
-            if (characterJoint.connectedBody != secondCharacterJoint.connectedBody)
-            {
-                characterJoint.connectedBody = secondEnemyCollider.RagdollRigidbodyToApplyForceTo;
-            }
             EnableRagdoll();
         }
 
@@ -57,7 +46,7 @@ namespace SoftBit.Mechanics
                 if (!rigidbodiesInUse.Contains(ragdollRigidbody))
                 {
                     currentCharacterJoint = ragdollRigidbody.GetComponent<CharacterJoint>();
-                    if(currentCharacterJoint != null)
+                    if (currentCharacterJoint != null)
                     {
                         Destroy(currentCharacterJoint);
                     }
@@ -69,7 +58,6 @@ namespace SoftBit.Mechanics
         private List<Rigidbody> GetRigidbodiesInUse(List<ConnectionPart> partsToActivate)
         {
             var rigidbodiesInUse = new List<Rigidbody>();
-            CharacterJoint currentCharacterJoint;
             foreach (var part in partsToActivate)
             {
                 foreach (var enemyCollider in part.EnemyColliders)
@@ -79,12 +67,11 @@ namespace SoftBit.Mechanics
                         if (!rigidbodiesInUse.Contains(enemyCollider.RagdollRigidbodyToApplyForceTo))
                         {
                             rigidbodiesInUse.Add(enemyCollider.RagdollRigidbodyToApplyForceTo);
-                            currentCharacterJoint = enemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
-                            if (currentCharacterJoint != null)
+                            if (enemyCollider.CharacterJoint != null)
                             {
-                                if (!rigidbodiesInUse.Contains(currentCharacterJoint.connectedBody))
+                                if (!rigidbodiesInUse.Contains(enemyCollider.CharacterJoint.connectedBody))
                                 {
-                                    rigidbodiesInUse.Add(currentCharacterJoint.connectedBody);
+                                    rigidbodiesInUse.Add(enemyCollider.CharacterJoint.connectedBody);
                                 }
                             }
                         }

@@ -27,11 +27,6 @@ namespace SoftBit.Mechanics
             selfTransform = transform;
             partsToActivate = new List<ConnectionPart>();
             connectionPartsEnemyColliders = new List<EnemyCollider>();
-        }
-
-        private void Start()
-        {
-            //connectionParts.RemoveAll(connectionPart => connectionPart == null);
             foreach (var connectionPart in connectionParts)
             {
                 connectionPart.breakApart = this;
@@ -39,6 +34,17 @@ namespace SoftBit.Mechanics
             }
         }
 
+        //private void Start()
+        //{
+        //    //connectionParts.RemoveAll(connectionPart => connectionPart == null);
+            
+        //}
+
+        /// <summary>
+        /// This is run on the object itself and not on the instantiated scrap one when it is called first time.
+        /// </summary>
+        /// <param name="connectionPart"></param>
+        /// <param name="collision"></param>
         public void DestroyPart(ConnectionPart connectionPart, Collision collision)
         {
             partsToActivate.Clear();
@@ -52,6 +58,7 @@ namespace SoftBit.Mechanics
                 cell.BakeMesh(explosionForce, collision != null ? collision.GetContact(0).point : cell.transform.position);
             }
             DeactivatePart(connectionPart);
+            //partsToActivate.RemoveAt(0); // remove the piece that got destroyed.
             if (partsToActivate.Count > 1)
             {
                 prefabClone = Instantiate(prefab); // this will clone this object at this moment
@@ -86,6 +93,10 @@ namespace SoftBit.Mechanics
         //    }
         //}
 
+        /// <summary>
+        /// Called on the scrap, not on the prefab itself
+        /// </summary>
+        /// <param name="partsToActivateFromPrefab"></param>
         private void SetupPrefabClone(List<ConnectionPart> partsToActivateFromPrefab)
         {
             foreach (var part in partsToActivateFromPrefab)
@@ -114,11 +125,12 @@ namespace SoftBit.Mechanics
                     i = -1;
                 }
             }
+
         }
 
         private void AdjustRagdollToWorkProperly(List<ConnectionPart> partsToActivate)
         {
-            if (partsToActivate.Count > 2)
+            if (partsToActivate.Count > 2) // one piece is already the destroyed one
             {
                 ragdoll.SetRagdollForScrap(partsToActivate);
             }
@@ -150,8 +162,9 @@ namespace SoftBit.Mechanics
 
         private void SetScrapRigidbodyProperties(Rigidbody scrapRigidbody)
         {
-            scrapRigidbody.useGravity = true;
-            scrapRigidbody.isKinematic = false;
+            // TODO: Test with isKinematic to fix the stretching mesh issue
+            scrapRigidbody.useGravity = false;
+            scrapRigidbody.isKinematic = true;
             scrapRigidbody.collisionDetectionMode = collisionDetectionModeForParts;
         }
 
@@ -219,22 +232,15 @@ namespace SoftBit.Mechanics
             if (connectionPart.EnemyColliders != null && connectionPart.EnemyColliders.Count > 0)
             {
                 connectionPartsEnemyColliders.RemoveAll(enemyCollider => enemyCollider == null);
-                CharacterJoint currentCharacterJoint;
-
                 foreach (var enemyCollider in connectionPart.EnemyColliders)
                 {
                     if (enemyCollider != null)
                     {
-                        // Destroy the collider and not the gameObject, the GO is still used as a bone transform
+                        // Destroyes the collider and not the gameObject, the GO is still used as a bone transform
                         var enemyCollidersThatUseSameRB = connectionPartsEnemyColliders.FindAll(ec => ec.RagdollRigidbodyToApplyForceTo == enemyCollider.RagdollRigidbodyToApplyForceTo);
                         if (enemyCollidersThatUseSameRB.Count < 2)
                         {
-                            currentCharacterJoint = enemyCollider.RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
-                            if (currentCharacterJoint != null)
-                            {
-                                Destroy(currentCharacterJoint);
-                            }
-                            Destroy(enemyCollider.RagdollRigidbodyToApplyForceTo);
+                            enemyCollider.RemoveJointAndRigidbody();
                         }
 
                         Destroy(enemyCollider);
@@ -243,6 +249,10 @@ namespace SoftBit.Mechanics
             }
         }
 
+        /// <summary>
+        /// Called only on the scrap part for the moment
+        /// </summary>
+        /// <param name="connectionPart"></param>
         private void DestroyConnectionPart(ConnectionPart connectionPart)
         {
             foreach (var cell in connectionPart.cells)

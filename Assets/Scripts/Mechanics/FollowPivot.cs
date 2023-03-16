@@ -11,20 +11,20 @@ namespace SoftBit.Mechanics
 
         private void Awake()
         {
-            //selfRigidbody = GetComponent<Rigidbody>();
+            selfRigidbody = GetComponent<Rigidbody>();
         }
 
         private void Update()
         {
             if (PivotToFollow)
             {
-                //selfRigidbody.isKinematic = true;
+                selfRigidbody.isKinematic = true;
                 transform.position = PivotToFollow.position;
                 transform.rotation = PivotToFollow.rotation;
             }
             else
             {
-                //selfRigidbody.isKinematic = false;
+                selfRigidbody.isKinematic = false;
             }
         }
     }

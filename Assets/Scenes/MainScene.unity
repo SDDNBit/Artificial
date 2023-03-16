@@ -841,8 +841,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 1588582776}
-  connectionPart: {fileID: 709364133}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 709364133}
 --- !u!4 &36332540
 Transform:
   m_ObjectHideFlags: 0
@@ -1173,8 +1175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 1533623468}
-  connectionPart: {fileID: 656406640}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 656406640}
 --- !u!4 &60679577
 Transform:
   m_ObjectHideFlags: 0
@@ -3827,8 +3831,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 1633268712}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1633268712}
 --- !u!4 &235156358
 Transform:
   m_ObjectHideFlags: 0
@@ -3904,8 +3910,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 8038031441369527889}
-  connectionPart: {fileID: 715963164}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 715963164}
 --- !u!1001 &243249020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3996,8 +4004,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 64108681346314398}
   RagdollRigidbodyToApplyForceTo: {fileID: 2075239585}
-  connectionPart: {fileID: 884966664}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 884966664}
 --- !u!4 &254914244
 Transform:
   m_ObjectHideFlags: 0
@@ -4771,8 +4781,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 549889530}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 549889530}
 --- !u!4 &281658890
 Transform:
   m_ObjectHideFlags: 0
@@ -5198,8 +5210,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 64108681346314398}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 1724900108}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1724900108}
 --- !u!4 &311180605
 Transform:
   m_ObjectHideFlags: 0
@@ -6037,8 +6051,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 1280076455}
-  connectionPart: {fileID: 346280467}
+  FallbackRigidbodyToConnectTo: {fileID: 1467173443}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 346280467}
 --- !u!4 &385394702
 Transform:
   m_ObjectHideFlags: 0
@@ -6883,8 +6899,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 64108681346314398}
   RagdollRigidbodyToApplyForceTo: {fileID: 1364960740}
-  connectionPart: {fileID: 500258657}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 500258657}
 --- !u!4 &468126512
 Transform:
   m_ObjectHideFlags: 0
@@ -6989,8 +7007,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 42106506}
-  connectionPart: {fileID: 1251097204}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1251097204}
 --- !u!136 &470474856
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8016,8 +8036,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 3921544620531294902}
-  connectionPart: {fileID: 1832053021}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1832053021}
 --- !u!114 &549889530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11509,8 +11531,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 1860392152}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1860392152}
 --- !u!4 &798745274
 Transform:
   m_ObjectHideFlags: 0
@@ -12275,8 +12299,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 1591759024}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1591759024}
 --- !u!4 &861143388
 Transform:
   m_ObjectHideFlags: 0
@@ -12593,8 +12619,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 64108681346314398}
   RagdollRigidbodyToApplyForceTo: {fileID: 1460056712}
-  connectionPart: {fileID: 396918333}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 396918333}
 --- !u!4 &886092789
 Transform:
   m_ObjectHideFlags: 0
@@ -14527,8 +14555,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 2106616830}
-  connectionPart: {fileID: 32484881}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 32484881}
 --- !u!4 &1022695168
 Transform:
   m_ObjectHideFlags: 0
@@ -15791,6 +15821,7 @@ GameObject:
   - component: {fileID: 1097301059}
   - component: {fileID: 1098256155}
   - component: {fileID: 64108681346314398}
+  - component: {fileID: 64108681346314399}
   m_Layer: 0
   m_Name: SM_Wep_Shield_Heater_01
   m_TagString: Untagged
@@ -17753,8 +17784,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 1467173443}
-  connectionPart: {fileID: 1120566026}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1120566026}
 --- !u!4 &1225746821
 Transform:
   m_ObjectHideFlags: 0
@@ -20240,8 +20273,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 675126779}
-  connectionPart: {fileID: 954389486}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 954389486}
 --- !u!136 &1354595143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21385,6 +21420,7 @@ GameObject:
   - component: {fileID: 1421527952}
   - component: {fileID: 1421527951}
   - component: {fileID: 1421527954}
+  - component: {fileID: 1421527955}
   m_Layer: 0
   m_Name: SM_Wep_Ornate_Sword_02
   m_TagString: Untagged
@@ -21483,6 +21519,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotToFollow: {fileID: 2100591207}
+--- !u!54 &1421527955
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421527949}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1424177686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21589,8 +21641,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 1421527954}
   RagdollRigidbodyToApplyForceTo: {fileID: 1462214892}
-  connectionPart: {fileID: 397044908}
+  FallbackRigidbodyToConnectTo: {fileID: 1280076455}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 397044908}
 --- !u!4 &1431370650
 Transform:
   m_ObjectHideFlags: 0
@@ -23716,8 +23770,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 954389490}
-  connectionPart: {fileID: 1073839061}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1073839061}
 --- !u!4 &1567580852
 Transform:
   m_ObjectHideFlags: 0
@@ -28309,8 +28365,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 2080412815}
-  connectionPart: {fileID: 715963164}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 715963164}
 --- !u!4 &1908204405
 Transform:
   m_ObjectHideFlags: 0
@@ -28567,8 +28625,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachedObject: {fileID: 0}
   RagdollRigidbodyToApplyForceTo: {fileID: 1670293011}
-  connectionPart: {fileID: 1832053021}
+  FallbackRigidbodyToConnectTo: {fileID: 0}
   IsDestroyed: 0
+  CharacterJoint: {fileID: 0}
+  connectionPart: {fileID: 1832053021}
 --- !u!136 &1918071791
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32795,6 +32855,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotToFollow: {fileID: 611327849}
+--- !u!54 &64108681346314399
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096048157}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &75113555964596805
 Transform:
   m_ObjectHideFlags: 0

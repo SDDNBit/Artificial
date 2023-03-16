@@ -8,10 +8,13 @@ namespace SoftBit.Mechanics
     {
         public FollowPivot AttachedObject;
         public Rigidbody RagdollRigidbodyToApplyForceTo;
-
-        [SerializeField] private ConnectionPart connectionPart;
+        //public Rigidbody FallbackRigidbodyToConnectTo;
 
         [HideInInspector] public bool IsDestroyed = false;
+        [HideInInspector] public CharacterJoint CharacterJoint;
+
+        [SerializeField] private ConnectionPart connectionPart;
+        
 
         private Collider selfCollider;
 
@@ -23,6 +26,7 @@ namespace SoftBit.Mechanics
         {
             enemyStateMachine = GetComponentInParent<EnemyStateMachine>();
             selfCollider = GetComponent<Collider>();
+            CharacterJoint = RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>();
         }
 
         private void OnDestroy()
@@ -41,7 +45,10 @@ namespace SoftBit.Mechanics
         {
             if (RagdollRigidbodyToApplyForceTo != null)
             {
-                Destroy(RagdollRigidbodyToApplyForceTo.GetComponent<CharacterJoint>());
+                if(CharacterJoint != null)
+                {
+                    Destroy(CharacterJoint);
+                }
                 Destroy(RagdollRigidbodyToApplyForceTo);
             }
         }
